@@ -12,7 +12,7 @@
                 </div>
                 
                 
-				<div class="square1">
+				<div id="kentuckyave" class="square1">
 					<div class="header header-top red"></div>
 					<div class="firstLine firstLine-top rotation2">kentucky <br /> avenue</div>
 				</div>
@@ -55,7 +55,7 @@
 					<div data-id="marvingardens" class="firstLine firstLine-top rotation2">marvin <br /> gardens</div>
 				</div>
 
-				<div id="clickable" data-id="gotojail" class="square2 "><span data-id="gotojail" class="corner corner2">go to<br />jail</span></div>
+				<div id="gotojail" class="square2 "><span data-id="gotojail" class="corner corner2">go to<br />jail</span></div>
 			</div>
 			
 			<div class="row center">
@@ -93,9 +93,9 @@
 					<div id="clickable" data-id="electriccompany" class="squareSide ">						
 						<div data-id="electriccompany" class="firstLine firstLine-left no-color rotation1">electric<br />company</div>
 					</div>
-					<div id="clickable" data-id="stcharlesplace" class="squareSide ">
-						<div data-id="stcharlesplace" class="headerSide header-left purple"></div>
-						<div data-id="stcharlesplace" class="firstLine firstLine-left rotation1">st. charles<br />place</div>
+					<div id="stcharlesplace" class="squareSide ">
+						<div class="headerSide header-left purple"></div>
+						<div class="firstLine firstLine-left rotation1">st. charles<br />place</div>
 					</div>
 				</div>
 
@@ -112,9 +112,9 @@
 				</div>
 
 				<div class="pos-right square2">
-					<div id="clickable" data-id="pacificave" class="squareSide ">
-						<div data-id="pacificave" class="headerSide header-right green"></div>
-						<div data-id="pacificave" class="firstLine firstLine-right rotation3">pacific<br /> avenue</div>
+					<div id="pacificave" class="squareSide ">
+						<div class="headerSide header-right green"></div>
+						<div class="firstLine firstLine-right rotation3">pacific<br /> avenue</div>
 					</div>
 					<div id="clickable" data-id="northcarolinaave" class="squareSide ">
 						<div data-id="northcarolinaave" class="headerSide header-right green"></div>
@@ -160,14 +160,14 @@
 					<span data-id="jail" class="corner4-bottom">visiting</span>
 				</div> -->
 
-				<div id="clickable" data-id="jail" class="square2 ">
-					<span data-id="jail" class="corner4-left">just</span>
+				<div id="jailjustvisiting" class="square2 ">
+					<span class="corner4-left">just</span>
 
-					<div data-id="injail" class="squareCorner">
-						<span data-id="injail" class="corner corner4">in <br />jail</span>
+					<div id="injail" class="squareCorner">
+						<span class="corner corner4">in <br />jail</span>
 					</div>
 
-					<span data-id="jail" class="corner4-bottom">visiting</span>
+					<span class="corner4-bottom">visiting</span>
 				</div>
 
 				<div id="clickable" data-id="connecticutave" class="square1 ">
@@ -191,9 +191,9 @@
 				<div id="clickable" data-id="incometax" class="square1 ">
 					<div data-id="incometax" class="firstLine firstLine-bottom no-color">income<br /> tax</div>
 				</div>
-				<div id="clickable" data-id="balticave" class="square1 ">
-					<div data-id="balticave" class="header header-bottom brown"></div>
-					<div data-id="balticave" class="firstLine firstLine-bottom">baltic<br /> avenue</div>
+				<div id="balticave" class="square1">
+					<div class="header header-bottom brown"></div>
+					<div class="firstLine firstLine-bottom">baltic<br /> avenue</div>
 				</div>
 				<div id="clickable" data-id="communitychest" class="square1 ">
 					<div data-id="communitychestThree" class="firstLine firstLine-bottom no-color">community<br /> chest</div>
@@ -229,90 +229,400 @@ let playerPieceObj = {
         position: {
             go: {
                 inset: '90% 0 0 90%',
-                width: '10%'
+                width: '10%',
+                height: '10%'
             },
             bottomRow: {
                 inset: '89% 0 0 74%',
                 width: '25%',
                 height: '11%'
-            } 
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 90%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 90%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '75% 0 0 0',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '0 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '0 0 0 0',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 90%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '0 0 0 88%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
 
     player2: {
         color: 'purple',
         position: {
-            go: '90% 0 0 80%',
+            go: {
+                inset: '90% 0 0 80%',
+                width: '10%',
+                height: '10%'
+            },
             bottomRow: {
                 inset: '89% 0 0 49%',
                 width: '25%',
                 height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 80%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 80%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '50% 0 0 0',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '10% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '0 0 0 25%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 80%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '25% 0 0 88%',
+                width: '12.5%',
+                height: '25%'
             }
         }
     },
     player3: {
         color: 'black',
         position: {
-            go: '90% 0 0 70%',
+            go: {
+                inset: '90% 0 0 70%',
+                width: '10%',
+                height: '10%'
+            },
             bottomRow: {
                 inset: '89% 0 0 24%',
                 width: '25%',
                 height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 70%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 70%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '25% 0 0 0',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '20% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '0 0 0 50%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 70%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '50% 0 0 88%',
+                width: '12.5%',
+                height: '25%'
             }
         }
     },
     player4: {
         color: 'green',
         position: {
-            go: '90% 0 0 60%',
+            go: {
+                inset: '90% 0 0 60%',
+                width: '10%',
+                height: '10%'
+            },
             bottomRow: {
                 inset: '89% 0 0 0%',
                 width: '25%',
                 height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 60%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 60%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '0 0 0 0',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '30% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '0 0 0 75%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 60%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '75% 0 0 88%',
+                width: '12.5%',
+                height: '25%'
             }
         }
     },
     player5: {
         color: 'brown',
         position: {
-            go: '90% 0 0 50%',
+            go: {
+                inset: '90% 0 0 50%',
+                width: '10%',
+                height: '10%'
+            },
             bottomRow: {
                 inset: '78% 0 0 74%',
                 width: '25%',
                 height: '11%'
-            } 
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 50%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 50%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '75% 0  0 12.5%',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '40% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '11% 0 0 0',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 50%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '0 0 0 76%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
     player6: {
         color: 'yellow',
         position: {
-            go: '90% 0 0 40%',
+            go: {
+                inset: '90% 0 0 40%',
+                width: '10%',
+                height: '10%'
+            },
             bottomRow: {
                 inset: '78% 0 0 49%',
                 width: '25%',
                 height: '11%'
+            },
+            jailjustvisiting: {
+               inset: '90% 0 0 40%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 40%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '50% 0 0 12.5%',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '50% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '11% 0 0 25%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 40%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '25% 0 0 76%',
+                width: '12.5%',
+                height: '25%'
             }
         }
     },
     player7: {
         color: 'pink',
         position: {
-            go: '78% 0 0 30%',
+            go: {
+                inset: '90% 0 0 30%',
+                width: '10%',
+                height: '10%'
+            },
             bottomRow: {
                 inset: '78% 0 0 24%',
                 width: '25%',
                 height: '11%'
+            },
+            jailjustvisiting: {
+               inset: '90% 0 0 30%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 30%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '25% 0 0 12.5%',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '60% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '11% 0 0 50%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 30%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '50% 0 0 76%',
+                width: '12.5%',
+                height: '25%'
             }
         }
     },
+
     player8: {
         color: 'gray',
         position: {
-            go: '78% 0 0 20%',
+            go: {
+                inset: '90% 0 0 20%',
+                width: '10%',
+                height: '10%'
+            },
             bottomRow: {
                 inset: '78% 0px 0px 0%',
                 width: '25%',
                 height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 20%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 20%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '0 0 0 12.5%',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '70% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '11% 0 0 75%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 20%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '75% 0 0 76%',
+                width: '12.5%',
+                height: '25%'
             }
         }
     }
@@ -321,7 +631,7 @@ let playerPieceObj = {
 
 function testDom() {
     
-    let position = 'bottomRow';
+    let position = 'rightRow';
     let playerP;
     
 
@@ -347,9 +657,7 @@ function testDom() {
         playerP.style.height = playerPieceObj['player' + `${i}`].position[`${position}`].height;
         playerP.style.backgroundColor = playerPieceObj['player' + `${i}`].color;
         
-        
-
-        document.getElementById('mediterraneanave').append(playerP);
+        document.getElementById('pacificave').append(playerP);
         
     };
 
@@ -381,7 +689,7 @@ div {
     width: 80vw;
     height: 80vw;
     margin: 10px auto;
-    transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);
+    // transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);
 }
 .mainSquare {
 	height: 100%;
