@@ -12,18 +12,18 @@
                 </div>
                 
                 
-				<div class="square1">
+				<div id="kentuckyave" class="square1">
 					<div class="header header-top red"></div>
 					<div class="firstLine firstLine-top rotation2">kentucky <br /> avenue</div>
 				</div>
 
-				<div class="square1">		
+				<div id="chancetwo" class="square1">		
 					<div class="firstLine firstLine-top no-color rotation2">chance</div>
 				</div>
 
-				<div id="clickable" data-id="indianaave" class="square1 ">
-					<div data-id="indianaave" class="header header-top red"></div>
-					<div data-id="indianaave" class="firstLine firstLine-top rotation2">indiana <br /> avenue</div>
+				<div id="indianaave" class="square1 ">
+					<div class="header header-top red"></div>
+					<div class="firstLine firstLine-top rotation2">indiana <br /> avenue</div>
 				</div>
 
 				<div id="clickable" data-id="illinoisave" class="square1 ">
@@ -35,67 +35,66 @@
 					<div data-id="borailroad" class="firstLine firstLine-top no-color rotation2">b. & o. <br /> railroad</div>
 				</div>
 
-				<div id="clickable" data-id="atlanticave" class="square1 ">
-					<div data-id="atlanticave" class="header header-top yellow"></div>
-					<div data-id="atlanticave" class="firstLine firstLine-top rotation2">atlantic <br /> avenue</div>
+				<div id="atlanticave" class="square1 ">
+					<div class="header header-top yellow"></div>
+					<div class="firstLine firstLine-top rotation2">atlantic <br /> avenue</div>
 				</div>
 
-				<div id="clickable" data-id="ventnorave" class="square1 ">
-					<div data-id="ventnorave" class="header header-top yellow"></div>
-					<div data-id="ventnorave" class="firstLine firstLine-top rotation2">ventnor <br /> avenue</div>
+				<div id="ventnorave" class="square1 ">
+					<div class="header header-top yellow"></div>
+					<div class="firstLine firstLine-top rotation2">ventnor <br /> avenue</div>
 				</div>
 
-				<div id="clickable" data-id="waterworks" class="square1 ">
-                    <!-- waterworks not in this.vueopoly.properties -->
-					<div data-id="waterworks" class="firstLine firstLine-top no-color rotation2">water <br /> works</div>
+				<div id="waterworks" class="square1 ">
+					<div class="firstLine firstLine-top no-color rotation2">water <br /> works</div>
 				</div>
 
-				<div id="clickable" data-id="marvingardens" class="square1 ">
-					<div data-id="marvingardens" class="header header-top yellow"></div>
-					<div data-id="marvingardens" class="firstLine firstLine-top rotation2">marvin <br /> gardens</div>
+				<div id="marvingardens" class="square1 ">
+					<div class="header header-top yellow"></div>
+					<div class="firstLine firstLine-top rotation2">marvin <br /> gardens</div>
 				</div>
 
-				<div id="clickable" data-id="gotojail" class="square2 "><span data-id="gotojail" class="corner corner2">go to<br />jail</span></div>
+				<div id="gotojail" class="square2 "><span data-id="gotojail" class="corner corner2">go to<br />jail</span></div>
 			</div>
 			
 			<div class="row center">
 				<div class="pos-left square2">
 
-					<div id="clickable" data-id="newyorkave" class="squareSide ">
-						<div data-id="newyorkave" class="headerSide header-left orange"></div>
-						<div data-id="newyorkave" class="firstLine firstLine-left rotation1">new york <br /> avenue</div>
+					<div id="newyorkave" class="squareSide ">
+						<div class="headerSide header-left orange"></div>
+						<div class="firstLine firstLine-left rotation1">new york <br /> avenue</div>
 					</div>
 
-					<div id="clickable" data-id="tennesseeave" class="squareSide ">
-						<div data-id="tennesseeave" class="headerSide header-left orange"></div>
-						<div data-id="tennesseeave" class="firstLine firstLine-left rotation1">tennessee <br /> avenue</div>
+					<div id="tennesseeave" class="squareSide ">
+						<div class="headerSide header-left orange"></div>
+						<div class="firstLine firstLine-left rotation1">tennessee <br /> avenue</div>
 					</div>
-					<div id="clickable" data-id="communitychesttwo" class="squareSide ">						
-						<div data-id="communitychesttwo" class="firstLine firstLine-left no-color rotation1">community<br /> chest</div>
-					</div>
-
-					<div id="clickable" data-id="stjamesplace" class="squareSide ">
-						<div data-id="stjamesplace" class="headerSide header-left orange"></div>
-						<div data-id="stjamesplace" class="firstLine firstLine-left rotation1">st.james <br />place</div>
+					<div id="communitychesttwo" class="squareSide ">						
+						<div class="firstLine firstLine-left no-color rotation1">community<br /> chest</div>
 					</div>
 
-					<div id="clickable" data-id="pennsylvaniarailroad" class="squareSide ">						
-						<div data-id="pennsylvaniarailroad" class="firstLine firstLine-left no-color rotation1">pennsylvania<br> railroad</div>
+					<div id="stjamesplace" class="squareSide ">
+						<div class="headerSide header-left orange"></div>
+						<div class="firstLine firstLine-left rotation1">st.james <br />place</div>
 					</div>
-					<div id="clickable" data-id="virginiaave" class="squareSide ">
-						<div data-id="virginiaave" class="headerSide header-left purple"></div>
-						<div data-id="virginiaave" class="firstLine firstLine-left rotation1">virginia<br /> avenue</div>
+
+					<div id="pennsylvaniarailroad" class="squareSide ">						
+						<div class="firstLine firstLine-left no-color rotation1">pennsylvania<br> railroad</div>
 					</div>
-					<div id="clickable" data-id="statesave" class="squareSide ">
-						<div data-id="statesave" class="headerSide header-left purple"></div>
-						<div data-id="statesave" class="firstLine firstLine-left rotation1">states<br /> avenue</div>
+					<div id="virginiaave" class="squareSide ">
+						<div class="headerSide header-left purple"></div>
+						<div class="firstLine firstLine-left rotation1">virginia<br /> avenue</div>
 					</div>
-					<div id="clickable" data-id="electriccompany" class="squareSide ">						
-						<div data-id="electriccompany" class="firstLine firstLine-left no-color rotation1">electric<br />company</div>
+					<div id="statesave" class="squareSide ">
+						<div class="headerSide header-left purple"></div>
+						<div class="firstLine firstLine-left rotation1">states<br /> avenue</div>
 					</div>
-					<div id="clickable" data-id="stcharlesplace" class="squareSide ">
-						<div data-id="stcharlesplace" class="headerSide header-left purple"></div>
-						<div data-id="stcharlesplace" class="firstLine firstLine-left rotation1">st. charles<br />place</div>
+					<div id="electriccompany" class="squareSide ">						
+						<div class="firstLine firstLine-left no-color rotation1">electric<br />company</div>
+					</div>
+					<div id="stcharlesplace" class="squareSide ">
+						<div class="headerSide header-left purple"></div>
+						<div class="firstLine firstLine-left rotation1">st. charles<br />place</div>
 					</div>
 				</div>
 
@@ -112,39 +111,39 @@
 				</div>
 
 				<div class="pos-right square2">
-					<div id="clickable" data-id="pacificave" class="squareSide ">
-						<div data-id="pacificave" class="headerSide header-right green"></div>
-						<div data-id="pacificave" class="firstLine firstLine-right rotation3">pacific<br /> avenue</div>
+					<div id="pacificave" class="squareSide ">
+						<div class="headerSide header-right green"></div>
+						<div class="firstLine firstLine-right rotation3">pacific<br /> avenue</div>
 					</div>
-					<div id="clickable" data-id="northcarolinaave" class="squareSide ">
-						<div data-id="northcarolinaave" class="headerSide header-right green"></div>
-						<div data-id="northcarolinaave" class="firstLine firstLine-right rotation3">north<br />carolina<br />avenue</div>
+					<div id="northcarolinaave" class="squareSide ">
+						<div class="headerSide header-right green"></div>
+						<div class="firstLine firstLine-right rotation3">north<br />carolina<br />avenue</div>
 					</div>
-					<div id="clickable" data-id="communitychestthree" class="squareSide ">						
-						<div data-id="communitychestthree" class="firstLine firstLine-right no-color rotation3">community<br />chest</div>
+					<div id="communitychestthree" class="squareSide ">						
+						<div class="firstLine firstLine-right no-color rotation3">community<br />chest</div>
 					</div>
-					<div id="clickable" data-id="pennsylvaniaave" class="squareSide ">
-						<div data-id="pennsylvaniaave" class="headerSide header-right green"></div>
-						<div data-id="pennsylvaniaave" class="firstLine firstLine-right rotation3">pennsylvania<br /> avenue</div>
+					<div id="pennsylvaniaave" class="squareSide ">
+						<div class="headerSide header-right green"></div>
+						<div class="firstLine firstLine-right rotation3">pennsylvania<br /> avenue</div>
 					</div>
-					<div id="clickable" data-id="shortlinerailroad" class="squareSide ">						
-						<div data-id="shortlinerailroad" class="firstLine firstLine-right no-color rotation3">short<br /> line</div>
+					<div id="shortlinerailroad" class="squareSide ">						
+						<div class="firstLine firstLine-right no-color rotation3">short<br /> line</div>
 					</div>
                     
-                    <div id="clickable" data-id="chancethree" class="squareSide ">
-                        <div data-id="chancethree" class="firstLine firstLine-right no-color rotation3">chance</div>
+                    <div id="chancethree" class="squareSide ">
+                        <div class="firstLine firstLine-right no-color rotation3">chance</div>
                     </div>
                     
-					<div id="clickable" data-id="parkplace" class="squareSide ">						
-						<div data-id="parkplace" class="headerSide header-right blue"></div>
-						<div data-id="parkplace" class="firstLine firstLine-right rotation3">park<br /> place</div>
+					<div id="parkplace" class="squareSide ">						
+						<div class="headerSide header-right blue"></div>
+						<div class="firstLine firstLine-right rotation3">park<br /> place</div>
 					</div>
-					<div id="clickable" data-id="luxerytax" class="squareSide">						
-						<div data-id="luxerytax" class="firstLine firstLine-right no-color rotation3">luxury<br /> tax</div>
+					<div id="luxerytax" class="squareSide">						
+						<div class="firstLine firstLine-right no-color rotation3">luxury<br /> tax</div>
 					</div>
-					<div id="clickable" data-id="boardwalk" class="squareSide ">
-						<div data-id="boardwalk" class="headerSide header-right blue"></div>
-						<div data-id="boardwalk" class="firstLine firstLine-right rotation3">boardwalk<br /> avenue</div>
+					<div id="boardwalk" class="squareSide ">
+						<div class="headerSide header-right blue"></div>
+						<div class="firstLine firstLine-right rotation3">boardwalk<br /> avenue</div>
 					</div>
 				</div>
 			</div>
@@ -160,47 +159,47 @@
 					<span data-id="jail" class="corner4-bottom">visiting</span>
 				</div> -->
 
-				<div id="clickable" data-id="jail" class="square2 ">
-					<span data-id="jail" class="corner4-left">just</span>
+				<div id="jailjustvisiting" class="square2 ">
+					<span class="corner4-left">just</span>
 
-					<div data-id="injail" class="squareCorner">
-						<span data-id="injail" class="corner corner4">in <br />jail</span>
+					<div id="injail" class="squareCorner">
+						<span class="corner corner4">in <br />jail</span>
 					</div>
 
-					<span data-id="jail" class="corner4-bottom">visiting</span>
+					<span class="corner4-bottom">visiting</span>
 				</div>
 
-				<div id="clickable" data-id="connecticutave" class="square1 ">
-					<div data-id="connecticutave" class="header header-bottom lightblue"></div>
-					<div data-id="connecticutave" class="firstLine firstLine-bottom">connecticut avenue</div>
+				<div id="connecticutave" class="square1 ">
+					<div class="header header-bottom lightblue"></div>
+					<div class="firstLine firstLine-bottom">connecticut avenue</div>
 				</div>
-				<div id="clickable" data-id="vermontave" class="square1 ">
-					<div data-id="vermontave" class="header header-bottom lightblue"></div>
-					<div data-id="vermontave" class="firstLine firstLine-bottom">vermont<br /> avenue</div>
+				<div id="vermontave" class="square1 ">
+					<div class="header header-bottom lightblue"></div>
+					<div class="firstLine firstLine-bottom">vermont<br /> avenue</div>
 				</div>
-				<div id="clickable" data-id="chance" class="square1 ">
-					<div data-id="chance" class="firstLine firstLine-bottom no-color">chance</div>
+				<div id="chance" class="square1 ">
+					<div class="firstLine firstLine-bottom no-color">chance</div>
 				</div>
-				<div id="clickable" data-id="orientalave" class="square1 ">
-					<div data-id="orientalave" class="header header-bottom lightblue"></div>
-					<div data-id="orientalave" class="firstLine firstLine-bottom">oriental<br /> avenue</div>
+				<div id="orientalave" class="square1 ">
+					<div class="header header-bottom lightblue"></div>
+					<div class="firstLine firstLine-bottom">oriental<br /> avenue</div>
 				</div>
 				<div id="clickable" data-id="readingrailroad" class="square1 ">					
 					<div data-id="readingrailroad" class="firstLine firstLine-bottom no-color">reading<br /> railroad</div>
 				</div>
-				<div id="clickable" data-id="incometax" class="square1 ">
-					<div data-id="incometax" class="firstLine firstLine-bottom no-color">income<br /> tax</div>
+				<div id="incometax" class="square1 ">
+					<div class="firstLine firstLine-bottom no-color">income<br /> tax</div>
 				</div>
-				<div id="clickable" data-id="balticave" class="square1 ">
-					<div data-id="balticave" class="header header-bottom brown"></div>
-					<div data-id="balticave" class="firstLine firstLine-bottom">baltic<br /> avenue</div>
+				<div id="balticave" class="square1">
+					<div class="header header-bottom brown"></div>
+					<div class="firstLine firstLine-bottom">baltic<br /> avenue</div>
 				</div>
-				<div id="clickable" data-id="communitychest" class="square1 ">
-					<div data-id="communitychestThree" class="firstLine firstLine-bottom no-color">community<br /> chest</div>
+				<div id="communitychest" class="square1 ">
+					<div class="firstLine firstLine-bottom no-color">community<br /> chest</div>
 				</div>
-				<div id="clickable" data-id="mediterraneanave" class="square1 ">
-					<div data-id="mediterraneanave" class="header header-bottom brown"></div>
-					<div data-id="mediterraneanave" class="firstLine firstLine-bottom">mediter-<br /> ranean <br /> avenue</div>
+				<div id="mediterraneanave" class="square1 ">
+					<div class="header header-bottom brown"></div>
+					<div class="firstLine firstLine-bottom">mediter-<br /> ranean <br /> avenue</div>
 				</div>
 				<div id="go" class="square2 ">
 					<span class="corner corner3">collect<br />$200 salary<br />as you pass</span>
@@ -222,53 +221,400 @@ onMounted(() => {
 
     testDom();
 });
-let playerPieceObj = {
+let playerPositionObj = {
+
     player1: {
-        color: 'red',
         position: {
-            go: '90% 0 0 90%'
+            go: {
+                inset: '90% 0 0 90%',
+                width: '10%',
+                height: '10%'
+            },
+            bottomRow: {
+                inset: '89% 0 0 74%',
+                width: '25%',
+                height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 90%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 90%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '75% 0 0 0',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '0 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '0 0 0 0',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 90%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '0 0 0 88%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
+
     player2: {
-        color: 'purple',
         position: {
-            go: '90% 0 0 80%'
+            go: {
+                inset: '90% 0 0 80%',
+                width: '10%',
+                height: '10%'
+            },
+            bottomRow: {
+                inset: '89% 0 0 49%',
+                width: '25%',
+                height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 80%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 80%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '50% 0 0 0',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '10% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '0 0 0 25%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 80%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '25% 0 0 88%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
     player3: {
-        color: 'black',
         position: {
-            go: '90% 0 0 70%'
+            go: {
+                inset: '90% 0 0 70%',
+                width: '10%',
+                height: '10%'
+            },
+            bottomRow: {
+                inset: '89% 0 0 24%',
+                width: '25%',
+                height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 70%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 70%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '25% 0 0 0',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '20% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '0 0 0 50%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 70%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '50% 0 0 88%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
     player4: {
-        color: 'green',
         position: {
-            go: '90% 0 0 60%'
+            go: {
+                inset: '90% 0 0 60%',
+                width: '10%',
+                height: '10%'
+            },
+            bottomRow: {
+                inset: '89% 0 0 0%',
+                width: '25%',
+                height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 60%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 60%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '0 0 0 0',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '30% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '0 0 0 75%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 60%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '75% 0 0 88%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
     player5: {
-        color: 'brown',
         position: {
-            go: '90% 0 0 50%'
+            go: {
+                inset: '90% 0 0 50%',
+                width: '10%',
+                height: '10%'
+            },
+            bottomRow: {
+                inset: '78% 0 0 74%',
+                width: '25%',
+                height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 50%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 50%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '75% 0  0 12.5%',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '40% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '11% 0 0 0',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 50%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '0 0 0 76%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
     player6: {
-        color: 'yellow',
         position: {
-            go: '90% 0 0 40%'
+            go: {
+                inset: '90% 0 0 40%',
+                width: '10%',
+                height: '10%'
+            },
+            bottomRow: {
+                inset: '78% 0 0 49%',
+                width: '25%',
+                height: '11%'
+            },
+            jailjustvisiting: {
+               inset: '90% 0 0 40%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 40%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '50% 0 0 12.5%',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '50% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '11% 0 0 25%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 40%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '25% 0 0 76%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
     player7: {
-        color: 'green',
         position: {
-            go: '90% 0 0 30%'
+            go: {
+                inset: '90% 0 0 30%',
+                width: '10%',
+                height: '10%'
+            },
+            bottomRow: {
+                inset: '78% 0 0 24%',
+                width: '25%',
+                height: '11%'
+            },
+            jailjustvisiting: {
+               inset: '90% 0 0 30%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 30%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '25% 0 0 12.5%',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '60% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '11% 0 0 50%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 30%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '50% 0 0 76%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     },
+
     player8: {
-        color: 'gray',
         position: {
-            go: '90% 0 0 20%'
+            go: {
+                inset: '90% 0 0 20%',
+                width: '10%',
+                height: '10%'
+            },
+            bottomRow: {
+                inset: '78% 0px 0px 0%',
+                width: '25%',
+                height: '11%'
+            },
+            jailjustvisiting: {
+                inset: '90% 0 0 20%',
+                width: '10%',
+                height: '10%'
+            },
+            injail: {
+                inset: '90% 0 0 20%',
+                width: '10%',
+                height: '10%'
+            },
+            leftRow: {
+                inset: '0 0 0 12.5%',
+                width: '12.5%',
+                height: '25%'
+            },
+            freeparking: {
+                inset: '70% 0 0 0',
+                width: '10%',
+                height: '10%'
+            },
+            topRow: {
+                inset: '11% 0 0 75%',
+                width: '25%',
+                height: '11%'
+            },
+            gotojail: {
+                inset: '0 0 0 20%',
+                width: '10%',
+                height: '10%'
+            },
+            rightRow: {
+                inset: '75% 0 0 76%',
+                width: '12.5%',
+                height: '25%'
+            }
         }
     }
 }
@@ -276,9 +622,20 @@ let playerPieceObj = {
 
 function testDom() {
     
-    let position = 'go';
+    let position = 'rightRow';
     let playerP;
     
+
+    playerP = document.createElement('span');
+    playerP.classList.add('player-piece');
+
+    // playerP.style.inset = playerPieceObj.player1.position[`${position}`].inset;
+    // playerP.style.width = playerPieceObj.player1.position[`${position}`].width;
+    // playerP.style.height = playerPieceObj.player1.position[`${position}`].height;
+    // playerP.style.backgroundColor = playerPieceObj.player1.color;
+
+    // document.getElementById('mediterraneanave').append(playerP);
+
     for(let i = 1; i < 9; i++) {
 
         playerP = document.createElement('span');
@@ -286,18 +643,15 @@ function testDom() {
 
         // console.log(playerPieceObj['player' + `${i}`]);
 
-        playerP.style.inset = playerPieceObj['player' + `${i}`].position[`${position}`];
+        playerP.style.inset = playerPieceObj['player' + `${i}`].position[`${position}`].inset;
+        playerP.style.width = playerPieceObj['player' + `${i}`].position[`${position}`].width;
+        playerP.style.height = playerPieceObj['player' + `${i}`].position[`${position}`].height;
         playerP.style.backgroundColor = playerPieceObj['player' + `${i}`].color;
         
-        
-
-        document.getElementById(position).append(playerP);
+        document.getElementById('pacificave').append(playerP);
         
     };
 
-    
-
-    // console.log(domSquare)
     
 }
 
@@ -308,8 +662,7 @@ function testDom() {
 .player-piece {
     position: absolute;
     
-    width: 10%;
-    height: 10%;
+    
     
     
 }
@@ -327,6 +680,7 @@ div {
     width: 80vw;
     height: 80vw;
     margin: 10px auto;
+    // transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);
 }
 .mainSquare {
 	height: 100%;
