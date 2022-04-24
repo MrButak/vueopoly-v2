@@ -198,9 +198,9 @@
 				<div id="clickable" data-id="communitychest" class="square1 ">
 					<div data-id="communitychestThree" class="firstLine firstLine-bottom no-color">community<br /> chest</div>
 				</div>
-				<div id="clickable" data-id="mediterraneanave" class="square1 ">
-					<div data-id="mediterraneanave" class="header header-bottom brown"></div>
-					<div data-id="mediterraneanave" class="firstLine firstLine-bottom">mediter-<br /> ranean <br /> avenue</div>
+				<div id="mediterraneanave" class="square1 ">
+					<div class="header header-bottom brown"></div>
+					<div class="firstLine firstLine-bottom">mediter-<br /> ranean <br /> avenue</div>
 				</div>
 				<div id="go" class="square2 ">
 					<span class="corner corner3">collect<br />$200 salary<br />as you pass</span>
@@ -223,52 +223,97 @@ onMounted(() => {
     testDom();
 });
 let playerPieceObj = {
+
     player1: {
         color: 'red',
         position: {
-            go: '90% 0 0 90%'
+            go: {
+                inset: '90% 0 0 90%',
+                width: '10%'
+            },
+            bottomRow: {
+                inset: '89% 0 0 74%',
+                width: '25%',
+                height: '11%'
+            } 
         }
     },
+
     player2: {
         color: 'purple',
         position: {
-            go: '90% 0 0 80%'
+            go: '90% 0 0 80%',
+            bottomRow: {
+                inset: '89% 0 0 49%',
+                width: '25%',
+                height: '11%'
+            }
         }
     },
     player3: {
         color: 'black',
         position: {
-            go: '90% 0 0 70%'
+            go: '90% 0 0 70%',
+            bottomRow: {
+                inset: '89% 0 0 24%',
+                width: '25%',
+                height: '11%'
+            }
         }
     },
     player4: {
         color: 'green',
         position: {
-            go: '90% 0 0 60%'
+            go: '90% 0 0 60%',
+            bottomRow: {
+                inset: '89% 0 0 0%',
+                width: '25%',
+                height: '11%'
+            }
         }
     },
     player5: {
         color: 'brown',
         position: {
-            go: '90% 0 0 50%'
+            go: '90% 0 0 50%',
+            bottomRow: {
+                inset: '78% 0 0 74%',
+                width: '25%',
+                height: '11%'
+            } 
         }
     },
     player6: {
         color: 'yellow',
         position: {
-            go: '90% 0 0 40%'
+            go: '90% 0 0 40%',
+            bottomRow: {
+                inset: '78% 0 0 49%',
+                width: '25%',
+                height: '11%'
+            }
         }
     },
     player7: {
-        color: 'green',
+        color: 'pink',
         position: {
-            go: '90% 0 0 30%'
+            go: '78% 0 0 30%',
+            bottomRow: {
+                inset: '78% 0 0 24%',
+                width: '25%',
+                height: '11%'
+            }
         }
     },
     player8: {
         color: 'gray',
         position: {
-            go: '90% 0 0 20%'
+            go: '78% 0 0 20%',
+            bottomRow: {
+                inset: '78% 0px 0px 0%',
+                width: '25%',
+                height: '11%'
+            }
         }
     }
 }
@@ -276,9 +321,20 @@ let playerPieceObj = {
 
 function testDom() {
     
-    let position = 'go';
+    let position = 'bottomRow';
     let playerP;
     
+
+    playerP = document.createElement('span');
+    playerP.classList.add('player-piece');
+
+    // playerP.style.inset = playerPieceObj.player1.position[`${position}`].inset;
+    // playerP.style.width = playerPieceObj.player1.position[`${position}`].width;
+    // playerP.style.height = playerPieceObj.player1.position[`${position}`].height;
+    // playerP.style.backgroundColor = playerPieceObj.player1.color;
+
+    // document.getElementById('mediterraneanave').append(playerP);
+
     for(let i = 1; i < 9; i++) {
 
         playerP = document.createElement('span');
@@ -286,18 +342,17 @@ function testDom() {
 
         // console.log(playerPieceObj['player' + `${i}`]);
 
-        playerP.style.inset = playerPieceObj['player' + `${i}`].position[`${position}`];
+        playerP.style.inset = playerPieceObj['player' + `${i}`].position[`${position}`].inset;
+        playerP.style.width = playerPieceObj['player' + `${i}`].position[`${position}`].width;
+        playerP.style.height = playerPieceObj['player' + `${i}`].position[`${position}`].height;
         playerP.style.backgroundColor = playerPieceObj['player' + `${i}`].color;
         
         
 
-        document.getElementById(position).append(playerP);
+        document.getElementById('mediterraneanave').append(playerP);
         
     };
 
-    
-
-    // console.log(domSquare)
     
 }
 
@@ -308,8 +363,7 @@ function testDom() {
 .player-piece {
     position: absolute;
     
-    width: 10%;
-    height: 10%;
+    
     
     
 }
@@ -327,6 +381,7 @@ div {
     width: 80vw;
     height: 80vw;
     margin: 10px auto;
+    transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);
 }
 .mainSquare {
 	height: 100%;
