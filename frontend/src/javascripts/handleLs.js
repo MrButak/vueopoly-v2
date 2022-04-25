@@ -9,8 +9,9 @@ function handleLs() {
     if(checkLsAvailable()) {
         
         // if game in ls found
-        if(localStorage.getItem('gameLogic') != null && localStorage.getItem('gameLogic') !== '0') {
+        if(localStorage.getItem('gameLogic') != null && localStorage.getItem('gameLogic') != '0') {
             restoreLs();
+            lsInUse.value = true; // set global state
             return true; // true for yes, ask to continue game
         };
         // if no game found in ls, but ls is available
@@ -44,7 +45,7 @@ let checkLsAvailable = () => {
 // Function sets local storage objects if doesn't exist
 let setLs = () => {
 
-    localStorage.setItem('gamelogic', '0');
+    localStorage.setItem('gameLogic', '0');
     // initially set value to 0 so I know wether to start a new game
     return;
 };
@@ -53,15 +54,12 @@ let setLs = () => {
 let restoreLs = () => {
 
     // convert local storage string to object
-    let lsGameLogic = localStorage.getItem('gamelogic');
+    let lsGameLogic = localStorage.getItem('gameLogic');
     lsGameLogic = JSON.parse(lsGameLogic);
-
-    console.log(lsGameLogic)
-    console.log("pulled from ls after save");
     
     // set global state variables
     gameLogic.value = lsGameLogic;
-    
+    gameLogic.value.startGame = false;
     return;
 };
 
@@ -70,7 +68,7 @@ function saveToLs() {
     
     console.log("save to ls");
 
-    localStorage.setItem('gamelogic', JSON.stringify(gameLogic.value));
+    localStorage.setItem('gameLogic', JSON.stringify(gameLogic.value));
 }
 export default handleLs
 // export {handleLs, saveToLs};

@@ -1,4 +1,5 @@
 import gameJson from '../../vueopoly.json';
+import {lsInUse, gameLogic} from '../javascripts/stateStore';
 let playerPositionObj = {
 
     player1: {
@@ -427,8 +428,9 @@ function initNewGame(newPlayers) {
     });
 
     // object to handle game logic. assigned to global state and local storage
-    let gameLogic = {
+    let gameLogicObj = {
         
+        startGame: true,
         playerCount: playerCnt,
         whosTurnIndex: 0,
         gameLog: [{log: 'New game created.', style: 'game'}], // first game log!
@@ -443,9 +445,12 @@ function initNewGame(newPlayers) {
     // console.log(playersArr);
     // console.log(gameLogic);
 
+    // if(lsInUse.value)
     // set local storage
-    localStorage.setItem('gamelogic', JSON.stringify(gameLogic));
-    
+    localStorage.setItem('gameLogic', JSON.stringify(gameLogicObj));
+    // game state
+    gameLogic.value = gameLogicObj;
+
 
 };
 
