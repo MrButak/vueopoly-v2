@@ -768,7 +768,7 @@
       {
         "name": "Jail / Just Visiting",
         "id": "jailjustvisiting",
-        "position": 10,
+        "position": 11,
         "pieceposition": "jailjustvisiting",
         "group": "Special",
         "averageProbability": 8.897
@@ -834,7 +834,7 @@
         "id": "communitychest",
         "group": "Special",
         "position": 3,
-        "pieceposition": "rowBottom",
+        "pieceposition": "bottomRow",
         "rel": {
           "Square": "Community Chest",
           "Probability % (Jail Short)": 1.8849,
@@ -848,7 +848,7 @@
         "id": "communitychesttwo",
         "group": "Special",
         "position": 18,
-        "pieceposition": "leftBottom",
+        "pieceposition": "leftRow",
         "rel": {
           "Square": "Community Chest",
           "Probability % (Jail Short)": 1.8849,
@@ -862,7 +862,7 @@
         "id": "communitychestthree",
         "group": "Special",
         "position": 34,
-        "pieceposition": "rightBottom",
+        "pieceposition": "rightRow",
         "rel": {
           "Square": "Community Chest",
           "Probability % (Jail Short)": 1.8849,
@@ -876,6 +876,7 @@
         "id": "gotojail",
         "group": "Special",
         "position": 31,
+        "pieceposition": "gotojail",
         "rel": {
           "Square": "Go To Jail",
           "Probability % (Jail Short)": 0,
@@ -889,7 +890,7 @@
         "id": "luxerytax",
         "group": "Special",
         "position": 39,
-        "pieceposition": "rowRight",
+        "pieceposition": "rightRow",
         "averageProbability": 2.116
       }
     ],
