@@ -211,78 +211,63 @@
 	</div>
 
 </body>
+<button @click="placePlayerPieces">test dom</button>
 </template>
 
 
 <script setup>
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import { lsInUse, gameLogic } from '../javascripts/stateStore';
 
 onMounted(() => {
 
-    placePlayerPieces();
-    let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[0].position);
-    let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
-    let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
+    // // place all player pieces on dom
+    // gameLogic.value.players.forEach((player) => {
+    //     placePlayerPiece(player.name)
+    // })
 
-    console.log(piecePosition)
-    let playerPiece = document.createElement('span');
-    playerPiece.classList.add('player-piece');
-
-    // playerPiece.style.inset = gameLogic.value.playerPiecePos[`${gameLogic.value.players[0].name}`][`${piecePosition}`].inset;
-    // playerP.style.width = gameLogic.value.playerPiecePos[`${gameLogic.value.players[0].name}`][`${piecePosition}`].width;
-    // playerP.style.height = gameLogic.value.playerPiecePos[`${gameLogic.value.players[0].name}`][`${piecePosition}`].height;
-    // playerP.style.backgroundColor = 'red'
-
-    // console.log(playerP)
 });
+
 computed(() => {
 
 
 });
 
-function placePlayerPieces() {
-    
+function placePlayerPiece(playerId) {
+        
+        console.log('test')
+        // // if element already on the dom, remove it
+        // if(document.querySelector(playerId)) {document.querySelector(playerId).remove()};
+
+        // let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId))
+        // let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
+        // let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
+        // let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
+        
+        // let positionObj = gameLogic.value.playerPiecePos[`${gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
+
+        // // add css properties and class name
+        // let playerPiece = document.createElement('span');
+        // playerPiece.classList.add(gameLogic.value.players[playerIndex].name);
+        // playerPiece.style.position = 'absolute';
+        // playerPiece.style.inset = positionObj.inset;
+        // playerPiece.style.width = positionObj.width;
+        // playerPiece.style.height = positionObj.height;
+        // playerPiece.style.backgroundColor = gameLogic.value.players[playerIndex].color;
+
+        // // add player piece to dom
+        // document.getElementById(propertyId).append(playerPiece);
 }
 
-// function testDom() {
-    
-//     let position = 'rightRow';
-//     let playerP;
-    
-
-//     playerP = document.createElement('span');
-//     playerP.classList.add('player-piece');
-
-
-//     for(let i = 1; i < 9; i++) {
-
-//         playerP = document.createElement('span');
-//         playerP.classList.add('player-piece');
-
-//         playerP.style.inset = playerPieceObj['player' + `${i}`].position[`${position}`].inset;
-//         playerP.style.width = playerPieceObj['player' + `${i}`].position[`${position}`].width;
-//         playerP.style.height = playerPieceObj['player' + `${i}`].position[`${position}`].height;
-//         playerP.style.backgroundColor = playerPieceObj['player' + `${i}`].color;
-        
-//         document.getElementById('pacificave').append(playerP);
-        
-//     };
-
-    
-// }
-
+// so function can be called from other component
+defineExpose({
+    placePlayerPiece
+})
 </script>
 
 
 <style lang="scss" scoped>
-.player-piece {
-    position: absolute;
-    
-    
-    
-    
-}
+
 @media (min-width: 480px) {
 
 
