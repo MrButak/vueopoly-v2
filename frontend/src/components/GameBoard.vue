@@ -26,13 +26,13 @@
 					<div class="firstLine firstLine-top rotation2">indiana <br /> avenue</div>
 				</div>
 
-				<div id="clickable" data-id="illinoisave" class="square1 ">
-					<div data-id="illinoisave" class="header header-top red"></div>
-					<div data-id="illinoisave" class="firstLine firstLine-top rotation2">illinios <br /> avenue</div>
+				<div id="illinoisave" class="square1 ">
+					<div class="header header-top red"></div>
+					<div class="firstLine firstLine-top rotation2">illinios <br /> avenue</div>
 				</div>
 
-				<div id="clickable" data-id="borailroad" class="square1 ">
-					<div data-id="borailroad" class="firstLine firstLine-top no-color rotation2">b. & o. <br /> railroad</div>
+				<div id="borailroad" class="square1 ">
+					<div class="firstLine firstLine-top no-color rotation2">b. & o. <br /> railroad</div>
 				</div>
 
 				<div id="atlanticave" class="square1 ">
@@ -54,7 +54,7 @@
 					<div class="firstLine firstLine-top rotation2">marvin <br /> gardens</div>
 				</div>
 
-				<div id="gotojail" class="square2 "><span data-id="gotojail" class="corner corner2">go to<br />jail</span></div>
+				<div id="gotojail" class="square2 "><span class="corner corner2">go to<br />jail</span></div>
 			</div>
 			
 			<div class="row center">
@@ -149,15 +149,6 @@
 			</div>
 
 			<div class="pos-bottom row top">
-                
-                <!-- <div id="clickable" data-id="jail" class="square2 ">
-					<span data-id="jail" class="corner4-left">just</span>
-					<div data-id="jail" class="squareCorner">
-						<span data-id="jail" class="corner corner4">in <br />jail</span>
-					</div>
-                    
-					<span data-id="jail" class="corner4-bottom">visiting</span>
-				</div> -->
 
 				<div id="jailjustvisiting" class="square2 ">
 					<span class="corner4-left">just</span>
@@ -184,7 +175,7 @@
 					<div class="header header-bottom lightblue"></div>
 					<div class="firstLine firstLine-bottom">oriental<br /> avenue</div>
 				</div>
-				<div id="clickable" data-id="readingrailroad" class="square1 ">					
+				<div id="readingrailroad" class="square1 ">					
 					<div data-id="readingrailroad" class="firstLine firstLine-bottom no-color">reading<br /> railroad</div>
 				</div>
 				<div id="incometax" class="square1 ">
@@ -209,69 +200,144 @@
 		</div>
 
 	</div>
-
+<button @click="fun">push me</button>
 </body>
-<button @click="placePlayerPieces">test dom</button>
+
 </template>
 
 
-<script setup>
-import { onMounted, computed, ref } from 'vue';
+<script>
+import { defineComponent, onMounted, watch, ref } from 'vue';
 import { lsInUse, gameLogic } from '../javascripts/stateStore';
 
-onMounted(() => {
+// onMounted(() => {
 
-    // // place all player pieces on dom
-    // gameLogic.value.players.forEach((player) => {
-    //     placePlayerPiece(player.name)
-    // })
+//     // place all player pieces on dom
+//     // gameLogic.value.players.forEach((player) => {
+//     //     placePlayerPiece(player.name)
+//     // })
+    
+
+// });
+
+// // computed(() => {
+
+
+// // });
+
+// let placePlayerPiece = (playerId) => {
+        
+//     console.log('test')
+//     // if element already on the dom, remove it
+//     if(document.querySelector(playerId)) {document.querySelector(playerId).remove()};
+
+//     let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId))
+//     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
+//     let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
+//     let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
+    
+//     let positionObj = gameLogic.value.playerPiecePos[`${gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
+
+//     // add css properties and class name
+//     let playerPiece = document.createElement('span');
+//     playerPiece.classList.add(gameLogic.value.players[playerIndex].name);
+//     playerPiece.style.position = 'absolute';
+//     playerPiece.style.inset = positionObj.inset;
+//     playerPiece.style.width = positionObj.width;
+//     playerPiece.style.height = positionObj.height;
+//     playerPiece.style.backgroundColor = gameLogic.value.players[playerIndex].color;
+
+//     // add player piece to dom
+//     document.getElementById(propertyId).append(playerPiece);
+
+// }
+
+
+export default defineComponent({
+    name: 'GameBoard',
+    setup() {
+        
+        return {
+            
+            // lsInUse,
+            gameLogic
+        }
+    },
+    components: {
+    
+    },
+    data() {
+        return {
+            
+        }
+    },
+    mounted() {
+        // console.log(document.getElementById('jailjustvisiting'))
+        // place all player pieces on dom
+        console.log(this.freshStart)
+        this.gameLogic.value.players.forEach((player) => {
+            this.placePlayerPiece(player.name)
+        });
+        
+        
+    },
+    methods: {
+        placePlayerPiece(playerId) {
+            
+            // if element already on the dom, remove it
+            if(document.getElementById(playerId)) {document.getElementById(playerId).remove()};
+            
+            let playerIndex = this.gameLogic.value.players.findIndex((player => player.name == playerId))
+            let propertyIndex = this.gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
+            let propertyId = this.gameLogic.value.vueopoly.properties[propertyIndex].id;
+            let piecePosition = this.gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
+            let positionObj = this.gameLogic.value.playerPiecePos[`${this.gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
+
+            // add css properties and id
+            let playerPiece = document.createElement('span');
+            playerPiece.id = gameLogic.value.players[playerIndex].name;
+            playerPiece.style.position = 'absolute';
+            playerPiece.style.inset = positionObj.inset;
+            playerPiece.style.width = positionObj.width;
+            playerPiece.style.height = positionObj.height;
+            playerPiece.style.backgroundColor = gameLogic.value.players[playerIndex].color;
+
+            // add player piece to dom
+            document.getElementById(propertyId).append(playerPiece);
+        },
+        
+        fun() {
+            this.gameLogic.value.players[0].position++;
+            console.log(this.gameLogic.value.players[0].position);
+            this.placePlayerPiece(this.gameLogic.value.players[0].name);
+        }
+        
+    },
+    computed: {
+
+        playerPosition: function() {
+            return this.gameLogic.value.players[0].position + 0;
+        }
+    },
+    watch: {
+        
+        playerPosition: function() {
+            this.placePlayerPiece(this.gameLogic.value.players[0].name);
+        }
+    },
 
 });
 
-computed(() => {
 
-
-});
-
-function placePlayerPiece(playerId) {
-        
-        console.log('test')
-        // // if element already on the dom, remove it
-        // if(document.querySelector(playerId)) {document.querySelector(playerId).remove()};
-
-        // let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId))
-        // let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
-        // let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
-        // let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
-        
-        // let positionObj = gameLogic.value.playerPiecePos[`${gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
-
-        // // add css properties and class name
-        // let playerPiece = document.createElement('span');
-        // playerPiece.classList.add(gameLogic.value.players[playerIndex].name);
-        // playerPiece.style.position = 'absolute';
-        // playerPiece.style.inset = positionObj.inset;
-        // playerPiece.style.width = positionObj.width;
-        // playerPiece.style.height = positionObj.height;
-        // playerPiece.style.backgroundColor = gameLogic.value.players[playerIndex].color;
-
-        // // add player piece to dom
-        // document.getElementById(propertyId).append(playerPiece);
-}
-
-// so function can be called from other component
-defineExpose({
-    placePlayerPiece
-})
 </script>
 
 
 <style lang="scss" scoped>
 
-@media (min-width: 480px) {
+// @media (min-width: 480px) {
 
 
-}    
+// }    
 
 div {
 	box-sizing: border-box;
