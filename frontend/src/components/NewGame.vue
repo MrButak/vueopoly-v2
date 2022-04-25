@@ -2,10 +2,8 @@
 
 
 
-<div class="full-page-centered">
-
-
-    <div v-if="askToContinueGame">
+<div v-if="askToContinueGame" class="full-page-centered">
+    <div>
         <div class="choose-players-wrapper">
             
             <text>Saved game found.</text>
@@ -16,8 +14,10 @@
             
         </div>
     </div>
+</div>
 
-    <div v-if="showPlayerCountDiv, !askToContinueGame" class="choose-players-wrapper">
+<div v-if="showPlayerCountDiv, !askToContinueGame" class="full-page-centered">
+    <div class="choose-players-wrapper">
         <div class="choose-players-div">
 
             <label for="player-count">Number of players:</label>
@@ -28,8 +28,10 @@
             <button @click="choosePlayerCount()" type="submit">Continue</button>
         </div>
     </div>
+</div>
 
-    <div v-if="!showPlayerCountDiv" class="choose-players-wrapper">
+<div v-if="!showPlayerCountDiv" class="full-page-centered">
+    <div class="choose-players-wrapper">
         <div v-for="count in playerCount">
             <input name="playerName" type="text" v-bind:placeholder='"Player " + count + " name"'>
             <select>
@@ -38,8 +40,9 @@
         </div>
         <button @click.prevent="submitUserProfile($event)" type="submit">Continue</button>
     </div>
-    
-</div>
+</div> 
+
+
 
 </template>
 
@@ -60,7 +63,6 @@ let playerColors = ["green", "yellow", "white", "black", "pink", "brown", "purpl
 onMounted(() => {
 
     askToContinueGame.value = handleLs();
-    console.log(askToContinueGame.value)
 });
 
 

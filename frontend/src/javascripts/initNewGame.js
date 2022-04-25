@@ -433,7 +433,7 @@ function initNewGame(newPlayers) {
         startGame: true,
         playerCount: playerCnt,
         whosTurnIndex: 0,
-        gameLog: [{log: 'New game created.', style: 'game'}], // first game log!
+        gameLog: [{log: 'New game created.', style: 'white'}], // first game log!
         usedChance: [],
         usedCommunityChest: [],
         freeParking: 0,
@@ -445,6 +445,7 @@ function initNewGame(newPlayers) {
     // console.log(playersArr);
     // console.log(gameLogic);
 
+    // TODO set player1.isTurn = true
     // if(lsInUse.value)
     // set local storage
     localStorage.setItem('gameLogic', JSON.stringify(gameLogicObj));

@@ -1,7 +1,7 @@
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 
 const lsInUse = ref(false);
-const gameLogic = ref({})
+const gameLogic = reactive({})
 
 // function gameState() {
 
