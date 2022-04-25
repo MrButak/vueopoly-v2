@@ -27,7 +27,7 @@
             <text>is available to buy for</text>
             <text>You payed rent at</text>
             
-            <button>Buy</button>
+            <button @click="testFunctionCall()">Buy</button>
         </div>
     </div>
 </div>
@@ -36,6 +36,7 @@
 <script setup>
 import {ref, computed, onMounted, reactive} from 'vue';
 import { lsInUse, gameLogic } from '../../javascripts/stateStore';
+import GameBoard from '../GameBoard.vue';
 
 let crntTurnLogic = reactive({
     crntPlayer: reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]),
@@ -47,11 +48,14 @@ let crntTurnLogic = reactive({
 });
 
 onMounted(() => {
-    // crntPlayer.value = gameLogic.value.players[gameLogic.value.whosTurnIndex];
-    // console.log(crntPlayer.value)
+    
 });
 
 
+let aa = ref(GameBoard)
+function testFunctionCall() {
+    console.log(aa)
+}
 </script>
 
 <style scoped>
