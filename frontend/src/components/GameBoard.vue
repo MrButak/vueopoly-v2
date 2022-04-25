@@ -215,48 +215,67 @@
 
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
+import { lsInUse, gameLogic } from '../javascripts/stateStore';
 
 onMounted(() => {
 
-    
+    placePlayerPieces();
+    let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[0].position);
+    let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
+    let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
+
+    console.log(piecePosition)
+    let playerPiece = document.createElement('span');
+    playerPiece.classList.add('player-piece');
+
+    // playerPiece.style.inset = gameLogic.value.playerPiecePos[`${gameLogic.value.players[0].name}`][`${piecePosition}`].inset;
+    // playerP.style.width = gameLogic.value.playerPiecePos[`${gameLogic.value.players[0].name}`][`${piecePosition}`].width;
+    // playerP.style.height = gameLogic.value.playerPiecePos[`${gameLogic.value.players[0].name}`][`${piecePosition}`].height;
+    // playerP.style.backgroundColor = 'red'
+
+    // console.log(playerP)
+});
+computed(() => {
+
+
 });
 
-
-
-function testDom() {
-    
-    let position = 'rightRow';
-    let playerP;
-    
-
-    playerP = document.createElement('span');
-    playerP.classList.add('player-piece');
-
-
-    for(let i = 1; i < 9; i++) {
-
-        playerP = document.createElement('span');
-        playerP.classList.add('player-piece');
-
-        // console.log(playerPieceObj['player' + `${i}`]);
-
-        playerP.style.inset = playerPieceObj['player' + `${i}`].position[`${position}`].inset;
-        playerP.style.width = playerPieceObj['player' + `${i}`].position[`${position}`].width;
-        playerP.style.height = playerPieceObj['player' + `${i}`].position[`${position}`].height;
-        playerP.style.backgroundColor = playerPieceObj['player' + `${i}`].color;
-        
-        document.getElementById('pacificave').append(playerP);
-        
-    };
-
+function placePlayerPieces() {
     
 }
+
+// function testDom() {
+    
+//     let position = 'rightRow';
+//     let playerP;
+    
+
+//     playerP = document.createElement('span');
+//     playerP.classList.add('player-piece');
+
+
+//     for(let i = 1; i < 9; i++) {
+
+//         playerP = document.createElement('span');
+//         playerP.classList.add('player-piece');
+
+//         playerP.style.inset = playerPieceObj['player' + `${i}`].position[`${position}`].inset;
+//         playerP.style.width = playerPieceObj['player' + `${i}`].position[`${position}`].width;
+//         playerP.style.height = playerPieceObj['player' + `${i}`].position[`${position}`].height;
+//         playerP.style.backgroundColor = playerPieceObj['player' + `${i}`].color;
+        
+//         document.getElementById('pacificave').append(playerP);
+        
+//     };
+
+    
+// }
 
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .player-piece {
     position: absolute;
     
