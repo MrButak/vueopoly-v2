@@ -291,15 +291,9 @@ export default defineComponent({
             let propertyIndex = this.gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
             let propertyId = this.gameLogic.value.vueopoly.properties[propertyIndex].id;
             let piecePosition = this.gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
-            
             let positionObj = this.gameLogic.value.playerPiecePos[`${this.gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
-            // console.log({playerId})
-            // console.log({playerIndex})
-            // console.log({propertyIndex})
-            // console.log({propertyId})
-            // console.log({piecePosition})
 
-            // add css properties and class name
+            // add css properties and id
             let playerPiece = document.createElement('span');
             playerPiece.id = gameLogic.value.players[playerIndex].name;
             playerPiece.style.position = 'absolute';
