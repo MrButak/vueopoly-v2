@@ -16,7 +16,6 @@ let dtrmPropActionH = (property) => {
                 case 'communitychest': {
                     return 'specialcard';
                 }
-                
                 case 'tax':
                 case 'freeparking':
                 case 'gotojail': {
