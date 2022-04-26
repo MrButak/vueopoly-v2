@@ -7,11 +7,23 @@ let dtrmPropActionH = (property) => {
         case 'land':
         case 'railroad':
         case 'utilities': {
-            return isPropOwnedH(property) ? 'willPay' : 'canBuy';
+            return isPropOwnedH(property) ? 'willpay' : 'canbuy';
         }
 
         case 'special':
-            // goto jail, chance / community, tax, free parking (go already handled, jailjustvisiting no need to handle)
+            switch(property.style) {
+                case 'chance':
+                case 'communitychest': {
+                    return 'specialcard';
+                }
+                
+                case 'tax':
+                case 'freeparking':
+                case 'gotojail': {
+                    return property.style;
+                }
+            }
+          //  (go already handled, jailjustvisiting no need to handle)
     };
 };
 
@@ -25,7 +37,6 @@ let purchasePropertyH = (player, property) => {
     property.ownedby = player.name;
     player.properties.push(property);
     return;
-
 };
 
 let getTotalRentCostH = (property, diceRoll) => {
