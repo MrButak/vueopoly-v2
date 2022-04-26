@@ -433,7 +433,7 @@ function initNewGame(newPlayers) {
         startGame: true,
         playerCount: playerCnt,
         whosTurnIndex: 0,
-        gameLog: [{log: 'New game created.', style: 'white'}], // first game log!
+        gameLogs: [{log: 'New game created.', color: 'red'}], // first game log!
         usedChance: [],
         usedCommunityChest: [],
         freeParking: 0,
