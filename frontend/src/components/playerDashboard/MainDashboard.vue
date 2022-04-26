@@ -25,9 +25,9 @@
             </div>
 
             <div class="game-message-wrapper">
-                <span v-if="crntTurnLogic.buyAvailable">
-                    <text>{{ crntTurnLogic.propertyLandedOn.name }} is available to buy for ${{ crntTurnLogic.propertyLandedOn.cost }}</text>
-                    <button @click="purchaseProperty">Buy</button>
+                <span>
+                    <p v-if="crntTurnLogic.buyAvailable">{{ crntTurnLogic.propertyLandedOn.name }} is available to buy for ${{ crntTurnLogic.propertyLandedOn.price }}</p>
+                    <button v-if="crntTurnLogic.buyAvailable" @click="purchaseProperty">Buy</button>
                 </span>
             </div>
         </div>
@@ -53,8 +53,6 @@ import * as gameFunctions from '../../javascripts/gameFunctions';
 let gameLogs = computed(() => {
     return gameLogic.value.gameLogs
 });
-
-
 
 let crntTurnLogic = reactive({
     crntPlayer: reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]),
@@ -87,14 +85,15 @@ let dtrmPropAction = () => {
         case 'willPay':
             payRent();
     }
-}
+};
 
 function purchaseProperty() {
 
     // TODO also send a 'not enough money message to dom'
     if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, crntTurnLogic.propertyLandedOn.price)) {return};
     propertyAction.purchasePropertyH(crntTurnLogic.crntPlayer, crntTurnLogic.propertyLandedOn);
-    // TODO gamelogs
+    // gamelogs
+    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.crntPlayer.name} purchased ${crntTurnLogic.propertyLandedOn.name} for $${crntTurnLogic.propertyLandedOn.price}`, color: `${crntTurnLogic.crntPlayer.color}`});
 
 };
 
@@ -105,7 +104,9 @@ function payRent() {
     if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, totalRentAmount)) {return};
     // // (to, from, amount, type)
     gameFunctions.payMoneyH(crntTurnLogic.propertyLandedOn.ownedby, crntTurnLogic.crntPlayer.name, totalRentAmount, 'rent');
-    // TODO game logs and dom message. for utilities, make custom message for dice roll *
+    // gamelogs 
+    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.crntPlayer.name} payed ${crntTurnLogic.propertyLandedOn.ownedby} $${totalRentAmount} in rent at ${crntTurnLogic.propertyLandedOn.name}`, color: `${crntTurnLogic.crntPlayer.color}`});
+    // TODO dom message. for utilities, make custom message for dice roll *
 };
 
 
