@@ -3,13 +3,14 @@ import * as consts from '../javascripts/constants';
 
 let rollDiceH = () => {
 
-    let diceOne = Math.floor(Math.random() * 6 + 1);
-    let diceTwo = Math.floor(Math.random() * 6 + 1);
-    return [diceOne, diceTwo];
+    // let diceOne = Math.floor(Math.random() * 6 + 1);
+    // let diceTwo = Math.floor(Math.random() * 6 + 1);
+    // return [diceOne, diceTwo];
+    return [0, 1]
 };
 
 let movePlayerH = (moveCount, prevPosition) => {
-
+    
     let crntPlayer = consts.crntPlayer();
     if(moveCount + prevPosition < 41) {
         crntPlayer.position += moveCount;
@@ -34,6 +35,7 @@ let getCrntPropH = () => {
 
     
     let crntPlayer = consts.crntPlayer();
+    
     let crntPropIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == crntPlayer.position)
     let crntProp = gameLogic.value.vueopoly.properties[crntPropIndex];
     return crntProp;

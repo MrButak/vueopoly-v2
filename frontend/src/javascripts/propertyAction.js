@@ -5,8 +5,7 @@ let dtrmPropActionH = (property) => {
         case 'land':
         case 'railroad':
         case 'utilities': {
-            // can buy, pay money
-
+            return isPropOwnedH(property) ? 'willPay' : 'canBuy';
         }
 
         case 'special':
@@ -15,4 +14,29 @@ let dtrmPropActionH = (property) => {
     }
 };
 
-export { dtrmPropActionH }
+let isPropOwnedH = (property) => {
+    return property.ownedby == -1 ? false : true;
+};
+
+let purchasePropertyH = (player, property) => {
+
+    player.money -= property.price;
+    property.ownedby = player.name;
+    player.properties.push(property);
+    return;
+
+};
+
+let getTotalRentCostH = (property) => {
+    
+    switch(property.group) {
+
+        case 'railroad':
+            // get all owners
+        case 'land':
+            // check buildings
+    }
+};
+
+
+export { dtrmPropActionH, isPropOwnedH, getTotalRentCostH, purchasePropertyH }

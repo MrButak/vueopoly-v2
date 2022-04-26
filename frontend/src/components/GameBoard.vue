@@ -201,7 +201,7 @@
 
 	</div>
 </body>
-
+<button @click="manualMove">move player forward</button>
 </template>
 
 
@@ -215,6 +215,9 @@ onMounted(() => {
         placePlayerPiece(player.name)
     })
 });
+function manualMove() {
+    gameLogic.value.players[gameLogic.value.whosTurnIndex].position++
+};
 
 function placePlayerPiece(playerId) {
 
