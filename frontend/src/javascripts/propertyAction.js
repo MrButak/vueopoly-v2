@@ -12,8 +12,7 @@ let dtrmPropActionH = (property) => {
 
         case 'special':
             // goto jail, chance / community, tax, free parking (go already handled, jailjustvisiting no need to handle)
-
-    }
+    };
 };
 
 let isPropOwnedH = (property) => {
@@ -29,19 +28,19 @@ let purchasePropertyH = (player, property) => {
 
 };
 
-let getTotalRentCostH = (property) => {
+let getTotalRentCostH = (property, diceRoll) => {
     
     switch(property.group) {
 
         case 'railroad':
-            let ownedCount = 1;
-            // create array of all RRs
-            let railroads = gameLogic.value.vueopoly.properties.filter((prop => prop.group == 'railroad'));
+            let rrOwned = 1;
             // check how many RRs are owned by same person
+            let railroads = gameLogic.value.vueopoly.properties.filter((prop => prop.group == 'railroad'));
             railroads.forEach((rr) => {
-                if(rr.ownedby == property.ownedby) {ownedCount++}
+                if(rr.ownedby == property.ownedby) {rrOwned++}
             });
-            switch(ownedCount) {
+            // payment based on amount owned
+            switch(rrOwned) {
                 case 1: return 25;
                 case 2: return 50;
                 case 3: return 100;
@@ -50,11 +49,24 @@ let getTotalRentCostH = (property) => {
 
         case 'land':
             if(property.buildings > 0) {
-                return(property.buildingrent[property.buildings - 1])
+                return (property.buildingrent[property.buildings - 1])
             };    
-            return(property.rent)
+            return (property.rent);
+
+        case 'utilities': // dice roll. * 4 for 1 owned * 10 for both
+            // check how many Utilities are owned by same person
+            let utilsOwned = 1;
+            let utilities = gameLogic.value.vueopoly.properties.filter((prop => prop.group == 'utilities'));
+            utilities.forEach((util) => {
+                if(util.ownedby == property.ownedby) {utilsOwned++}
+            });
+            // payment based on amount owned
+            if(utilsOwned < 2) {
+                return ((diceRoll[0] + diceRoll[1]) * 4);
+            };
+            return ((diceRoll[0] + diceRoll[1]) * 10);
+
     }
 };
-
 
 export { dtrmPropActionH, isPropOwnedH, getTotalRentCostH, purchasePropertyH }

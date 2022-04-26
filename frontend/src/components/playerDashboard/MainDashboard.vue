@@ -100,12 +100,12 @@ function purchaseProperty() {
 
 function payRent() {
 
-    let totalRentAmount = propertyAction.getTotalRentCostH(crntTurnLogic.propertyLandedOn);
+    let totalRentAmount = propertyAction.getTotalRentCostH(crntTurnLogic.propertyLandedOn, crntTurnLogic.crntDiceRoll);
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
     if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, totalRentAmount)) {return};
     // // (to, from, amount, type)
     gameFunctions.payMoneyH(crntTurnLogic.propertyLandedOn.ownedby, crntTurnLogic.crntPlayer.name, totalRentAmount, 'rent');
-    // TODO game logs and dom message
+    // TODO game logs and dom message. for utilities, make custom message for dice roll *
 };
 
 
