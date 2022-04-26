@@ -77,13 +77,21 @@ let dtrmPropAction = () => {
     
     switch(propertyAction.dtrmPropActionH(crntTurnLogic.propertyLandedOn)) {
 
-        case 'canBuy':
+        case 'canbuy':
             // displays 'buy btn' and message on dom
             crntTurnLogic.buyAvailable = true;
             break;
 
-        case 'willPay':
+        case 'willpay':
             payRent();
+            break;
+
+        case 'specialcard':
+
+        case 'tax':
+
+        case 'freeparking':
+        
     }
 };
 
