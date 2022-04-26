@@ -20,34 +20,41 @@
             </div>
 
             <div class="roll-dice-end-turn-btn-wrapper">
-                <button v-if="!crntTurnLogic.diceRolled" @click="rollDice" class="endTurnBtn">Roll dice</button>
+                <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="endTurnBtn">Roll dice</button>
                 <button v-if="crntTurnLogic.canEndTurn" class="endTurnBtn">End turn</button>
             </div>
 
             <div class="game-message-wrapper">
-                <text>is available to buy for</text>
-                <text>You payed rent at</text>
-
-                <button>Buy</button>
+                <span v-if="crntTurnLogic.buyAvailable">
+                    <text>{{ crntTurnLogic.propertyLandedOn.name }} is available to buy for ${{ crntTurnLogic.propertyLandedOn.cost }}</text>
+                    <button @click="pruchaseProperty">Buy</button>
+                </span>
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup>
 
+
 import { ref, computed, onMounted, reactive } from 'vue';
 import { lsInUse, gameLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';
+import * as propertyAction from '../../javascripts/propertyAction';
+import * as gameFunctions from '../../javascripts/gameFunctions';
 
 
 // onMounted(() => {
 
 // });
 
+ 
 let gameLogs = computed(() => {
     return gameLogic.value.gameLogs
 });
+
+
 
 let crntTurnLogic = reactive({
     crntPlayer: reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]),
@@ -59,13 +66,46 @@ let crntTurnLogic = reactive({
 });
 
 let rollDice = () => {
-
     
     crntTurnLogic.crntDiceRoll = moveFunction.rollDiceH();
-    moveFunction.movePlayerH(crntTurnLogic.crntDiceRoll[0] + crntTurnLogic.crntDiceRoll[1], crntTurnLogic.crntPlayer.position)
-    // crntTurnLogic.diceRolled = true;
     
+    moveFunction.movePlayerH(crntTurnLogic.crntDiceRoll[0] + crntTurnLogic.crntDiceRoll[1], crntTurnLogic.crntPlayer.position);
+    
+    // diceRolled = true;
+};
+
+// called after rollDice() @click
+let dtrmPropAction = () => {
+
+    crntTurnLogic.propertyLandedOn = moveFunction.getCrntPropH();
+    
+    switch(propertyAction.dtrmPropActionH(crntTurnLogic.propertyLandedOn)) {
+
+        case 'canBuy':
+            // displays 'buy btn' and message on dom
+            crntTurnLogic.buyAvailable = true;
+            break;
+
+        case 'willPay':
+            payRent();
+    }
 }
+
+function pruchaseProperty() {
+
+    
+    // TODO also send a 'not enough money message to dom'
+    if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, crntTurnLogic.propertyLandedOn.price)) {return};
+    propertyAction.purchasePropertyH(crntTurnLogic.crntPlayer, crntTurnLogic.propertyLandedOn);
+    // TODO gamelogs
+
+};
+
+function payRent() {
+
+    let rentAmount = propertyAction.getRentCostH(crntTurnLogic.propertyLandedOn);
+};
+
 
 </script>
 
