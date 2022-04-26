@@ -89,7 +89,7 @@ let dtrmPropAction = () => {
         case 'specialcard':
 
         case 'tax':
-
+            payTax();
         case 'freeparking':
         
     }
@@ -117,7 +117,17 @@ function payRent() {
     // TODO dom message. for utilities, make custom message for dice roll *
 };
 
+function payTax() {
+    // 10% or 200
+    let taxAmount = gameFunctions.calculateTaxAmountH();
+    // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
+    if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, taxAmount)) {return};
 
+    gameFunctions.payMoneyH('bank', crntTurnLogic.crntPlayer, taxAmount, 'tax');
+    // gamelogs 
+    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.crntPlayer.name} payed $${taxAmount} for ${crntTurnLogic.propertyLandedOn.name}`, color: `${crntTurnLogic.crntPlayer.color}`});
+    
+}
 </script>
 
 <style scoped>
