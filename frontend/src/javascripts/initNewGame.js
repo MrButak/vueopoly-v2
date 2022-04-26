@@ -1,4 +1,4 @@
-import gameJson from '../../tmpVueopoly.json';
+import gameJson from '../../debugVueopoly.json';
 import {lsInUse, gameLogic} from '../javascripts/stateStore';
 let playerPositionObj = {
 

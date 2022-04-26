@@ -17,8 +17,8 @@
         "housecost": 50,
         "style": "purple",
         "group": "land",
-        "ownedby": -1,
-        "buildings": 0,
+        "ownedby": "player2",
+        "buildings": 5,
         "mortgaged": false,
         "probability": 2.1314,
         "rel": {
@@ -708,7 +708,7 @@
         "price": 200,
         "style": "railroad",
         "group": "railroad",
-        "ownedby": -1,
+        "ownedby": "player2",
         "mortgaged": false,
         "probability": 2.1314,
         "rel": {
@@ -728,7 +728,7 @@
         "price": 200,
         "style": "railroad",
         "group": "railroad",
-        "ownedby": -1,
+        "ownedby": "player2",
         "mortgaged": false,
         "rel": {
           "Square": "Pennsylvania Railroad",

@@ -27,7 +27,7 @@
             <div class="game-message-wrapper">
                 <span v-if="crntTurnLogic.buyAvailable">
                     <text>{{ crntTurnLogic.propertyLandedOn.name }} is available to buy for ${{ crntTurnLogic.propertyLandedOn.cost }}</text>
-                    <button @click="pruchaseProperty">Buy</button>
+                    <button @click="purchaseProperty">Buy</button>
                 </span>
             </div>
         </div>
@@ -68,10 +68,8 @@ let crntTurnLogic = reactive({
 let rollDice = () => {
     
     crntTurnLogic.crntDiceRoll = moveFunction.rollDiceH();
-    
     moveFunction.movePlayerH(crntTurnLogic.crntDiceRoll[0] + crntTurnLogic.crntDiceRoll[1], crntTurnLogic.crntPlayer.position);
-    
-    // diceRolled = true;
+    // diceRolled = true; // will remove the 'roll dice btn' from dom
 };
 
 // called after rollDice() @click
@@ -91,9 +89,8 @@ let dtrmPropAction = () => {
     }
 }
 
-function pruchaseProperty() {
+function purchaseProperty() {
 
-    
     // TODO also send a 'not enough money message to dom'
     if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, crntTurnLogic.propertyLandedOn.price)) {return};
     propertyAction.purchasePropertyH(crntTurnLogic.crntPlayer, crntTurnLogic.propertyLandedOn);
@@ -103,7 +100,12 @@ function pruchaseProperty() {
 
 function payRent() {
 
-    let rentAmount = propertyAction.getRentCostH(crntTurnLogic.propertyLandedOn);
+    let totalRentAmount = propertyAction.getTotalRentCostH(crntTurnLogic.propertyLandedOn, crntTurnLogic.crntDiceRoll);
+    // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
+    if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, totalRentAmount)) {return};
+    // // (to, from, amount, type)
+    gameFunctions.payMoneyH(crntTurnLogic.propertyLandedOn.ownedby, crntTurnLogic.crntPlayer.name, totalRentAmount, 'rent');
+    // TODO game logs and dom message. for utilities, make custom message for dice roll *
 };
 
 
