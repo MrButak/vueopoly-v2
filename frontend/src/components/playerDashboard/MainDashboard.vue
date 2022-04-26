@@ -4,59 +4,68 @@
 
             <div class="player-stats-top-wrapper">
                 <button>Manage</button>
-                <!-- <text>{{ crntTurnLogic.crntPlayer.name }} - {{ crntTurnLogic.crntPlayer.alias }}</text>
-            <text>${{ crntTurnLogic.crntPlayer.money }}</text> -->
+                <text>{{ crntTurnLogic.crntPlayer.name }} - {{ crntTurnLogic.crntPlayer.alias }}</text>
+            <text>${{ crntTurnLogic.crntPlayer.money }}</text>
                 <button>Trade</button>
             </div>
 
             <div class="log-and-dice-wrapper">
                 <div class="gamelog-wrapper-main">
-                    <!-- <p v-for="log in gameLogic.gameLog" v-bind:style="{ 'color': log.style }">{{ log.log }}</p> -->
+                    <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }">{{ log.log }}</p>
+                    
                 </div>
                 <div class="show-dice-wrapper-main">
-                    <text>dice roll</text>
+                    <text>{{ crntTurnLogic.crntDiceRoll[0] }}  {{ crntTurnLogic.crntDiceRoll[1] }}</text>
                 </div>
             </div>
 
-            <!-- <div class="roll-dice-end-turn-btn-wrapper">
-            <button v-if="!crntTurnLogic.diceRolled" class="endTurnBtn">Roll dice</button>
-            <button v-if="crntTurnLogic.canEndTurn" class="endTurnBtn">End turn</button>
-        </div> -->
+            <div class="roll-dice-end-turn-btn-wrapper">
+                <button v-if="!crntTurnLogic.diceRolled" @click="rollDice" class="endTurnBtn">Roll dice</button>
+                <button v-if="crntTurnLogic.canEndTurn" class="endTurnBtn">End turn</button>
+            </div>
 
             <div class="game-message-wrapper">
                 <text>is available to buy for</text>
                 <text>You payed rent at</text>
 
-                <button @click="testy()">Buy</button>
+                <button>Buy</button>
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
 
-import GameBoard from '../GameBoard.vue';
 import { ref, computed, onMounted, reactive } from 'vue';
 import { lsInUse, gameLogic } from '../../javascripts/stateStore';
-let comp = ref(GameBoard)
+import * as moveFunction from '../../javascripts/moveFunctions';
 
-let testy = () => {
-    comp.value.placePlayerPiece()
-}
+
 // onMounted(() => {
 
 // });
 
-// let crntTurnLogic = reactive({
-//     crntPlayer: reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]),
-//     propertyLandedOn: reactive({}),
-//     crntDiceRoll: reactive([]),
-//     diceRolled: ref(false),
-//     canEndTurn: ref(false),
-//     buyAvailable: ref(false)
-// });
-// console.log(gameLogic.value)
+let gameLogs = computed(() => {
+    return gameLogic.value.gameLogs
+});
+
+let crntTurnLogic = reactive({
+    crntPlayer: reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]),
+    propertyLandedOn: reactive({}),
+    crntDiceRoll: reactive([]),
+    diceRolled: ref(false),
+    canEndTurn: ref(false),
+    buyAvailable: ref(false)
+});
+
+let rollDice = () => {
+
+    
+    crntTurnLogic.crntDiceRoll = moveFunction.rollDiceH();
+    moveFunction.movePlayerH(crntTurnLogic.crntDiceRoll[0] + crntTurnLogic.crntDiceRoll[1], crntTurnLogic.crntPlayer.position)
+    // crntTurnLogic.diceRolled = true;
+    
+}
 
 </script>
 
@@ -111,7 +120,7 @@ let testy = () => {
     display: flex;
     flex-direction: column;
     height: 15vw;
-    background-color: black;
+    
     border: 1px solid black;
     overflow-y: scroll;
     width: 80%;
