@@ -200,91 +200,53 @@
 		</div>
 
 	</div>
-<button @click="fun">push me</button>
 </body>
 
 </template>
 
 
-<script>
-import { defineComponent, onMounted, watch, ref } from 'vue';
+<script setup>
+import { onMounted, watch } from 'vue';
 import { lsInUse, gameLogic } from '../javascripts/stateStore';
 
-export default defineComponent({
-    name: 'GameBoard',
-    setup() {
-        
-        return {
-            
-            // lsInUse,
-            gameLogic
-        }
-    },
-    components: {
-    
-    },
-    data() {
-        return {
-            
-        }
-    },
-    mounted() {
-        
-        // place all player pieces on dom
-        this.gameLogic.value.players.forEach((player) => {
-            this.placePlayerPiece(player.name)
-        });
-        
-        
-    },
-    methods: {
-        placePlayerPiece(playerId) {
-            
-            // if element already on the dom, remove it
-            if(document.getElementById(playerId)) {document.getElementById(playerId).remove()};
-            
-            let playerIndex = this.gameLogic.value.players.findIndex((player => player.name == playerId))
-            let propertyIndex = this.gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
-            let propertyId = this.gameLogic.value.vueopoly.properties[propertyIndex].id;
-            let piecePosition = this.gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
-            let positionObj = this.gameLogic.value.playerPiecePos[`${this.gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
-
-            // add css properties and id
-            let playerPiece = document.createElement('span');
-            playerPiece.id = gameLogic.value.players[playerIndex].name;
-            playerPiece.style.position = 'absolute';
-            playerPiece.style.inset = positionObj.inset;
-            playerPiece.style.width = positionObj.width;
-            playerPiece.style.height = positionObj.height;
-            playerPiece.style.backgroundColor = gameLogic.value.players[playerIndex].color;
-
-            // add player piece to dom
-            document.getElementById(propertyId).append(playerPiece);
-        },
-        
-        fun() {
-            this.gameLogic.value.players[0].position++;
-            console.log(this.gameLogic.value.players[0].position);
-            this.placePlayerPiece(this.gameLogic.value.players[0].name);
-        }
-        
-    },
-    computed: {
-
-        playerPosition: function() {
-            return this.gameLogic.value.players[0].position + 0;
-        }
-    },
-    watch: {
-        
-        playerPosition: function() {
-            this.placePlayerPiece(this.gameLogic.value.players[0].name);
-        }
-    },
-
+// place all player pieces
+onMounted(() => {
+    gameLogic.value.players.forEach((player) => {
+        placePlayerPiece(player.name)
+    })
 });
 
+function placePlayerPiece(playerId) {
 
+    // if element already on the dom, remove it
+    if(document.getElementById(playerId)) {document.getElementById(playerId).remove()};
+    
+    let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId))
+    let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
+    let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
+    let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
+    let positionObj = gameLogic.value.playerPiecePos[`${gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
+
+    // add css properties and id
+    let playerPiece = document.createElement('span');
+    playerPiece.id = gameLogic.value.players[playerIndex].name;
+    playerPiece.style.position = 'absolute';
+    playerPiece.style.inset = positionObj.inset;
+    playerPiece.style.width = positionObj.width;
+    playerPiece.style.height = positionObj.height;
+    playerPiece.style.backgroundColor = gameLogic.value.players[playerIndex].color;
+
+    // add player piece to dom
+    document.getElementById(propertyId).append(playerPiece);
+};
+
+// when current players poition changes
+watch(
+    () => gameLogic.value.players[gameLogic.value.whosTurnIndex].position,
+    (count, prevCount) => {
+        placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
+    }
+);
 </script>
 
 

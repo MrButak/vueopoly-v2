@@ -32,14 +32,15 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup>
 
+
 import { ref, computed, onMounted, reactive } from 'vue';
 import { lsInUse, gameLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';
-
 
 // onMounted(() => {
 
