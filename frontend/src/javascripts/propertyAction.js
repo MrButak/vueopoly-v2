@@ -1,3 +1,5 @@
+import { lsInUse, gameLogic } from '../javascripts/stateStore';
+
 let dtrmPropActionH = (property) => {
 
     switch(property.group) {
@@ -32,9 +34,25 @@ let getTotalRentCostH = (property) => {
     switch(property.group) {
 
         case 'railroad':
-            // get all owners
+            let ownedCount = 1;
+            // create array of all RRs
+            let railroads = gameLogic.value.vueopoly.properties.filter((prop => prop.group == 'railroad'));
+            // check how many RRs are owned by same person
+            railroads.forEach((rr) => {
+                if(rr.ownedby == property.ownedby) {ownedCount++}
+            });
+            switch(ownedCount) {
+                case 1: return 25;
+                case 2: return 50;
+                case 3: return 100;
+                default: return 200;
+            };
+
         case 'land':
-            // check buildings
+            if(property.buildings > 0) {
+                return(property.buildingrent[property.buildings - 1])
+            };    
+            return(property.rent)
     }
 };
 

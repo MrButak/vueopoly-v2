@@ -15,8 +15,7 @@
           250
         ],
         "housecost": 50,
-        "style": "purple",
-        "group": "land",
+        "group": "Purple",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -46,8 +45,7 @@
           450
         ],
         "housecost": 50,
-        "style": "purple",
-        "group": "land",
+        "group": "Purple",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -77,8 +75,7 @@
           550
         ],
         "housecost": 50,
-        "style": "lightgreen",
-        "group": "land",
+        "group": "lightgreen",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -107,8 +104,7 @@
           550
         ],
         "housecost": 50,
-        "style": "lightgreen",
-        "group": "land",
+        "group": "lightgreen",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -137,8 +133,7 @@
           600
         ],
         "housecost": 50,
-        "style": "lightgreen",
-        "group": "land",
+        "group": "lightgreen",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -167,8 +162,7 @@
           750
         ],
         "housecost": 100,
-        "style": "violet",
-        "group": "land",
+        "group": "Violet",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -197,8 +191,7 @@
           750
         ],
         "housecost": 100,
-        "style": "violet",
-        "group": "land",
+        "group": "Violet",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -227,8 +220,7 @@
           900
         ],
         "housecost": 100,
-        "style": "violet",
-        "group": "land",
+        "group": "Violet",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -257,8 +249,7 @@
           950
         ],
         "housecost": 100,
-        "color": "orange",
-        "group": "land",
+        "group": "Orange",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -287,8 +278,7 @@
           950
         ],
         "housecost": 100,
-        "style": "orange",
-        "group": "land",
+        "group": "Orange",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -317,8 +307,7 @@
           1000
         ],
         "housecost": 100,
-        "style": "orange",
-        "group": "land",
+        "group": "Orange",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -347,8 +336,7 @@
           1050
         ],
         "housecost": 150,
-        "style": "red",
-        "group": "land",
+        "group": "Red",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -377,8 +365,7 @@
           1050
         ],
         "housecost": 150,
-        "style": "red",
-        "group": "land",
+        "group": "Red",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -407,8 +394,7 @@
           1100
         ],
         "housecost": 150,
-        "style": "red",
-        "group": "land",
+        "group": "Red",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -437,8 +423,7 @@
           1150
         ],
         "housecost": 150,
-        "style": "yellow",
-        "group": "land",
+        "group": "Yellow",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -467,8 +452,7 @@
           1150
         ],
         "housecost": 150,
-        "style": "yellow",
-        "group": "land",
+        "group": "Yellow",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -497,8 +481,7 @@
           1200
         ],
         "housecost": 150,
-        "style": "yellow",
-        "group": "land",
+        "group": "Yellow",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -527,8 +510,7 @@
           1275
         ],
         "housecost": 200,
-        "style": "darkgreen",
-        "group": "land",
+        "group": "darkgreen",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -557,8 +539,7 @@
           1275
         ],
         "housecost": 200,
-        "style": "darkgreen",
-        "group": "land",
+        "group": "darkgreen",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -587,8 +568,7 @@
           1400
         ],
         "housecost": 200,
-        "style": "darkgreen",
-        "group": "land",
+        "group": "darkgreen",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -617,8 +597,7 @@
           1500
         ],
         "housecost": 200,
-        "style": "darkblue",
-        "group": "land",
+        "group": "darkblue",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -647,8 +626,7 @@
           2000
         ],
         "housecost": 200,
-        "style": "darkblue",
-        "group": "land",
+        "group": "darkblue",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -668,8 +646,7 @@
         "position": 13,
         "pieceposition": "leftRow",
         "price": 150,
-        "style": "utilities",
-        "group": "utilities",
+        "group": "Utilities",
         "ownedby": -1,
         "mortgaged": false,
         "rel": {
@@ -687,8 +664,7 @@
         "position": 29,
         "pieceposition": "topRow",
         "price": 150,
-        "style": "utilities",
-        "group": "utilities",
+        "group": "Utilities",
         "ownedby": -1,
         "mortgaged": false,
         "rel": {
@@ -706,8 +682,7 @@
         "position": 6,
         "pieceposition": "bottomRow",
         "price": 200,
-        "style": "railroad",
-        "group": "railroad",
+        "group": "Railroad",
         "ownedby": -1,
         "mortgaged": false,
         "probability": 2.1314,
@@ -726,8 +701,7 @@
         "position": 16,
         "pieceposition": "leftRow",
         "price": 200,
-        "style": "railroad",
-        "group": "railroad",
+        "group": "Railroad",
         "ownedby": -1,
         "mortgaged": false,
         "rel": {
@@ -745,8 +719,7 @@
         "position": 26,
         "pieceposition": "topRow",
         "price": 200,
-        "style": "railroad",
-        "group": "railroad",
+        "group": "Railroad",
         "ownedby": -1,
         "mortgaged": false,
         "oprice": 200,
@@ -758,8 +731,7 @@
         "position": 36,
         "pieceposition": "rightRow",
         "price": 200,
-        "style": "railroad",
-        "group": "railroad",
+        "group": "Railroad",
         "ownedby": -1,
         "mortgaged": false,
         "oprice": 200,
@@ -770,8 +742,7 @@
         "id": "go",
         "position": 1,
         "pieceposition": "go",
-        "style": "go",
-        "group": "special",
+        "group": "Special",
         "rel": {
           "Square": "Go",
           "Probability % (Jail Short)": 3.0961,
@@ -783,8 +754,7 @@
       {
         "name": "Income Tax",
         "id": "incometax",
-        "style": "tax",
-        "group": "special",
+        "group": "Special",
         "position": 5,
         "pieceposition": "bottomRow",
         "rel": {
@@ -800,15 +770,13 @@
         "id": "jailjustvisiting",
         "position": 11,
         "pieceposition": "jailjustvisiting",
-        "style": "jailjustvisiting",
-        "group": "special",
+        "group": "Special",
         "averageProbability": 8.897
       },
       {
         "name": "Chance",
         "id": "chance",
-        "style": "chance",
-        "group": "special",
+        "group": "Special",
         "position": 8,
         "pieceposition": "bottomRow",
         "rel": {
@@ -822,8 +790,7 @@
       {
         "name": "Chance",
         "id": "chancetwo",
-        "style": "chance",
-        "group": "special",
+        "group": "Special",
         "position": 23,
         "pieceposition": "topRow",
         "rel": {
@@ -837,8 +804,7 @@
       {
         "name": "Chance",
         "id": "chancethree",
-        "style": "chance",
-        "group": "special",
+        "group": "Special",
         "position": 37,
         "pieceposition": "rightRow",
         "rel": {
@@ -852,8 +818,7 @@
       {
         "name": "Free Parking",
         "id": "freeparking",
-        "style": "freeparking",
-        "group": "special",
+        "group": "Special",
         "position": 21,
         "pieceposition": "freeparking",
         "rel": {
@@ -867,8 +832,7 @@
       {
         "name": "Community Chest",
         "id": "communitychest",
-        "style": "communitychest",
-        "group": "special",
+        "group": "Special",
         "position": 3,
         "pieceposition": "bottomRow",
         "rel": {
@@ -882,8 +846,7 @@
       {
         "name": "Community Chest",
         "id": "communitychesttwo",
-        "style": "communitychest",
-        "group": "special",
+        "group": "Special",
         "position": 18,
         "pieceposition": "leftRow",
         "rel": {
@@ -897,8 +860,7 @@
       {
         "name": "Community Chest",
         "id": "communitychestthree",
-        "style": "communitychest",
-        "group": "special",
+        "group": "Special",
         "position": 34,
         "pieceposition": "rightRow",
         "rel": {
@@ -912,8 +874,7 @@
       {
         "name": "Go To Jail",
         "id": "gotojail",
-        "style": "gotojail",
-        "group": "special",
+        "group": "Special",
         "position": 31,
         "pieceposition": "gotojail",
         "rel": {
@@ -927,8 +888,7 @@
       {
         "name": "Luxury Tax",
         "id": "luxerytax",
-        "style": "tax",
-        "group": "special",
+        "group": "Special",
         "position": 39,
         "pieceposition": "rightRow",
         "averageProbability": 2.116
