@@ -257,7 +257,8 @@
           950
         ],
         "housecost": 100,
-        "group": "Orange",
+        "color": "orange",
+        "group": "land",
         "ownedby": -1,
         "buildings": 0,
         "mortgaged": false,
@@ -770,7 +771,7 @@
         "position": 1,
         "pieceposition": "go",
         "style": "go",
-        "group": "Special",
+        "group": "special",
         "rel": {
           "Square": "Go",
           "Probability % (Jail Short)": 3.0961,
@@ -783,7 +784,7 @@
         "name": "Income Tax",
         "id": "incometax",
         "style": "tax",
-        "group": "Special",
+        "group": "special",
         "position": 5,
         "pieceposition": "bottomRow",
         "rel": {
@@ -800,14 +801,14 @@
         "position": 11,
         "pieceposition": "jailjustvisiting",
         "style": "jailjustvisiting",
-        "group": "Special",
+        "group": "special",
         "averageProbability": 8.897
       },
       {
         "name": "Chance",
         "id": "chance",
         "style": "chance",
-        "group": "Special",
+        "group": "special",
         "position": 8,
         "pieceposition": "bottomRow",
         "rel": {
@@ -822,7 +823,7 @@
         "name": "Chance",
         "id": "chancetwo",
         "style": "chance",
-        "group": "Special",
+        "group": "special",
         "position": 23,
         "pieceposition": "topRow",
         "rel": {
@@ -837,7 +838,7 @@
         "name": "Chance",
         "id": "chancethree",
         "style": "chance",
-        "group": "Special",
+        "group": "special",
         "position": 37,
         "pieceposition": "rightRow",
         "rel": {
@@ -852,7 +853,7 @@
         "name": "Free Parking",
         "id": "freeparking",
         "style": "freeparking",
-        "group": "Special",
+        "group": "special",
         "position": 21,
         "pieceposition": "freeparking",
         "rel": {
@@ -867,7 +868,7 @@
         "name": "Community Chest",
         "id": "communitychest",
         "style": "communitychest",
-        "group": "Special",
+        "group": "special",
         "position": 3,
         "pieceposition": "bottomRow",
         "rel": {
@@ -882,7 +883,7 @@
         "name": "Community Chest",
         "id": "communitychesttwo",
         "style": "communitychest",
-        "group": "Special",
+        "group": "special",
         "position": 18,
         "pieceposition": "leftRow",
         "rel": {
@@ -897,7 +898,7 @@
         "name": "Community Chest",
         "id": "communitychestthree",
         "style": "communitychest",
-        "group": "Special",
+        "group": "special",
         "position": 34,
         "pieceposition": "rightRow",
         "rel": {
@@ -912,7 +913,7 @@
         "name": "Go To Jail",
         "id": "gotojail",
         "style": "gotojail",
-        "group": "Special",
+        "group": "special",
         "position": 31,
         "pieceposition": "gotojail",
         "rel": {
@@ -927,7 +928,7 @@
         "name": "Luxury Tax",
         "id": "luxerytax",
         "style": "tax",
-        "group": "Special",
+        "group": "special",
         "position": 39,
         "pieceposition": "rightRow",
         "averageProbability": 2.116

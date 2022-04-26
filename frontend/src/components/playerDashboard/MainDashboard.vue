@@ -73,7 +73,11 @@ let dtrmPropAction = () => {
     let crntProp = moveFunction.getCrntPropH();
     switch(crntProp.group) {
 
-        
+        //  canbuy, willpay for 'land'
+            // if availableToPurhase()
+                // crntTurnLogic.buyAvailable = true;
+            // else payRent()
+                // i should consider moneyCheck() first and displaying a message from moneyCheck() if not enough money
     }
 }
 
