@@ -20,7 +20,7 @@
             </div>
 
             <div class="roll-dice-end-turn-btn-wrapper">
-                <button v-if="!crntTurnLogic.diceRolled" @click="rollDice" class="endTurnBtn">Roll dice</button>
+                <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="endTurnBtn">Roll dice</button>
                 <button v-if="crntTurnLogic.canEndTurn" class="endTurnBtn">End turn</button>
             </div>
 
@@ -60,12 +60,23 @@ let crntTurnLogic = reactive({
 
 let rollDice = () => {
 
-    
     crntTurnLogic.crntDiceRoll = moveFunction.rollDiceH();
-    moveFunction.movePlayerH(crntTurnLogic.crntDiceRoll[0] + crntTurnLogic.crntDiceRoll[1], crntTurnLogic.crntPlayer.position)
+    moveFunction.movePlayerH(crntTurnLogic.crntDiceRoll[0] + crntTurnLogic.crntDiceRoll[1], crntTurnLogic.crntPlayer.position);
+
     // crntTurnLogic.diceRolled = true;
+};
+
+// called after rollDice() @click
+let dtrmPropAction = () => {
+
     
+    let crntProp = moveFunction.getCrntPropH();
+    switch(crntProp.group) {
+
+        
+    }
 }
+
 
 </script>
 
