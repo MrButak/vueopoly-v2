@@ -112,8 +112,6 @@ function dtrmPropAction() {
             // landed on go, jail just visiting
             console.log('unhandled case in MainDashboard.vue dtrmPropAction()')
             crntTurnLogic.canEndTurn = true;
-            
-            
     };
 };
 
