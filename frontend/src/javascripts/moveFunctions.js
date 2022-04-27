@@ -33,12 +33,28 @@ let passGoH = () => {
 
 let getCrntPropH = () => {
 
-    
     let crntPlayer = consts.crntPlayer();
-    
     let crntPropIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == crntPlayer.position)
     let crntProp = gameLogic.value.vueopoly.properties[crntPropIndex];
     return crntProp;
 };
 
-export { rollDiceH, movePlayerH, getCrntPropH };
+let moveToPropertyH = (propertyId) => {
+
+    let crntPlayer = consts.crntPlayer();
+    
+    let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id == propertyId));
+    
+    let propertyPosition = gameLogic.value.vueopoly.properties[propertyIndex].position;
+
+    if(crntPlayer.position > propertyPosition) {
+        crntPlayer.position = propertyPosition;
+        passGoH();
+        return;
+    };
+    crntPlayer.position = propertyPosition;
+    return;
+
+};
+
+export { rollDiceH, movePlayerH, getCrntPropH, moveToPropertyH };

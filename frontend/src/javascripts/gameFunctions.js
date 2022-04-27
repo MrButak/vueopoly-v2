@@ -5,7 +5,7 @@ let moneyCheckH = (money, moneyToPay) => {
     return money > moneyToPay ? true : false;
 };
 
-let payMoneyH = (recipient, payer, amount, type) => { // (type = 'rent', 'tax', etc)
+let payMoneyH = (recipient, payer, amount, type) => { // (type = 'rent', 'tax', 'freeparking', etc)
 
     // rent
     switch(type) {
