@@ -28,4 +28,15 @@ let calculateTaxAmountH = () => {
     return tenPercentOfMoney < 200 ? tenPercentOfMoney : 200;
 };
 
-export { moneyCheckH, payMoneyH, calculateTaxAmountH }
+let nextPlayerTurn = () => {
+    // whosTurnIndex is an int representing the 0 index position in the gameLogic.players array
+    let totalPlayers = gameLogic.value.players.length;
+    if(gameLogic.value.whosTurnIndex < totalPlayers - 1) {
+        gameLogic.value.whosTurnIndex++;
+        return;
+    };
+    gameLogic.value.whosTurnIndex = 0;
+
+};
+
+export { moneyCheckH, payMoneyH, calculateTaxAmountH, nextPlayerTurn }
