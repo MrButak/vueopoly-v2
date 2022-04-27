@@ -200,8 +200,9 @@
 		</div>
 
 	</div>
+    <!-- <button @click="manualMove">move player forward</button> -->
 </body>
-<button @click="manualMove">move player forward</button>
+
 </template>
 
 
@@ -269,7 +270,12 @@ div {
     width: 80vw;
     height: 80vw;
     margin: 10px auto;
-    // transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);
+    /*transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);*/
+    /*
+    width: 70vw;
+    height: 70vw;   
+    margin: 168px auto auto auto;
+    transform: rotateX(64deg) rotateZ(45deg) translate(-20rem, -20rem);*/
 }
 .mainSquare {
 	height: 100%;
