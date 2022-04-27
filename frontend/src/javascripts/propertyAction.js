@@ -75,7 +75,8 @@ let getTotalRentCostH = (property, diceRoll) => {
                 return ((diceRoll[0] + diceRoll[1]) * 4);
             };
             return ((diceRoll[0] + diceRoll[1]) * 10);
-
+        default:
+            console.log('unhandled case in propertyAction.js dtrmPropActionH()')
     }
 };
 

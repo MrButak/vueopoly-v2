@@ -1,5 +1,6 @@
 import gameJson from '../../debugVueopoly.json';
 import {lsInUse, gameLogic} from '../javascripts/stateStore';
+import * as gameConstants from './constants';
 let playerPositionObj = {
 
     player1: {
@@ -433,10 +434,10 @@ function initNewGame(newPlayers) {
         startGame: true,
         playerCount: playerCnt,
         whosTurnIndex: 0,
-        gameLogs: [{log: 'New game created.', color: 'red'}], // first game log!
+        gameLogs: [{log: 'New game created.', color: gameConstants.logColor()}], // first game log!
         usedChance: [],
         usedCommunityChest: [],
-        freeParking: 0,
+        freeParking: gameConstants.freeParkingMoney(),
         playerPiecePos: playerPositionObj,
         players: playersArr,
         vueopoly: gameJson
