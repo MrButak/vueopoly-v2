@@ -982,149 +982,47 @@
       {"id": "boardwalk"}
     ],
     "chance": [
-      {
-        "title": "Advance to Go (Collect $200)",
-        "action": "move",
-        "tileid": "go"
-      },
-      {
-        "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "illinoisave"
-      },
-      {
-        "title": "Advance to St. Charles Place - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "stcharlesplace"
-      },
-      {
-        "title": "Advance to Go (Collect $200)",
-        "action": "move",
-        "tileid": "go"
-      },
-      {
-        "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "illinoisave"
-      },
-      {
-        "title": "Advance to St. Charles Place - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "stcharlesplace"
-      },
-      {
-        "title": "Bank pays you dividend of $50",
-        "action": "addfunds",
-        "amount": 50
-      },
-      {
-        "title": "Go Back 3 Spaces",
-        "action": "move",
-        "count": -3
-      },
-      {
-        "title": "Make general repairs on all your property - For each house pay $25 - For each hotel $100",
-        "action": "propertycharges",
-        "buildings": 25,
-        "hotels": 100
-      },
-      {
-        "title": "Pay poor tax of $15",
-        "action": "removefunds",
-        "amount": 15
-      },
-      {
-        "title": "Take a trip to Reading Railroad - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "readingrailroad"
-      },
-      {
-        "title": "Take a walk on the Boardwalk - Advance token to Boardwalk",
-        "action": "move",
-        "tileid": "boardwalk"
-      },
-      {
-        "title": "You have been elected Chairman of the Board - Pay each player $50",
-        "action": "removefundstoplayers",
-        "amount": 50
-      },
-      {
-        "title": "Your building loan matures - Collect $150",
-        "action": "addfunds",
-        "amount": 50
-      }
+        {
+            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+            "action": "addfundsfromplayers",
+            "amount": 50
+        },
+        {
+            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+            "action": "addfundsfromplayers",
+            "amount": 50
+        },
+        {
+            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+            "action": "addfundsfromplayers",
+            "amount": 50
+        },
+        {
+            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+            "action": "addfundsfromplayers",
+            "amount": 50
+        }
     ],
     "communitychest": [
         {
-        "title": "Advance to Go (Collect $200)",
-        "action": "move",
-        "tileid": "go"
+            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+            "action": "addfundsfromplayers",
+            "amount": 50
         },
         {
-        "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "illinoisave"
+            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+            "action": "addfundsfromplayers",
+            "amount": 50
         },
         {
-        "title": "Advance to St. Charles Place - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "stcharlesplace"
+            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+            "action": "addfundsfromplayers",
+            "amount": 50
         },
         {
-        "title": "Advance to Go (Collect $200)",
-        "action": "move",
-        "tileid": "go"
-        },
-        {
-        "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "illinoisave"
-        },
-        {
-        "title": "Advance to St. Charles Place - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "stcharlesplace"
-        },
-        {
-        "title": "Bank pays you dividend of $50",
-        "action": "addfunds",
-        "amount": 50
-        },
-        {
-        "title": "Go Back 3 Spaces",
-        "action": "move",
-        "count": -3
-        },
-        {
-        "title": "Make general repairs on all your property - For each house pay $25 - For each hotel $100",
-        "action": "propertycharges",
-        "buildings": 25,
-        "hotels": 100
-        },
-        {
-        "title": "Pay poor tax of $15",
-        "action": "removefunds",
-        "amount": 15
-        },
-        {
-        "title": "Take a trip to Reading Railroad - If you pass Go, collect $200",
-        "action": "move",
-        "tileid": "readingrailroad"
-        },
-        {
-        "title": "Take a walk on the Boardwalk - Advance token to Boardwalk",
-        "action": "move",
-        "tileid": "boardwalk"
-        },
-        {
-        "title": "You have been elected Chairman of the Board - Pay each player $50",
-        "action": "removefundstoplayers",
-        "amount": 50
-        },
-        {
-        "title": "Your building loan matures - Collect $150",
-        "action": "addfunds",
-        "amount": 50
+            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+            "action": "addfundsfromplayers",
+            "amount": 50
         }
     ]
   }

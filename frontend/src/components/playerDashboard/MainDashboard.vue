@@ -122,22 +122,29 @@ function payTax() {
 
 function handleSpecialCard() {
 
-    let addFundsSpecial = (amount) => {
-        crntTurnLogic.crntPlayer.money += amount;
-    };
+    
     let removefundsSpecial = (amount) => {
         if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, amount)) {return};
         // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
         crntTurnLogic.crntPlayer.money -= amount;
     };
 
-    let removeFundsToPlayersSpecial = (amount) => {
+    let removeFundsToPlayersSpecial = (amountPerPlayer) => {
         let totalPlayers = gameLogic.value.players.length;
-        let totalAmountToPay = totalPlayers * amount;
+        let totalAmountToPay = totalPlayers * amountPerPlayer;
         if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, totalAmountToPay)) {return};
         // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
         crntTurnLogic.crntPlayer.money -= totalAmountToPay;
-        specialCards.removeFundsToPlayersH(amount);
+        specialCards.removeFundsToPlayersH(amountPerPlayer);
+    };
+    let addFundsFromPlayersSpecial = (amountPerPlayer) => {
+        for(let i = 0; i < gameLogic.value.players.length; i++) {
+
+            if(gameLogic.value.players[i].name == crntTurnLogic.crntPlayer.name) {continue};
+            if(gameLogic.value.players[i].money < amountPerPlayer) {console.log('handle not enough money for players')}
+            gameLogic.value.players[i].money -= amountPerPlayer;
+        };
+        crntTurnLogic.crntPlayer.money += (gameLogic.value.players.length - 1) * amountPerPlayer;
     };
 
     let drawnCard = specialCards.drawSpecialCardH(crntTurnLogic.propertyLandedOn.style); // chance or community chest
@@ -160,10 +167,10 @@ function handleSpecialCard() {
             break;
 
         case 'addfunds':
-            addFundsSpecial(drawnCard.amount);
+            crntTurnLogic.crntPlayer.money += drawnCard.amount;
             break;
         case 'addfundsfromplayers':
-            
+            addFundsFromPlayersSpecial(drawnCard.amount);
             break;
 
         case 'removefundstoplayers':

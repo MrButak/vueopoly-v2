@@ -1,5 +1,6 @@
-import { lsInUse, gameLogic } from '../javascripts/stateStore';
-import * as consts from '../javascripts/constants';
+import { lsInUse, gameLogic } from './stateStore';
+import * as consts from './constants';
+import * as gameFunctions from './gameFunctions'
 
 let drawSpecialCardH = (type) => {
     let deck = gameLogic.value.vueopoly[`${type}`];
@@ -37,4 +38,6 @@ let removeFundsToPlayersH = (amountPerPlayer) => {
     };
 };
 
-export { drawSpecialCardH, streetRepairsCostH, removeFundsToPlayersH }
+// addFundsFromPlayersH
+
+export { drawSpecialCardH, streetRepairsCostH, removeFundsToPlayersH}
