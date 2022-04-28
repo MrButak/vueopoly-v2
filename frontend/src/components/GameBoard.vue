@@ -271,11 +271,11 @@ div {
     height: 80vw;
     margin: 10px auto;
     /*transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);*/
-    /*
-    width: 70vw;
-    height: 70vw;   
-    margin: 168px auto auto auto;
-    transform: rotateX(64deg) rotateZ(45deg) translate(-20rem, -20rem);*/
+    
+    /*background: #cde6d0;
+    width: 56vw;
+    height: 56vw;
+    margin: 10px auto;*/
 }
 .mainSquare {
 	height: 100%;
@@ -355,6 +355,12 @@ div {
 	font-weight: 500;
 	line-height: 1vw;
 	text-align: center;
+
+    /*position: absolute; 
+    font-size: 0.6vw;
+    font-weight: 500;
+    line-height: 1vw;
+    text-align: center;*/
 }
 .firstLine-top {
 	left: 1px;
@@ -430,6 +436,14 @@ div {
 	border: 3px solid black;
 	text-align: center;
 	box-shadow: inset 0px 2px 12px 0px white;
+
+    /*width: 40%;
+    background: #ed1b24;
+    position: absolute;
+    transform: rotateZ(-45deg) translateX(-27%) translateY(116%);
+    border: 3px solid black;
+    text-align: center;
+    box-shadow: inset 0px 2px 12px 0px white;*/
 }
 .logoName {
 	font-size: 7.1vw;
@@ -444,7 +458,12 @@ div {
 	position: absolute;
 	width: 15%;
 	height: 9vw;
+
+    /*position: absolute;
+    width: 10%;
+    height: 7vw;*/
 }
+
 .card-blue {
 	background: linear-gradient(#4ccaf4, #a3dff9);
 	transform: rotateZ(-45deg) translateX(-13%) translateY(66%);
@@ -459,6 +478,9 @@ div {
 .card-orange {
 	background: linear-gradient(#f99120, #f57420);
 	transform: rotateZ(-45deg) translateX(-13%) translateY(610%);
+
+    /*background: linear-gradient(#f99120, #f57420);
+    transform: rotateZ(-45deg) translateX(-13%) translateY(521%);*/
 }
 .card-orange-inside {
     background: linear-gradient(#f57420, #f99120);
@@ -473,6 +495,12 @@ div {
 	line-height: 8vw;
 	font-size: 1.2vw;
 	font-weight: 500;
+
+    /*position: absolute;
+    text-align: center;
+    line-height: 5vw;
+    font-size: .8vw;
+    font-weight: 500;*/
 }
 .corner1 {
     transform: rotateZ(135deg) translateX(-66%) translateY(-15%);
@@ -480,15 +508,25 @@ div {
 .corner2 {
     transform: rotateZ(-135deg) translateX(-30%) translateY(23%);
     line-height: 9vw;
+
+    /*transform: rotateZ(-135deg) translateX(-30%) translateY(23%);
+    line-height: 6vw;*/
 }
 .corner3 {
     transform: rotateZ(-45deg) translateX(-14%) translateY(26%);
     line-height: 1.4vw;
     font-size: 1vw;
+
+    /*transform: rotateZ(-45deg) translateX(-14%) translateY(26%);
+    line-height: 1.6vw;
+    font-size: .9vw;*/
 }
 .corner4 {
     transform: rotateZ(45deg) translateX(-9%) translateY(-31%);
     line-height: 7vw;
+
+    /*transform: rotateZ(45deg) translateX(-9%) translateY(-31%);
+    line-height: 5vw;*/
 }
 .squareCorner {
 	height: 65%;
@@ -503,11 +541,22 @@ div {
 	transform: rotateZ(90deg) translateX(80%) translateY(-36%);
 	font-size: 1.2vw;
 	font-weight: 500;
+
+    /*position: absolute;
+    transform: rotateZ(90deg) translateX(80%) translateY(-36%);
+    font-size: 0.9vw;
+    font-weight: 500;*/
 }
 .corner4-bottom {
 	position: absolute;
 	transform: translateX(112%) translateY(720%);
 	font-size: 1.2vw;
 	font-weight: 500;
+
+    /*position: absolute;
+    transform: translateX(112%) translateY(720%);
+    font-size: .9vw;
+    font-weight: 500;
+    line-height: 1vw;*/
 }
 </style>
