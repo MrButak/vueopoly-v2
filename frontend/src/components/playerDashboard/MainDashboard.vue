@@ -16,12 +16,16 @@
                 </div>
                 <div class="show-dice-wrapper-main">
                     <text>{{ crntTurnLogic.crntDiceRoll[0] }}  {{ crntTurnLogic.crntDiceRoll[1] }}</text>
+                    <button>Roll</button>
                 </div>
             </div>
 
             <div class="roll-dice-end-turn-btn-wrapper">
-                <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="endTurnBtn">Roll dice</button>
-                <button v-if="crntTurnLogic.canEndTurn" @click="endTurn()" class="endTurnBtn">End turn</button>
+                <!-- <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="endTurnBtn">Roll dice</button>
+                <button v-if="crntTurnLogic.canEndTurn" @click="endTurn()" class="endTurnBtn">End turn</button> -->
+                
+                <button>End Turn</button>
+                
             </div>
 
             <div class="game-message-wrapper">
@@ -242,21 +246,37 @@ function handleSpecialCard() {
 
 <style scoped>
 .player-dashboard-wrapper-main {
+
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 56vw;
+    top: 17.4vw;
+    margin: 3rem 0 3rem 3rem;
+
+    /*position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 50vw;
     top: 31.4vw;
-    left: 25vw;
+    left: 25vw;*/
 }
 
 .player-dashboard-wrapper {
-    width: 47vw;
+    
+    width: 38.4vw;
     border: 1px solid black;
     background-color: white;
     padding: 10px;
+    /*width: 47vw;
+    border: 1px solid black;
+    background-color: white;
+    padding: 10px;*/
 }
+    
+
 
 .player-stats-top-wrapper {
     display: flex;
@@ -275,7 +295,7 @@ function handleSpecialCard() {
 .roll-dice-end-turn-btn-wrapper {
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    width: 100%;
 }
 
 .log-and-dice-wrapper {
