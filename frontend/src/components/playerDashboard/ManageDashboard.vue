@@ -5,7 +5,7 @@
     <span v-for="propArry in filteredProperties">
         <div v-for="prop in propArry" class="prop-name-wrapper">
             <span v-bind:style="{'background-color': prop.color}" class="prop-color-box"></span>
-            <input @click="checkCanMortgage($event, prop.id);" type="radio" name="property">
+            <input @click="checkCanMortgage(prop.id); checkCanBuild(prop.id)" type="radio" name="property">
             <p v-if="!prop.mortgaged">{{ prop.name }}</p>
             <p v-if="prop.mortgaged" style="text-decoration: line-through;">{{ prop.name }}</p>
         </div>
@@ -19,11 +19,19 @@
         </span>
     </span>
 
-    <span v-if="offerMortgage">
-        <p>Unmortgage  {{ computedEligibleProperty.name }} for ${{ computedEligibleProperty.mortgagePrice }} ?</p>
+    <span v-if="offerUnmortgage">
+        <p>Unmortgage  {{ computedEligibleProperty.name }} for ${{ computedEligibleProperty.mortgagePrice * .10 + computedEligibleProperty.mortgagePrice}} ?</p>
         <span class="mortgage-yes-no-btn-wrapper">
-            <button @click.prevent="mortgageProperty($event)">Yes</button>
-            <button @click.prevent="declineMortgageOffer">No</button>
+            <button @click.prevent="unmortgageProperty($event)">Yes</button>
+            <button @click.prevent="declineUnmortgageOffer">No</button>
+        </span>
+    </span>
+
+    <span v-if="offerBuild">
+        <p>Buy building on {{ computedEligibleProperty.name }} for ${{ computedEligibleProperty.mortgagePrice * .10 + computedEligibleProperty.mortgagePrice}} ?</p>
+        <span class="mortgage-yes-no-btn-wrapper">
+            <button @click.prevent="unmortgageProperty($event)">Yes</button>
+            <button @click.prevent="declineUnmortgageOffer">No</button>
         </span>
     </span>
     
@@ -32,6 +40,8 @@
 <span class="mortgage-btn-wrapper">
     <button v-if="canMortgage" @click="offerMortgage = true">Mortgage</button>
     <button v-if="canUnmortgage" @click="offerUnmortgage = true">Unmortgage</button>
+
+    <button v-if="canBuild">Buy Building</button>
 </span>
 
 </template>
@@ -40,16 +50,18 @@
 import { computed } from '@vue/reactivity';
 import { onMounted, reactive, ref } from 'vue';
 import { gameLogic } from '../../javascripts/stateStore';
-import * as propertyFunctions from '../../javascripts/propertyFunctions'
-
-let eligibleProperty = reactive({});
+import * as propertyFunctions from '../../javascripts/propertyFunctions';
+import * as gameFunctions from '../../javascripts/gameFunctions';
 
 let canMortgage = ref(false);
-let canUnmortgage = ref(false);
 let offerMortgage = ref(false);
+let canUnmortgage = ref(false);
 let offerUnmortgage = ref(false);
 
+let canBuild = ref(false);
+let offerBuild = ref(false);
 
+let eligibleProperty = reactive({});
 let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
 
 // returns all of current players properties ordered by group
@@ -67,32 +79,70 @@ let computedEligibleProperty = computed(() => {
     return eligibleProperty.value;
 });
 
+function mortgageProperty() {
 
-function checkCanMortgage(event, propertyId) {
+    propertyFunctions.mortgagePropertyH(computedEligibleProperty.value.id);
+    crntPlayer.money += computedEligibleProperty.value.mortgagePrice;
+
+    canMortgage.value = false;
     offerMortgage.value = false;
+    canUnmortgage.value = true;
 
+    // see if property is now eligible to build on (if not working, could try a document.checked = true or a click())
+    checkCanMortgage(computedEligibleProperty.value.id);
+    checkCanBuild(computedEligibleProperty.value.id);
+    
+};
+
+function checkCanMortgage(propertyId) {
+
+    // hide previous mortgage/unmortgage offer message on dom 
+    offerMortgage.value = false;
+    offerUnmortgage.value = false;
+    // hide 'buy building btn'
+    canBuild.value = false;
+
+    // can mortgage
     if(propertyFunctions.canMortgagePropertyH(propertyId)) {
         canMortgage.value = true;
+        canUnmortgage.value = false;
         eligibleProperty.value = propertyFunctions.getMortgageObjH(propertyId);
-        console.log(eligibleProperty.value)
         return;
     };
+    // can not mortgage
     canMortgage.value = false;
-    eligibleProperty.value = {};
+    canUnmortgage.value = true;
+    eligibleProperty.value = propertyFunctions.getMortgageObjH(propertyId);
 };
 
 function declineMortgageOffer() {
     offerMortgage.value = false;
 };
 
-function mortgageProperty() {
-    propertyFunctions.mortgagePropertyH(computedEligibleProperty.value.id);
-    crntPlayer.money += computedEligibleProperty.value.mortgagePrice;
-
-    canMortgage.value = false;
-    offerMortgage.value = false;
+function declineUnmortgageOffer() {
+    offerUnmortgage.value = false;
 };
 
+function unmortgageProperty() {
+    if(!gameFunctions.moneyCheckH(crntPlayer.money, computedEligibleProperty.value.mortgagePrice * .1 + computedEligibleProperty.value.mortgagePrice)) {
+        return;
+        // TODO: send message for not enough money
+    };
+    propertyFunctions.unmortgagePropertyH(computedEligibleProperty.value.id);
+    crntPlayer.money -= (computedEligibleProperty.value.mortgagePrice * .1) + computedEligibleProperty.value.mortgagePrice;
+    canUnmortgage.value = false;
+    offerUnmortgage.value = false;
+    canMortgage.value = true;
+};
+
+function checkCanBuild(propertyId) {
+    
+    if(!propertyFunctions.canBuyBuildingH(propertyId)) {
+        canBuild.value = false;
+        return;
+    };
+    canBuild.value = true;
+};
 
 </script>
 

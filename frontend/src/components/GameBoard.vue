@@ -200,7 +200,7 @@
 		</div>
 
 	</div>
-    <!-- <button @click="manualMove">move player forward</button> -->
+    <button @click="manualMove">move player forward</button>
 </body>
 
 </template>
@@ -240,6 +240,10 @@ function placePlayerPiece(playerId) {
     // add player piece to dom
     document.getElementById(propertyId).append(playerPiece);
 };
+
+function manualMove() {
+    gameLogic.value.players[gameLogic.value.whosTurnIndex].position++
+}
 
 // when current players poition changes
 watch(
