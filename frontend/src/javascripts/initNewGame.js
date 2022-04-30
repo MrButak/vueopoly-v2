@@ -1,6 +1,7 @@
-import gameJson from '../../debugVueopoly.json';
-import {lsInUse, gameLogic} from '../javascripts/stateStore';
+import gameJson from '../../vueopoly.json';
+import {lsInUse, gameLogic, turnLogic} from '../javascripts/stateStore';
 import * as gameConstants from './constants';
+import { ref, reactive } from 'vue';
 let playerPositionObj = {
 
     player1: {
@@ -442,16 +443,24 @@ function initNewGame(newPlayers) {
         players: playersArr,
         vueopoly: gameJson
     };
-    
-    // console.log(playersArr);
-    // console.log(gameLogic);
 
-    // TODO set player1.isTurn = true
-    // if(lsInUse.value)
+    let turnLogicObj = reactive({
+
+        crntPlayer: reactive(gameLogicObj.players[gameLogicObj.whosTurnIndex]),
+        propertyLandedOn: reactive({}),
+        crntDiceRoll: reactive([]),
+        diceRolled: ref(false),
+        canEndTurn: ref(false),
+        buyAvailable: ref(false)
+    });
+
+
     // set local storage
     localStorage.setItem('gameLogic', JSON.stringify(gameLogicObj));
+    localStorage.setItem('turnLogic', JSON.stringify(turnLogicObj));
     // game state
     gameLogic.value = gameLogicObj;
+    turnLogic.value = turnLogicObj;
 
 
 };

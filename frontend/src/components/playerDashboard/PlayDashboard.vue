@@ -7,22 +7,22 @@
         </div>
         <div class="dice-wrapper-main">
             <span class="roll-dice-btn-wrapper">
-                <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="roll-dice-btn">Roll Dice</button>
-                <text>{{ crntTurnLogic.crntDiceRoll[0] }}  {{ crntTurnLogic.crntDiceRoll[1] }}</text>
+                <button v-if="!turnLogic.value.diceRolled" @click="rollDice(); dtrmPropAction();" class="roll-dice-btn">Roll Dice</button>
+                <text>{{ turnLogic.value.crntDiceRoll[0] }}  {{ turnLogic.value.crntDiceRoll[1] }}</text>
             </span>
         </div>
     </div>
 
     <div class="roll-dice-end-turn-btn-wrapper">
         
-        <button v-show="crntTurnLogic.canEndTurn" @click="endTurn()" class="endTurnBtn">End turn</button>
+        <button v-show="turnLogic.value.canEndTurn" @click="endTurn()" class="endTurnBtn">End turn</button>
         
     </div>
 
     <div class="game-message-wrapper-main">
         <span class="game-message-wrapper">
-            <text v-show="crntTurnLogic.buyAvailable">{{ crntTurnLogic.propertyLandedOn.name }} is available for ${{ crntTurnLogic.propertyLandedOn.price }}</text>
-            <button v-show="crntTurnLogic.buyAvailable" @click="purchaseProperty">Buy</button>
+            <text v-show="turnLogic.value.buyAvailable">{{ turnLogic.value.propertyLandedOn.name }} is available for ${{ turnLogic.value.propertyLandedOn.price }}</text>
+            <button v-show="turnLogic.value.buyAvailable" @click="purchaseProperty">Buy</button>
         </span>
     </div>
    
@@ -33,7 +33,7 @@
 
 
 import { ref, computed, onMounted, reactive } from 'vue';
-import { lsInUse, gameLogic } from '../../javascripts/stateStore';
+import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';
 import * as propertyAction from '../../javascripts/propertyAction';
 import * as gameFunctions from '../../javascripts/gameFunctions';
@@ -52,31 +52,22 @@ let gameLogs = computed(() => {
 
 
 
-let crntTurnLogic = reactive({
-
-    crntPlayer: reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]),
-    propertyLandedOn: reactive({}),
-    crntDiceRoll: reactive([]),
-    diceRolled: ref(false),
-    canEndTurn: ref(false),
-    buyAvailable: ref(false),
-});
 
 function startTurn() {
 
-    if(crntTurnLogic.crntPlayer.inJail) {console.log('player is in jail'); return}; // handle in jail
-    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.crntPlayer.name}'s turn.`, color: `${gameConstants.logColor()}`});
+    if(turnLogic.value.crntPlayer.inJail) {console.log('player is in jail'); return}; // handle in jail
+    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name}'s turn.`, color: `${gameConstants.logColor()}`});
 };
 
 function endTurn() {
     gameFunctions.nextPlayerTurn();
 
-    crntTurnLogic.crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex])
-    crntTurnLogic.propertyLandedOn = reactive({});
-    crntTurnLogic.crntDiceRoll = reactive([]);
-    crntTurnLogic.diceRolled = ref(false);
-    crntTurnLogic.canEndTurn = ref(false);
-    crntTurnLogic.buyAvailable = ref(false);
+    turnLogic.value.crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex])
+    turnLogic.value.propertyLandedOn = reactive({});
+    turnLogic.value.crntDiceRoll = reactive([]);
+    turnLogic.value.diceRolled = ref(false);
+    turnLogic.value.canEndTurn = ref(false);
+    turnLogic.value.buyAvailable = ref(false);
 
     startTurn()
     
@@ -84,20 +75,20 @@ function endTurn() {
 
 function rollDice() {
     
-    crntTurnLogic.crntDiceRoll = moveFunction.rollDiceH();
-    moveFunction.movePlayerH(crntTurnLogic.crntDiceRoll[0] + crntTurnLogic.crntDiceRoll[1], crntTurnLogic.crntPlayer.position);
-    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.crntPlayer.name} rolled for ${crntTurnLogic.crntDiceRoll[0] + crntTurnLogic.crntDiceRoll[1]}`, color: `${crntTurnLogic.crntPlayer.color}`});
-    crntTurnLogic.diceRolled = true; // will remove the 'roll dice btn' from dom
+    turnLogic.value.crntDiceRoll = moveFunction.rollDiceH();
+    moveFunction.movePlayerH(turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1], turnLogic.value.crntPlayer.position);
+    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} rolled for ${turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1]}`, color: `${turnLogic.value.crntPlayer.color}`});
+    turnLogic.value.diceRolled = true; // will remove the 'roll dice btn' from dom
 };
 
 // called after rollDice() @click
 function dtrmPropAction() {
 
-    crntTurnLogic.propertyLandedOn = moveFunction.getCrntPropH();
+    turnLogic.value.propertyLandedOn = moveFunction.getCrntPropH();
 
-    switch(propertyAction.dtrmPropActionH(crntTurnLogic.propertyLandedOn)) {
+    switch(propertyAction.dtrmPropActionH(turnLogic.value.propertyLandedOn)) {
 
-        case 'canbuy': crntTurnLogic.buyAvailable = true; crntTurnLogic.canEndTurn = true; break; // displays 'buy btn' and buy property message on dom
+        case 'canbuy': turnLogic.value.buyAvailable = true; turnLogic.value.canEndTurn = true; break; // displays 'buy btn' and buy property message on dom
         case 'willpay': payRent(); break;
         case 'specialcard': handleSpecialCard(); break;
         case 'tax': payTax(); break;
@@ -105,93 +96,93 @@ function dtrmPropAction() {
         default:
             // landed on go, jail just visiting
             console.log('unhandled case in MainDashboard.vue dtrmPropAction()')
-            crntTurnLogic.canEndTurn = true;
+            turnLogic.value.canEndTurn = true;
     };
 };
 
 function purchaseProperty() {
-
     // TODO also send a 'not enough money message to dom'
-    if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, crntTurnLogic.propertyLandedOn.price)) {return};
-    propertyAction.purchasePropertyH(crntTurnLogic.crntPlayer, crntTurnLogic.propertyLandedOn);
-    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.crntPlayer.name} purchased ${crntTurnLogic.propertyLandedOn.name} for $${crntTurnLogic.propertyLandedOn.price}`, color: `${crntTurnLogic.crntPlayer.color}`});
-    crntTurnLogic.buyAvailable = false;
-    crntTurnLogic.canEndTurn = true;
+    if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, turnLogic.value.propertyLandedOn.price)) {return};
+    propertyAction.purchasePropertyH(turnLogic.value.crntPlayer, turnLogic.value.propertyLandedOn);
+    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} purchased ${turnLogic.value.propertyLandedOn.name} for $${turnLogic.value.propertyLandedOn.price}`, color: `${turnLogic.value.crntPlayer.color}`});
+    turnLogic.value.buyAvailable = false;
+    turnLogic.value.canEndTurn = true;
+    
 };
 
 function payRent() {
 
-    if(crntTurnLogic.propertyLandedOn.ownedby == crntTurnLogic.crntPlayer.name) {crntTurnLogic.canEndTurn = true; return};
-    let totalRentAmount = propertyAction.getTotalRentCostH(crntTurnLogic.propertyLandedOn, crntTurnLogic.crntDiceRoll);
+    if(turnLogic.value.propertyLandedOn.ownedby == turnLogic.value.crntPlayer.name) {turnLogic.value.canEndTurn = true; return};
+    let totalRentAmount = propertyAction.getTotalRentCostH(turnLogic.value.propertyLandedOn, turnLogic.value.crntDiceRoll);
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
-    if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, totalRentAmount)) {return};
+    if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, totalRentAmount)) {return};
     // // (to, from, amount, type)
-    gameFunctions.payMoneyH(crntTurnLogic.propertyLandedOn.ownedby, crntTurnLogic.crntPlayer.name, totalRentAmount, 'rent');
-    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.crntPlayer.name} payed ${crntTurnLogic.propertyLandedOn.ownedby} $${totalRentAmount} in rent at ${crntTurnLogic.propertyLandedOn.name}`, color: `${crntTurnLogic.crntPlayer.color}`});
+    gameFunctions.payMoneyH(turnLogic.value.propertyLandedOn.ownedby, turnLogic.value.crntPlayer.name, totalRentAmount, 'rent');
+    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} payed ${turnLogic.value.propertyLandedOn.ownedby} $${totalRentAmount} in rent at ${turnLogic.value.propertyLandedOn.name}`, color: `${turnLogic.value.crntPlayer.color}`});
     // TODO dom message. for utilities, make custom message for dice roll *
-    crntTurnLogic.canEndTurn = true;
+    turnLogic.value.canEndTurn = true;
 };
 
 function payTax() {
     // 10% or 200
     let taxAmount = gameFunctions.calculateTaxAmountH();
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
-    if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, taxAmount)) {return};
-    gameFunctions.payMoneyH('bank', crntTurnLogic.crntPlayer, taxAmount, 'tax');
-    crntTurnLogic.canEndTurn = true;
+    if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};
+    gameFunctions.payMoneyH('bank', turnLogic.value.crntPlayer, taxAmount, 'tax');
+    turnLogic.value.canEndTurn = true;
 };
 
 function freeParking() {
 
-    crntTurnLogic.crntPlayer.money += gameLogic.value.freeParking;
+    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} landed on Free Parking and received $${gameLogic.value.freeParking}`, color: `${turnLogic.value.crntPlayer.color}`});
+    turnLogic.value.crntPlayer.money += gameLogic.value.freeParking;
     gameLogic.value.freeParking = gameConstants.freeParkingMoney();
-    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.crntPlayer.name} payed ${crntTurnLogic.propertyLandedOn.ownedby} $${totalRentAmount} in rent at ${crntTurnLogic.propertyLandedOn.name}`, color: `${crntTurnLogic.crntPlayer.color}`});
-    crntTurnLogic.canEndTurn = true;
+    turnLogic.value.canEndTurn = true;
 };
 
 function handleSpecialCard() {
 
     
     let removefundsSpecial = (amount) => {
-        if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, amount)) {return};
+        if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, amount)) {return};
         // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
-        crntTurnLogic.crntPlayer.money -= amount;
-        crntTurnLogic.canEndTurn = true;
+        turnLogic.value.crntPlayer.money -= amount;
+        turnLogic.value.canEndTurn = true;
     };
 
     let removeFundsToPlayersSpecial = (amountPerPlayer) => {
         let totalPlayers = gameLogic.value.players.length;
         let totalAmountToPay = totalPlayers * amountPerPlayer;
-        if(!gameFunctions.moneyCheckH(crntTurnLogic.crntPlayer.money, totalAmountToPay)) {return};
+        if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, totalAmountToPay)) {return};
         // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
-        crntTurnLogic.crntPlayer.money -= totalAmountToPay;
+        turnLogic.value.crntPlayer.money -= totalAmountToPay;
         specialCards.removeFundsToPlayersH(amountPerPlayer);
-        crntTurnLogic.canEndTurn = true;
+        turnLogic.value.canEndTurn = true;
     };
 
     let addFundsFromPlayersSpecial = (amountPerPlayer) => {
 
         for(let i = 0; i < gameLogic.value.players.length; i++) {
 
-            if(gameLogic.value.players[i].name == crntTurnLogic.crntPlayer.name) {continue};
+            if(gameLogic.value.players[i].name == turnLogic.value.crntPlayer.name) {continue};
             if(gameLogic.value.players[i].money < amountPerPlayer) {console.log('handle not enough money for players')}
             gameLogic.value.players[i].money -= amountPerPlayer;
         };
-        crntTurnLogic.crntPlayer.money += (gameLogic.value.players.length - 1) * amountPerPlayer;
-        crntTurnLogic.canEndTurn = true;
+        turnLogic.value.crntPlayer.money += (gameLogic.value.players.length - 1) * amountPerPlayer;
+        turnLogic.value.canEndTurn = true;
     };
 
-    let drawnCard = specialCards.drawSpecialCardH(crntTurnLogic.propertyLandedOn.style); // chance or community chest
-    
+    let drawnCard = specialCards.drawSpecialCardH(turnLogic.value.propertyLandedOn.style); // chance or community chest
+    console.log({drawnCard});
     // TODO: call a function to display a popup div to show special card
     
-    gameLogic.value.gameLogs.push({log: `${crntTurnLogic.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
+    gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
     switch(drawnCard.action) {
 
         case 'move':
             if(drawnCard.title == 'Go Back 3 Spaces') {
-                crntTurnLogic.crntPlayer.position -= 3;
+                turnLogic.value.crntPlayer.position -= 3;
                 dtrmPropAction();
                 gameLogic.canEndTurn = true;
                 break;
@@ -201,8 +192,8 @@ function handleSpecialCard() {
             gameLogic.canEndTurn = true;
             break;
         case 'addfunds':
-            crntTurnLogic.crntPlayer.money += drawnCard.amount;
-            crntTurnLogic.canEndTurn = true;
+            turnLogic.value.crntPlayer.money += drawnCard.amount;
+            turnLogic.value.canEndTurn = true;
             break;
         case 'addfundsfromplayers':
             addFundsFromPlayersSpecial(drawnCard.amount);
@@ -224,7 +215,7 @@ function handleSpecialCard() {
         case 'jail':
             if(drawnCard.subaction == 'getout') {break}; // handle keep 'get out of jail free' card
             // handle 'goto jail'
-            // crntTurnLogic.crntPlayer.inJail = true;
+            // turnLogic.value.crntPlayer.inJail = true;
             // endTurn();
         default:
             console.log('unhandled case in MainDashboard.vue handleSpecialCard()')

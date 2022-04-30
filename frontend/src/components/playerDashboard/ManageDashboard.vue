@@ -1,4 +1,5 @@
 <template>
+    <!-- <p v-for="prop in properties">{{ prop.name }}</p> -->
     <p v-for="prop in properties">{{ prop.name }}</p>
 </template>
 
