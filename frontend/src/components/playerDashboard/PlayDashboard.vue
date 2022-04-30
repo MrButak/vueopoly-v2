@@ -1,41 +1,31 @@
 <template>
-    <div class="player-dashboard-wrapper-main">
-        <div class="player-dashboard-wrapper">
 
-            <div class="player-stats-top-wrapper">
-                <button>Manage</button>
-                <text>{{ crntTurnLogic.crntPlayer.name }} - {{ crntTurnLogic.crntPlayer.alias }}</text>
-            <text>${{ crntTurnLogic.crntPlayer.money }}</text>
-                <button>Trade</button>
-            </div>
-
-            <div class="log-and-dice-wrapper">
-                <div class="gamelog-wrapper-main">
-                    <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }" class="game-log-text">{{ log.log }}</p>
-                    
-                </div>
-                <div class="dice-wrapper-main">
-                    <span class="roll-dice-btn-wrapper">
-                        <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="roll-dice-btn">Roll Dice</button>
-                        <text>{{ crntTurnLogic.crntDiceRoll[0] }}  {{ crntTurnLogic.crntDiceRoll[1] }}</text>
-                    </span>
-                </div>
-            </div>
-
-            <div class="roll-dice-end-turn-btn-wrapper">
-                
-                <button v-show="crntTurnLogic.canEndTurn" @click="endTurn()" class="endTurnBtn">End turn</button>
-                
-            </div>
-
-            <div class="game-message-wrapper-main">
-                <span class="game-message-wrapper">
-                    <text v-show="crntTurnLogic.buyAvailable">{{ crntTurnLogic.propertyLandedOn.name }} is available for ${{ crntTurnLogic.propertyLandedOn.price }}</text>
-                    <button v-show="crntTurnLogic.buyAvailable" @click="purchaseProperty">Buy</button>
-                </span>
-            </div>
+    <div class="log-and-dice-wrapper">
+        <div class="gamelog-wrapper-main">
+            <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }" class="game-log-text">{{ log.log }}</p>
+            
+        </div>
+        <div class="dice-wrapper-main">
+            <span class="roll-dice-btn-wrapper">
+                <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="roll-dice-btn">Roll Dice</button>
+                <text>{{ crntTurnLogic.crntDiceRoll[0] }}  {{ crntTurnLogic.crntDiceRoll[1] }}</text>
+            </span>
         </div>
     </div>
+
+    <div class="roll-dice-end-turn-btn-wrapper">
+        
+        <button v-show="crntTurnLogic.canEndTurn" @click="endTurn()" class="endTurnBtn">End turn</button>
+        
+    </div>
+
+    <div class="game-message-wrapper-main">
+        <span class="game-message-wrapper">
+            <text v-show="crntTurnLogic.buyAvailable">{{ crntTurnLogic.propertyLandedOn.name }} is available for ${{ crntTurnLogic.propertyLandedOn.price }}</text>
+            <button v-show="crntTurnLogic.buyAvailable" @click="purchaseProperty">Buy</button>
+        </span>
+    </div>
+   
 
 </template>
 
@@ -69,7 +59,8 @@ let crntTurnLogic = reactive({
     crntDiceRoll: reactive([]),
     diceRolled: ref(false),
     canEndTurn: ref(false),
-    buyAvailable: ref(false)
+    buyAvailable: ref(false),
+    view: 'main' // main , manage
 });
 
 function startTurn() {
@@ -244,47 +235,7 @@ function handleSpecialCard() {
 
 </script>
 
-<style scoped>
-.player-dashboard-wrapper-main {
-
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 56vw;
-    top: 17.4vw;
-    margin: 3rem 0 3rem 3rem;
-
-    /*position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50vw;
-    top: 31.4vw;
-    left: 25vw;*/
-}
-
-.player-dashboard-wrapper {
-    
-    width: 38.4vw;
-    border: 1px solid black;
-    background-color: white;
-    padding: 10px;
-    /*width: 47vw;
-    border: 1px solid black;
-    background-color: white;
-    padding: 10px;*/
-}
-    
-
-
-.player-stats-top-wrapper {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 4vw;
-    padding: 0 0 10px 0;
-}
+<style>
 
 .game-message-wrapper-main {
     display: flex;
