@@ -38,33 +38,17 @@ let dashboardView = ref('play');
     flex-direction: column;
     align-items: center;
     width: 56vw;
-    top: 13.4vw;
+    top: 18.4vw;
     margin: 3rem 0 3rem 3rem;
-
-    /*position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50vw;
-    top: 31.4vw;
-    left: 25vw;*/
 }
-
 .player-dashboard-wrapper {
     
     width: 38.4vw;
     border: 1px solid black;
     background-color: white;
     padding: 10px;
-    height: 30vw;
-    /*width: 47vw;
-    border: 1px solid black;
-    background-color: white;
-    padding: 10px;*/
+    height: 24vw;
 }
-    
-
-
 .player-stats-top-wrapper {
     display: flex;
     justify-content: space-between;

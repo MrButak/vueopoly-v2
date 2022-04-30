@@ -60,7 +60,6 @@ let crntTurnLogic = reactive({
     diceRolled: ref(false),
     canEndTurn: ref(false),
     buyAvailable: ref(false),
-    view: 'main' // main , manage
 });
 
 function startTurn() {

@@ -1,15 +1,16 @@
 <template>
-    <p>test test test</p>
+    <p v-for="prop in properties">{{ prop.name }}</p>
 </template>
 
 <script setup>
+import { computed } from '@vue/reactivity';
+import { reactive } from 'vue';
+import { gameLogic } from '../../javascripts/stateStore';
+let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
 
-function testy() {
-    console.log('hey parent component is calling child components function !!!!!@@@@')
-}
-
-
-defineExpose({testy})
+let properties = computed(() => {
+    return crntPlayer.properties
+})
 </script>
 
 <style scoped>
