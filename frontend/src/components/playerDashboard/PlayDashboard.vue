@@ -95,7 +95,7 @@ function dtrmPropAction() {
         case 'freeparking': freeParking(); break;
         default:
             // landed on go, jail just visiting
-            console.log('unhandled case in MainDashboard.vue dtrmPropAction()')
+            console.log('unhandled case in PlayDashboard.vue dtrmPropAction()')
             turnLogic.value.canEndTurn = true;
     };
 };

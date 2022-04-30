@@ -6,9 +6,9 @@
             <div class="player-stats-top-wrapper">
                 <button v-if="dashboardView === 'play'" @click="dashboardView = 'manage'">Manage</button>
                 <button v-if="dashboardView === 'manage'" @click="dashboardView = 'play'">Game</button>
-                <text>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].name }}</text>
-                <text>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].alias }}</text>
-                <text>${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</text>
+                    <text>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].name }}</text>
+                    <text>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].alias }}</text>
+                    <text>${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</text>
                 <button>Trade</button>
             </div>
 
