@@ -14,24 +14,24 @@
                     <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }" class="game-log-text">{{ log.log }}</p>
                     
                 </div>
-                <div class="show-dice-wrapper-main">
-                    <text>{{ crntTurnLogic.crntDiceRoll[0] }}  {{ crntTurnLogic.crntDiceRoll[1] }}</text>
-                    <button>Roll</button>
+                <div class="dice-wrapper-main">
+                    <span class="roll-dice-btn-wrapper">
+                        <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="roll-dice-btn">Roll Dice</button>
+                        <text>{{ crntTurnLogic.crntDiceRoll[0] }}  {{ crntTurnLogic.crntDiceRoll[1] }}</text>
+                    </span>
                 </div>
             </div>
 
             <div class="roll-dice-end-turn-btn-wrapper">
-                <!-- <button v-if="!crntTurnLogic.diceRolled" @click="rollDice(); dtrmPropAction();" class="endTurnBtn">Roll dice</button>
-                <button v-if="crntTurnLogic.canEndTurn" @click="endTurn()" class="endTurnBtn">End turn</button> -->
                 
-                <button>End Turn</button>
+                <button v-show="crntTurnLogic.canEndTurn" @click="endTurn()" class="endTurnBtn">End turn</button>
                 
             </div>
 
-            <div class="game-message-wrapper">
-                <span>
-                    <p v-if="crntTurnLogic.buyAvailable">{{ crntTurnLogic.propertyLandedOn.name }} is available to buy for ${{ crntTurnLogic.propertyLandedOn.price }}</p>
-                    <button v-if="crntTurnLogic.buyAvailable" @click="purchaseProperty">Buy</button>
+            <div class="game-message-wrapper-main">
+                <span class="game-message-wrapper">
+                    <text v-show="crntTurnLogic.buyAvailable">{{ crntTurnLogic.propertyLandedOn.name }} is available for ${{ crntTurnLogic.propertyLandedOn.price }}</text>
+                    <button v-show="crntTurnLogic.buyAvailable" @click="purchaseProperty">Buy</button>
                 </span>
             </div>
         </div>
@@ -286,12 +286,14 @@ function handleSpecialCard() {
     padding: 0 0 10px 0;
 }
 
-.game-message-wrapper {
+.game-message-wrapper-main {
     display: flex;
     justify-content: space-around;
     padding: 10px 0 0 0;
 }
-
+.game-message-wrapper {
+    display: flex;
+}
 .roll-dice-end-turn-btn-wrapper {
     display: flex;
     justify-content: center;
@@ -311,15 +313,24 @@ function handleSpecialCard() {
     background-color: black;
     border: 1px solid black;
     overflow-y: scroll;
-    width: 80%;
+    width: 100%;
 }
 .game-log-text {
     font-size: 26px;
 }
-.show-dice-wrapper-main {
+.dice-wrapper-main {
     display: flex;
+    flex-direction: column-reverse;
     height: 15vw;
     border: 1px solid black;
-    width: 18vw;
+    width: 10vw;
+}
+.roll-dice-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%
+}
+.roll-dice-btn {
+    padding: 2px 10px;
 }
 </style>
