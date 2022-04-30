@@ -5,12 +5,24 @@
     <span v-for="propArry in filteredProperties">
         <div v-for="prop in propArry" class="prop-name-wrapper">
             <span v-bind:style="{'background-color': prop.color}" class="prop-color-box"></span>
-            <input @click="checkCanMortgage(prop.id); checkCanBuild(prop.id)" type="radio" name="property">
+            <input @click="checkCanMortgage($event, prop.id); checkCanBuild(prop.id)" type="radio" name="property">
             <p v-if="!prop.mortgaged">{{ prop.name }}</p>
             <p v-if="prop.mortgaged" style="text-decoration: line-through;">{{ prop.name }}</p>
+            
+            <span v-if="prop.buildings > 0 && prop.buildings < 5">
+                <span v-for="count in prop.buildings">
+                    <span class="house-box">__</span>
+                </span>
+            </span>
+
+            <span v-if="prop.buildings > 4">
+                <span class="hotel-box">__</span>
+            </span>
+            
         </div>
     </span>
 
+    <!-- mortages -->
     <span v-if="offerMortgage">
         <p>Mortgage  {{ computedEligibleProperty.name }} for ${{ computedEligibleProperty.mortgagePrice }} ?</p>
         <span class="mortgage-yes-no-btn-wrapper">
@@ -27,21 +39,23 @@
         </span>
     </span>
 
+    <!-- buildings -->
     <span v-if="offerBuild">
-        <p>Buy building on {{ computedEligibleProperty.name }} for ${{ computedEligibleProperty.mortgagePrice * .10 + computedEligibleProperty.mortgagePrice}} ?</p>
+        <p>Buy building on {{ computedEligibleProperty.name }} for ${{ computedEligibleProperty.buildingCost}} ?</p>
         <span class="mortgage-yes-no-btn-wrapper">
-            <button @click.prevent="unmortgageProperty($event)">Yes</button>
-            <button @click.prevent="declineUnmortgageOffer">No</button>
+            <button @click.prevent="purchaseBuilding">Yes</button>
+            <button @click.prevent="declineBuildingOffer">No</button>
         </span>
     </span>
     
 </form>
 
+<!-- TODO disable button that wasn't pressed -->
 <span class="mortgage-btn-wrapper">
     <button v-if="canMortgage" @click="offerMortgage = true">Mortgage</button>
     <button v-if="canUnmortgage" @click="offerUnmortgage = true">Unmortgage</button>
 
-    <button v-if="canBuild">Buy Building</button>
+    <button v-if="canBuild" @click="offerBuild = true">Buy Building</button>
 </span>
 
 </template>
@@ -64,6 +78,9 @@ let offerBuild = ref(false);
 let eligibleProperty = reactive({});
 let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
 
+
+let compCanMortgage = computed(() => {return canMortgage.value});
+
 // returns all of current players properties ordered by group
 let filteredProperties = computed(() => {
 
@@ -78,6 +95,22 @@ let filteredProperties = computed(() => {
 let computedEligibleProperty = computed(() => {
     return eligibleProperty.value;
 });
+
+function purchaseBuilding() {
+    if(!gameFunctions.moneyCheckH(crntPlayer.money, computedEligibleProperty.value.buildingCost)) {
+        return;
+        // send message for not enough money
+    };
+    crntPlayer.money -= computedEligibleProperty.value.buildingCost;
+    propertyFunctions.purchaseBuildingH(computedEligibleProperty.value.id);
+    // remove building text from dom and see if property is still eligible to build on
+    offerBuild.value = false;
+    checkCanBuild(computedEligibleProperty.value.id);
+};
+
+function declineBuildingOffer() {
+    offerBuild.value = false;
+};
 
 function mortgageProperty() {
 
@@ -94,7 +127,7 @@ function mortgageProperty() {
     
 };
 
-function checkCanMortgage(propertyId) {
+function checkCanMortgage(event, propertyId) {
 
     // hide previous mortgage/unmortgage offer message on dom 
     offerMortgage.value = false;
@@ -102,17 +135,26 @@ function checkCanMortgage(propertyId) {
     // hide 'buy building btn'
     canBuild.value = false;
 
+    // if property has buildings, can not mortgage
+    if(propertyFunctions.areBuildingsInGroupH(propertyId)) {
+        canMortgage.value = false;
+        offerMortgage.value = false;
+        //eligibleProperty.value = propertyFunctions.getEligiblePropObjH(propertyId);
+        
+        return;
+    };
+
     // can mortgage
     if(propertyFunctions.canMortgagePropertyH(propertyId)) {
         canMortgage.value = true;
         canUnmortgage.value = false;
-        eligibleProperty.value = propertyFunctions.getMortgageObjH(propertyId);
+        eligibleProperty.value = propertyFunctions.getEligiblePropObjH(propertyId);
         return;
     };
     // can not mortgage
     canMortgage.value = false;
     canUnmortgage.value = true;
-    eligibleProperty.value = propertyFunctions.getMortgageObjH(propertyId);
+    eligibleProperty.value = propertyFunctions.getEligiblePropObjH(propertyId);
 };
 
 function declineMortgageOffer() {
@@ -141,6 +183,8 @@ function checkCanBuild(propertyId) {
         canBuild.value = false;
         return;
     };
+    if(propertyFunctions.getBuildingCountH(propertyId) > 4) {return;};
+    
     canBuild.value = true;
 };
 
@@ -159,6 +203,16 @@ function checkCanBuild(propertyId) {
     width: 20px;
     height: 20px;
     
+}
+.house-box {
+    width: 20px;
+    height: 20px;
+    background-color: green;
+}
+.hotel-box {
+    width: 20px;
+    height: 20px;
+    background-color: red;
 }
 .mortgage-btn-wrapper {
 
