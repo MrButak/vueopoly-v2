@@ -1,16 +1,38 @@
 <template>
-<form>
-<span v-for="propArry in filteredProperties">
-    <div v-for="prop in propArry" class="prop-name-wrapper">
-        
-        <span v-bind:style="{'background-color': prop.color}" class="prop-color-box"></span>
-        <p>{{ prop.name }}</p>
-        <input @click="checkCanMortgage($event, prop.id)" type="checkbox">
-    </div>
-</span>
 
-<button v-if="canMortgage" @click.prevent="mortgageProperty">Mortgage</button>
+<form id="property-form">
+
+    <span v-for="propArry in filteredProperties">
+        <div v-for="prop in propArry" class="prop-name-wrapper">
+            <span v-bind:style="{'background-color': prop.color}" class="prop-color-box"></span>
+            <input @click="checkCanMortgage($event, prop.id);" type="radio" name="property">
+            <p v-if="!prop.mortgaged">{{ prop.name }}</p>
+            <p v-if="prop.mortgaged" style="text-decoration: line-through;">{{ prop.name }}</p>
+        </div>
+    </span>
+
+    <span v-if="offerMortgage">
+        <p>Mortgage  {{ computedEligibleProperty.name }} for ${{ computedEligibleProperty.mortgagePrice }} ?</p>
+        <span class="mortgage-yes-no-btn-wrapper">
+            <button @click.prevent="mortgageProperty($event)">Yes</button>
+            <button @click.prevent="declineMortgageOffer">No</button>
+        </span>
+    </span>
+
+    <span v-if="offerMortgage">
+        <p>Unmortgage  {{ computedEligibleProperty.name }} for ${{ computedEligibleProperty.mortgagePrice }} ?</p>
+        <span class="mortgage-yes-no-btn-wrapper">
+            <button @click.prevent="mortgageProperty($event)">Yes</button>
+            <button @click.prevent="declineMortgageOffer">No</button>
+        </span>
+    </span>
+    
 </form>
+
+<span class="mortgage-btn-wrapper">
+    <button v-if="canMortgage" @click="offerMortgage = true">Mortgage</button>
+    <button v-if="canUnmortgage" @click="offerUnmortgage = true">Unmortgage</button>
+</span>
 
 </template>
 
@@ -20,14 +42,17 @@ import { onMounted, reactive, ref } from 'vue';
 import { gameLogic } from '../../javascripts/stateStore';
 import * as propertyFunctions from '../../javascripts/propertyFunctions'
 
-let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
-let buildingPropIdArry = reactive([]);
-let mortgagePropIdArry = reactive([]);
-let canBuild = ref(false);
-let canMortgage = ref(false);
-let buildingCost = ref(0);
+let eligibleProperty = reactive({});
 
-// returns all of current players properties
+let canMortgage = ref(false);
+let canUnmortgage = ref(false);
+let offerMortgage = ref(false);
+let offerUnmortgage = ref(false);
+
+
+let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
+
+// returns all of current players properties ordered by group
 let filteredProperties = computed(() => {
 
     let filteredPropArry = [];
@@ -38,59 +63,43 @@ let filteredProperties = computed(() => {
     return filteredPropArry;
 });
 
-// function checkGroup(event, id) {
+let computedEligibleProperty = computed(() => {
+    return eligibleProperty.value;
+});
 
-//     // TODO make exceptions for railroad, utilities
-//     if(id === 'railroad' || id === 'utilities') {
-//         // check to see if can mortgage / unmortgage
-//         return;
-//     };
-
-//     // add checked properties to an array
-//     if(event.target.checked) {
-//         buildingPropIdArry.push(id);
-
-//         // check if all properties in group are owned
-//         if(propertyFunctions.canBuyBuildingH(buildingPropIdArry)) {
-//             canBuild.value = true;
-//             // get building cost for property
-//             buildingCost.value = propertyFunctions.getBuildingCostH(buildingPropIdArry[0]);
-            
-//         };
-//     }
-//     // remove unchecked properties from array
-//     else {buildingPropIdArry.splice(buildingPropIdArry.indexOf(id))};
-    
-// }
 
 function checkCanMortgage(event, propertyId) {
+    offerMortgage.value = false;
 
-    if(event.target.checked) {
-        console.log(propertyId)
-        mortgagePropIdArry.push(propertyId);
-
-        if(propertyFunctions.canMortgagePropertyH(mortgagePropIdArry)) {
-            canMortgage.value = true;
-        }
-    }
-    
-    else {
-        // remove propertyId from array
-        mortgagePropIdArry.splice(mortgagePropIdArry.indexOf(propertyId));
-        console.log(mortgagePropIdArry)
-        // if no checked properties, remove mortgage, unmortgage button
-        if(mortgagePropIdArry.length < 1) {console.log(mortgagePropIdArry); canMortgage.value = false}
+    if(propertyFunctions.canMortgagePropertyH(propertyId)) {
+        canMortgage.value = true;
+        eligibleProperty.value = propertyFunctions.getMortgageObjH(propertyId);
+        console.log(eligibleProperty.value)
+        return;
     };
+    canMortgage.value = false;
+    eligibleProperty.value = {};
 };
 
-function mortgageProperty(event) {
-    console.log(event)
+function declineMortgageOffer() {
+    offerMortgage.value = false;
 };
+
+function mortgageProperty() {
+    propertyFunctions.mortgagePropertyH(computedEligibleProperty.value.id);
+    crntPlayer.money += computedEligibleProperty.value.mortgagePrice;
+
+    canMortgage.value = false;
+    offerMortgage.value = false;
+};
+
 
 </script>
 
 <style scoped>
+#property-form {
 
+}
 .prop-name-wrapper {
     display: flex;
     align-items: center;
@@ -100,5 +109,13 @@ function mortgageProperty(event) {
     width: 20px;
     height: 20px;
     
+}
+.mortgage-btn-wrapper {
+
+}
+.mortgage-yes-no-btn-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 15px;
 }
 </style>
