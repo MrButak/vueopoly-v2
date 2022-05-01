@@ -1,7 +1,8 @@
 import { ref, reactive } from 'vue';
 
 const lsInUse = ref(false);
-const gameLogic = reactive({})
+const gameLogic = reactive({});
+const turnLogic = reactive({});
 
 // function gameState() {
 
@@ -13,4 +14,4 @@ const gameLogic = reactive({})
 //     };
 // };
 
-export {lsInUse, gameLogic}
+export {lsInUse, gameLogic, turnLogic}

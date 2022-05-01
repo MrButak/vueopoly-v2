@@ -1,7 +1,4 @@
-import { gameLogic, lsInUse } from '../javascripts/stateStore';
-
-
-
+import { gameLogic, lsInUse, turnLogic } from '../javascripts/stateStore';
 
 // Function handles all function calls below. Is the only one exported
 function handleLs() {
@@ -55,10 +52,13 @@ let restoreLs = () => {
 
     // convert local storage string to object
     let lsGameLogic = localStorage.getItem('gameLogic');
+    let lsTurnLogic = localStorage.getItem('turnLogic');
+    lsTurnLogic = JSON.parse(lsTurnLogic)
     lsGameLogic = JSON.parse(lsGameLogic);
     
     // set global state variables
     gameLogic.value = lsGameLogic;
+    turnLogic.value = lsTurnLogic;
     gameLogic.value.startGame = false;
     return;
 };
@@ -68,7 +68,7 @@ function saveToLs() {
     
     console.log("save to ls");
 
-    localStorage.setItem('gameLogic', JSON.stringify(gameLogic.value));
+    
 }
 export default handleLs
 // export {handleLs, saveToLs};

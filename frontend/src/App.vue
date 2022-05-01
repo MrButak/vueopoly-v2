@@ -6,10 +6,8 @@
 
 <span v-if="gameLogic.startGame">
 <GameBoard />
-<MainDashboard />
+<Dashboard />
 </span>
-
-
 
 </template>
 
@@ -19,7 +17,7 @@
 import { ref } from 'vue';
 import GameBoard from './components/GameBoard.vue';
 import NewGame from './components/NewGame.vue';
-import MainDashboard from './components/playerDashboard/MainDashboard.vue';
+import Dashboard from './components/playerDashboard/DashBoard.vue';
 import { lsInUse, gameLogic } from './javascripts/stateStore';
 
 
