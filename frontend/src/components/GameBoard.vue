@@ -222,13 +222,14 @@ function placePlayerPiece(playerId) {
     // if element already on the dom, remove it
     if(document.getElementById(playerId)) {document.getElementById(playerId).remove()};
     
+
     let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId))
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
     let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
     let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
     let positionObj = gameLogic.value.playerPiecePos[`${gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
 
-    // add css properties and id
+    // add css properties and id (getting info from an object in initNewGame.js)
     let playerPiece = document.createElement('span');
     playerPiece.id = gameLogic.value.players[playerIndex].name;
     playerPiece.style.position = 'absolute';
