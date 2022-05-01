@@ -1,9 +1,9 @@
 <template>
 
-
-
     <span v-for="propArry in filteredProperties">
+
         <div v-for="prop in propArry" class="prop-name-wrapper">
+
             <span v-bind:style="{'background-color': prop.color}" class="prop-color-box"></span>
             <input @click="setClickedPropertyObj(prop.id)" v-bind:class="prop.id" type="radio" name="property">
 
@@ -22,7 +22,6 @@
             
         </div>
     </span>
-
 
     <!-- mortages -->
     <span v-if="showMortgageOffer">
@@ -58,15 +57,11 @@
         </span>
     </span>
    
-
-
-    
     <button v-if="clickedProperty.canMortgage" @click="showMortgageOffer = true">Mortgage</button>
     <button v-if="clickedProperty.canUnmortgage" @click="showUnmortgageOffer = true">Unmortgage</button>
     <button v-if="clickedProperty.canBuild" @click="showBuildOffer = true">Buy Building</button>
     <button v-if="clickedProperty.canSellBuilding" @click="showSellBuildingOffer = true">Sell Building</button>
   
-
 </template>
 
 <script setup>
@@ -76,9 +71,6 @@ import { onMounted, reactive, ref } from 'vue';
 import { gameLogic } from '../../javascripts/stateStore';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
 import * as gameFunctions from '../../javascripts/gameFunctions';
-
-
-
 
 let clickedProperty = reactive({
     name: ref(''),
@@ -98,7 +90,6 @@ let showSellBuildingOffer = ref(false);
 
 let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
 
-
 // returns all of the current players properties ordered by group
 let filteredProperties = computed(() => {
     let filteredPropArry = [];
@@ -116,8 +107,6 @@ function setClickedPropertyObj(propertyId) {
     clearOffer();
     let propObj = propertyFunctions.checkedPropObjH(propertyId);
     
-    
-    
     clickedProperty.name = propObj.name;
     clickedProperty.id = propObj.id;
     clickedProperty.buildingCost = propObj.buildingCost;
@@ -126,7 +115,6 @@ function setClickedPropertyObj(propertyId) {
     clickedProperty.canUnmortgage = propObj.canUnmortgage;
     clickedProperty.canBuild = propObj.canBuild;
     clickedProperty.canSellBuilding = propObj.canSellBuilding;
-    
 };
 
 function mortgageProperty() {
@@ -158,12 +146,14 @@ function buyBuilding() {
 
 function sellBuilding() {
 
-    gameFunctions.sellBuildingH(clickedProperty.id);
+    propertyFunctions.sellBuildingH(clickedProperty.id);
     crntPlayer.money += clickedProperty.buildingCost / 2;
+    clearOffer();
+    setClickedPropertyObj(clickedProperty.id);
 };
 
-
 function clearOffer() {
+
    showMortgageOffer.value = false;
    showUnmortgageOffer.value = false;
    showBuildOffer.value = false;

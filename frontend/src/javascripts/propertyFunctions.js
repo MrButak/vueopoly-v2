@@ -1,7 +1,6 @@
 import { gameLogic } from "./stateStore";
 import * as gameConstants from './constants';
 import * as gameFunctions from './gameFunctions';
-import { ref, reactive } from 'vue';
 
 let getPropFromIdH = (propertyId) => {
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id == propertyId));
@@ -20,7 +19,6 @@ let doesOwnAllInGroup = (owner, group) => {
         if(group[i].ownedby != owner) {return false;};
     };
     return true;
-
 };
 
 let isAnyMortgagedInGroup = (group) => {
@@ -37,8 +35,8 @@ let isAnyBuildingsInGroup = (group) => {
         if(group[i].buildings > 0) {return true;};
     };
     return false;
-    
-}
+};
+
 // only called after determined whole group is owned and none are mortgaged
 let canAddBuilding = (property, group) => {
 
@@ -56,12 +54,10 @@ let canAddBuilding = (property, group) => {
 
 let canRemoveBuilding = (property, group) => {
 
-    
     if(property.buildings < 1) {return false;};
-
     // can only build 'evenly', meaning all properties must have 1 building before you add a second building to any
     for(let i = 0; i < group.length; i++) {
-        if(property.buildings > group[i].buildings) {
+        if(property.buildings < group[i].buildings) {
             return false;
         };
     };
@@ -76,18 +72,17 @@ let checkedPropObjH = (propertyId) => {
     let group = getPropGroupFromProp(property);
 
     let propObj = {
-
         name: property.name,
         id: property.id,
         buildingCost:property.ohousecost,
         mortgagePrice: property.price / 2,
-
         canMortgage: false,
         canUnmortgage: false,
         canBuild: false,
         canSellBuilding: false
     };
-    // can build
+
+    // can add/remove building
     if(doesOwnAllInGroup(owner, group) && !isAnyMortgagedInGroup(group)) {
 
         console.log(canAddBuilding(property, group))
@@ -97,16 +92,19 @@ let checkedPropObjH = (propertyId) => {
         else {
             propObj.canBuild = false;
         };
-        
+        if(canRemoveBuilding(property, group)) {
+            propObj.canSellBuilding = true;
+        };
     };
 
-    // can mortgage/unmortgage  ONLY
+    // can mortgage/unmortgage
     if(property.mortgaged) {
         propObj.canUnmortgage = true;
     };
     if(!isAnyBuildingsInGroup(group) && !property.mortgaged) {
         propObj.canMortgage = true;
-    }
+    };
+
     return propObj;
 };
 
