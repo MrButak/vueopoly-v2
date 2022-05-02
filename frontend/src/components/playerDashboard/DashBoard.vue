@@ -13,7 +13,7 @@
             
                 <span v-if="dashboardView === 'play' && !isPlayerInJail"><PlayDashboard /></span>
                 <span v-if="dashboardView === 'manage'"><ManageDashboard /></span>
-            
+                <span v-if="dashboardView === 'play' && isPlayerInJail"><JailDashboard /></span>
         </div>
         
     </div>
@@ -21,10 +21,11 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import { gameLogic } from '../../javascripts/stateStore';
 import PlayDashboard from './PlayDashboard.vue';
 import ManageDashboard from './ManageDashboard.vue';
+import JailDashboard from './JailDashboard.vue';
 
 let dashboardView = ref('play');
 

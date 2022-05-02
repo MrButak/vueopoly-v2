@@ -207,7 +207,7 @@
 
 
 <script setup>
-import { onMounted, watch } from 'vue';
+import { onMounted, watch, computed } from 'vue';
 import { lsInUse, gameLogic } from '../javascripts/stateStore';
 
 // place all player pieces
@@ -217,16 +217,24 @@ onMounted(() => {
     })
 });
 
-function placePlayerPiece(playerId) {
+let crntPlayer = computed(() => {
+    return gameLogic.value.players[gameLogic.value.whosTurnIndex];
+});
 
+function placePlayerPiece(playerId) {
+    console.log(playerId)
     // if element already on the dom, remove it
     if(document.getElementById(playerId)) {document.getElementById(playerId).remove()};
     
 
-    let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId))
+    let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId));
+
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
+    
     let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
+
     let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
+
     let positionObj = gameLogic.value.playerPiecePos[`${gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
 
     // add css properties and id (getting info from an object in initNewGame.js)
@@ -250,9 +258,12 @@ function manualMove() {
 watch(
     () => gameLogic.value.players[gameLogic.value.whosTurnIndex].position,
     (count, prevCount) => {
-        placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
+        // placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
+        placePlayerPiece(crntPlayer.value.name);
     }
 );
+
+defineExpose({placePlayerPiece});
 </script>
 
 

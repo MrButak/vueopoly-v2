@@ -17,7 +17,7 @@ let dtrmPropActionH = (property) => {
                     return 'specialcard';
                 }
                 case 'tax':
-                case 'freeparking':
+                case 'freeparking': return 'freeparking';
                 case 'injail': return 'injail';
                 case 'gotojail': {
                     return 'gotojail' //property.style;

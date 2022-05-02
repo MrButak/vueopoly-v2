@@ -1,5 +1,5 @@
 <template>
-
+    <span v-show="showComponent"><GameBoard ref="gameBoard" /></span>
     <div class="log-and-dice-wrapper">
         <div class="gamelog-wrapper-main">
             <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }" class="game-log-text">{{ log.log }}</p>
@@ -32,7 +32,7 @@
 <script setup>
 
 
-import { ref, computed, onMounted, reactive } from 'vue';
+import { ref, computed, onMounted, reactive, defineExpose } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';
 import * as propertyAction from '../../javascripts/propertyAction';
@@ -40,7 +40,11 @@ import * as gameFunctions from '../../javascripts/gameFunctions';
 import * as specialCards from '../../javascripts/specialcards';
 import * as gameConstants from '../../javascripts/constants.js';
 
+import GameBoard from '../GameBoard.vue';
 
+let showComponent = ref(false);
+
+let gameBoard = ref(GameBoard);
 onMounted(() => {
     startTurn();
 });
@@ -71,6 +75,12 @@ function endTurn() {
     startTurn()
 };
 
+defineExpose({
+    endTurn,
+    dtrmPropAction
+});
+
+
 function rollDice() {
     
     turnLogic.value.crntDiceRoll = moveFunction.rollDiceH();
@@ -90,10 +100,10 @@ function dtrmPropAction() {
         case 'willpay': payRent(); break;
         case 'specialcard': handleSpecialCard(); break;
         case 'tax': payTax(); break;
-        case 'freeparking': freeParking(); break;
+        case 'freeparking': console.log('free parking, cant end turn?'); freeParking(); break;
         case 'gotojail': gotoJail(); break;
         case 'injail': 
-            console.log('ok....')
+            
             break;
         default:
             // landed on go, jail just visiting
@@ -101,6 +111,8 @@ function dtrmPropAction() {
             turnLogic.value.canEndTurn = true;
     };
 };
+
+
 
 function purchaseProperty() {
     // TODO also send a 'not enough money message to dom'
@@ -135,7 +147,7 @@ function payTax() {
 };
 
 function freeParking() {
-
+    
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} landed on Free Parking and received $${gameLogic.value.freeParking}`, color: `${turnLogic.value.crntPlayer.color}`});
     turnLogic.value.crntPlayer.money += gameLogic.value.freeParking;
     gameLogic.value.freeParking = gameConstants.freeParkingMoney();
@@ -143,8 +155,10 @@ function freeParking() {
 };
 
 function gotoJail() {
-    console.log('here in gotoJail()')
+    
     gameLogic.value.players[gameLogic.value.whosTurnIndex].position = 11.5;
+    // manually call function to move player. watcher() is set but not firing
+    gameBoard.value.placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
     dtrmPropAction();
     gameLogic.value.players[gameLogic.value.whosTurnIndex].inJail = true;
     endTurn();
@@ -193,12 +207,12 @@ function handleSpecialCard() {
             if(drawnCard.title == 'Go Back 3 Spaces') {
                 turnLogic.value.crntPlayer.position -= 3;
                 dtrmPropAction();
-                gameLogic.canEndTurn = true;
+                turnLogic.value.canEndTurn = true;
                 break;
             };
             moveFunction.moveToPropertyH(drawnCard.tileid);
             dtrmPropAction();
-            gameLogic.canEndTurn = true;
+            turnLogic.value.canEndTurn = true;
             break;
         case 'addfunds':
             turnLogic.value.crntPlayer.money += drawnCard.amount;
