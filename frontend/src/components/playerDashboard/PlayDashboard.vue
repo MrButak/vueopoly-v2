@@ -1,5 +1,5 @@
 <template>
-
+    <span v-show="showComponent"><GameBoard ref="gameBoard" /></span>
     <div class="log-and-dice-wrapper">
         <div class="gamelog-wrapper-main">
             <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }" class="game-log-text">{{ log.log }}</p>
@@ -32,7 +32,7 @@
 <script setup>
 
 
-import { ref, computed, onMounted, reactive } from 'vue';
+import { ref, computed, onMounted, reactive, defineExpose } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';
 import * as propertyAction from '../../javascripts/propertyAction';
@@ -40,7 +40,11 @@ import * as gameFunctions from '../../javascripts/gameFunctions';
 import * as specialCards from '../../javascripts/specialcards';
 import * as gameConstants from '../../javascripts/constants.js';
 
+import GameBoard from '../GameBoard.vue';
 
+let showComponent = ref(false);
+
+let gameBoard = ref(GameBoard);
 onMounted(() => {
     startTurn();
 });
@@ -51,15 +55,14 @@ let gameLogs = computed(() => {
 });
 
 
-
-
 function startTurn() {
 
-    if(turnLogic.value.crntPlayer.inJail) {console.log('player is in jail'); return}; // handle in jail
+    // if(turnLogic.value.crntPlayer.inJail) {console.log('player is in jail'); return}; // handle in jail
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name}'s turn.`, color: `${gameConstants.logColor()}`});
 };
 
 function endTurn() {
+
     gameFunctions.nextPlayerTurn();
 
     turnLogic.value.crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex])
@@ -70,8 +73,13 @@ function endTurn() {
     turnLogic.value.buyAvailable = ref(false);
 
     startTurn()
-    
 };
+
+defineExpose({
+    endTurn,
+    dtrmPropAction
+});
+
 
 function rollDice() {
     
@@ -85,20 +93,25 @@ function rollDice() {
 function dtrmPropAction() {
 
     turnLogic.value.propertyLandedOn = moveFunction.getCrntPropH();
-
+    
     switch(propertyAction.dtrmPropActionH(turnLogic.value.propertyLandedOn)) {
 
         case 'canbuy': turnLogic.value.buyAvailable = true; turnLogic.value.canEndTurn = true; break; // displays 'buy btn' and buy property message on dom
         case 'willpay': payRent(); break;
         case 'specialcard': handleSpecialCard(); break;
         case 'tax': payTax(); break;
-        case 'freeparking': freeParking(); break;
+        case 'freeparking': console.log('free parking, cant end turn?'); freeParking(); break;
+        case 'gotojail': gotoJail(); break;
+        case 'injail': break;
         default:
             // landed on go, jail just visiting
             console.log('unhandled case in PlayDashboard.vue dtrmPropAction()')
             turnLogic.value.canEndTurn = true;
+            break;
     };
 };
+
+
 
 function purchaseProperty() {
     // TODO also send a 'not enough money message to dom'
@@ -124,25 +137,37 @@ function payRent() {
 };
 
 function payTax() {
+    // TODO handle different taxes income/luxuery
     // 10% or 200
     let taxAmount = gameFunctions.calculateTaxAmountH();
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};
     gameFunctions.payMoneyH('bank', turnLogic.value.crntPlayer, taxAmount, 'tax');
     turnLogic.value.canEndTurn = true;
+    return;
 };
 
 function freeParking() {
-
+    
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} landed on Free Parking and received $${gameLogic.value.freeParking}`, color: `${turnLogic.value.crntPlayer.color}`});
     turnLogic.value.crntPlayer.money += gameLogic.value.freeParking;
     gameLogic.value.freeParking = gameConstants.freeParkingMoney();
     turnLogic.value.canEndTurn = true;
+    return;
+};
+
+function gotoJail() {
+    
+    gameLogic.value.players[gameLogic.value.whosTurnIndex].position = 11.5;
+    // manually call function to move player. watcher() is set but not firing
+    gameBoard.value.placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
+    dtrmPropAction();
+    gameLogic.value.players[gameLogic.value.whosTurnIndex].inJail = true;
+    endTurn();
 };
 
 function handleSpecialCard() {
 
-    
     let removefundsSpecial = (amount) => {
         if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, amount)) {return};
         // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
@@ -172,9 +197,18 @@ function handleSpecialCard() {
         turnLogic.value.canEndTurn = true;
     };
 
+    let keepGetOutOfJailFreeCard = (drawnCard, typeOfCard) => { // getoutofjail  chance/community chest
+
+        specialCards.keepJailCardH(drawnCard, typeOfCard)
+        // TODO game logs
+        turnLogic.value.canEndTurn = true;
+    };
+
     let drawnCard = specialCards.drawSpecialCardH(turnLogic.value.propertyLandedOn.style); // chance or community chest
     console.log({drawnCard});
+    
     // TODO: call a function to display a popup div to show special card
+    
     
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
@@ -184,12 +218,12 @@ function handleSpecialCard() {
             if(drawnCard.title == 'Go Back 3 Spaces') {
                 turnLogic.value.crntPlayer.position -= 3;
                 dtrmPropAction();
-                gameLogic.canEndTurn = true;
+                turnLogic.value.canEndTurn = true;
                 break;
             };
             moveFunction.moveToPropertyH(drawnCard.tileid);
             dtrmPropAction();
-            gameLogic.canEndTurn = true;
+            turnLogic.value.canEndTurn = true;
             break;
         case 'addfunds':
             turnLogic.value.crntPlayer.money += drawnCard.amount;
@@ -213,12 +247,11 @@ function handleSpecialCard() {
             break;
 
         case 'jail':
-            if(drawnCard.subaction == 'getout') {break}; // handle keep 'get out of jail free' card
-            // handle 'goto jail'
-            // turnLogic.value.crntPlayer.inJail = true;
-            // endTurn();
+            if(drawnCard.subaction == 'getout') {keepGetOutOfJailFreeCard(drawnCard, turnLogic.value.propertyLandedOn.style); break}; // handle keep 'get out of jail free' card
+            gotoJail();
+            break;
         default:
-            console.log('unhandled case in MainDashboard.vue handleSpecialCard()')
+            console.log('unhandled case in PlayDashboard.vue handleSpecialCard()')
     };
 
 };

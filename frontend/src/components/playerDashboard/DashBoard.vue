@@ -1,8 +1,7 @@
 <template>
     <div class="player-dashboard-wrapper-main">
         <div class="player-dashboard-wrapper">
-            
-
+        
             <div class="player-stats-top-wrapper">
                 <button v-if="dashboardView === 'play'" @click="dashboardView = 'manage'">Manage</button>
                 <button v-if="dashboardView === 'manage'" @click="dashboardView = 'play'">Game</button>
@@ -11,22 +10,32 @@
                     <text>${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</text>
                 <button>Trade</button>
             </div>
-
-            <span v-if="dashboardView === 'play'"><PlayDashboard /></span>
-            <span v-if="dashboardView === 'manage'"><ManageDashboard /></span>
             
+                <span v-if="dashboardView === 'play' && !isPlayerInJail"><PlayDashboard /></span>
+                <span v-if="dashboardView === 'manage'"><ManageDashboard /></span>
+                <span v-if="dashboardView === 'play' && isPlayerInJail"><JailDashboard /></span>
         </div>
+        
     </div>
 
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { gameLogic } from '../../javascripts/stateStore';
 import PlayDashboard from './PlayDashboard.vue';
 import ManageDashboard from './ManageDashboard.vue';
+import JailDashboard from './JailDashboard.vue';
 
 let dashboardView = ref('play');
+
+
+let isPlayerInJail = computed(() => {
+    return gameLogic.value.players[gameLogic.value.whosTurnIndex].inJail ? true : false;
+});
+
+
+
 
 </script>
 

@@ -451,7 +451,7 @@ function initNewGame(newPlayers) {
         crntDiceRoll: reactive([]),
         diceRolled: ref(false),
         canEndTurn: ref(false),
-        buyAvailable: ref(false)
+        buyAvailable: ref(false),
     });
 
 

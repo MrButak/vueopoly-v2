@@ -3,10 +3,10 @@ import * as consts from '../javascripts/constants';
 
 let rollDiceH = () => {
 
-    // let diceOne = Math.floor(Math.random() * 6 + 1);
-    // let diceTwo = Math.floor(Math.random() * 6 + 1);
-    // return [diceOne, diceTwo];
-    return [0, 0]; // debug purposes
+    let diceOne = Math.floor(Math.random() * 6 + 1);
+    let diceTwo = Math.floor(Math.random() * 6 + 1);
+    return [diceOne, diceTwo];
+    //return [0, 0]; // debug purposes
 };
 
 let movePlayerH = (moveCount, prevPosition) => {
@@ -42,16 +42,15 @@ let getCrntPropH = () => {
 let moveToPropertyH = (propertyId) => {
 
     let crntPlayer = consts.crntPlayer();
-    
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id == propertyId));
-    
     let propertyPosition = gameLogic.value.vueopoly.properties[propertyIndex].position;
 
     if(crntPlayer.position > propertyPosition) {
         crntPlayer.position = propertyPosition;
-        passGoH();
+        if(!crntPlayer.inJail) {passGoH();};
         return;
-    };
+    }
+    
     crntPlayer.position = propertyPosition;
     return;
 

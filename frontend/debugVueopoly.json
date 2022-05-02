@@ -16,9 +16,10 @@
         ],
         "housecost": 50,
         "style": "purple",
+        "color": "purple",
         "group": "land",
-        "ownedby": "player2",
-        "buildings": 5,
+        "ownedby": -1,
+        "buildings": 0,
         "mortgaged": false,
         "probability": 2.1314,
         "rel": {
@@ -47,6 +48,7 @@
         ],
         "housecost": 50,
         "style": "purple",
+        "color": "purple",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -78,6 +80,7 @@
         ],
         "housecost": 50,
         "style": "lightgreen",
+        "color": "lightgreen",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -108,6 +111,7 @@
         ],
         "housecost": 50,
         "style": "lightgreen",
+        "color": "lightgreen",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -138,6 +142,7 @@
         ],
         "housecost": 50,
         "style": "lightgreen",
+        "color": "lightgreen",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -168,6 +173,7 @@
         ],
         "housecost": 100,
         "style": "violet",
+        "color": "violet",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -198,6 +204,7 @@
         ],
         "housecost": 100,
         "style": "violet",
+        "color": "violet",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -228,6 +235,7 @@
         ],
         "housecost": 100,
         "style": "violet",
+        "color": "violet",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -257,6 +265,8 @@
           950
         ],
         "housecost": 100,
+        "style": "orange",
+        "color": "orange",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -287,6 +297,7 @@
         ],
         "housecost": 100,
         "style": "orange",
+        "color": "orange",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -317,6 +328,7 @@
         ],
         "housecost": 100,
         "style": "orange",
+        "color": "orange",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -347,6 +359,7 @@
         ],
         "housecost": 150,
         "style": "red",
+        "color": "red",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -377,6 +390,7 @@
         ],
         "housecost": 150,
         "style": "red",
+        "color": "red",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -407,6 +421,7 @@
         ],
         "housecost": 150,
         "style": "red",
+        "color": "red",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -437,6 +452,7 @@
         ],
         "housecost": 150,
         "style": "yellow",
+        "color": "yellow",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -467,6 +483,7 @@
         ],
         "housecost": 150,
         "style": "yellow",
+        "color": "yellow",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -497,6 +514,7 @@
         ],
         "housecost": 150,
         "style": "yellow",
+        "color": "yellow",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -527,6 +545,7 @@
         ],
         "housecost": 200,
         "style": "darkgreen",
+        "color": "darkgreen",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -557,6 +576,7 @@
         ],
         "housecost": 200,
         "style": "darkgreen",
+        "color": "darkgreen",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -587,6 +607,7 @@
         ],
         "housecost": 200,
         "style": "darkgreen",
+        "color": "darkgreen",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -617,6 +638,7 @@
         ],
         "housecost": 200,
         "style": "darkblue",
+        "color": "darkblue",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -647,6 +669,7 @@
         ],
         "housecost": 200,
         "style": "darkblue",
+        "color": "darkblue",
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
@@ -668,6 +691,7 @@
         "pieceposition": "leftRow",
         "price": 150,
         "style": "utilities",
+        "color": "gray",
         "group": "utilities",
         "ownedby": -1,
         "mortgaged": false,
@@ -687,6 +711,7 @@
         "pieceposition": "topRow",
         "price": 150,
         "style": "utilities",
+        "color": "gray",
         "group": "utilities",
         "ownedby": -1,
         "mortgaged": false,
@@ -706,8 +731,9 @@
         "pieceposition": "bottomRow",
         "price": 200,
         "style": "railroad",
+        "color": "black",
         "group": "railroad",
-        "ownedby": "player2",
+        "ownedby": -1,
         "mortgaged": false,
         "probability": 2.1314,
         "rel": {
@@ -726,8 +752,9 @@
         "pieceposition": "leftRow",
         "price": 200,
         "style": "railroad",
+        "color": "black",
         "group": "railroad",
-        "ownedby": "player2",
+        "ownedby": -1,
         "mortgaged": false,
         "rel": {
           "Square": "Pennsylvania Railroad",
@@ -745,6 +772,7 @@
         "pieceposition": "topRow",
         "price": 200,
         "style": "railroad",
+        "color": "black",
         "group": "railroad",
         "ownedby": -1,
         "mortgaged": false,
@@ -758,6 +786,7 @@
         "pieceposition": "rightRow",
         "price": 200,
         "style": "railroad",
+        "color": "black",
         "group": "railroad",
         "ownedby": -1,
         "mortgaged": false,
@@ -800,6 +829,15 @@
         "position": 11,
         "pieceposition": "jailjustvisiting",
         "style": "jailjustvisiting",
+        "group": "special",
+        "averageProbability": 8.897
+      },
+      {
+        "name": "Jail",
+        "id": "injail",
+        "position": 11.5,
+        "pieceposition": "injail",
+        "style": "injail",
         "group": "special",
         "averageProbability": 8.897
       },
@@ -982,46 +1020,47 @@
     ],
     "chance": [
         {
-            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
-            "action": "addfundsfromplayers",
-            "amount": 50
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
         },
         {
-            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
-            "action": "addfundsfromplayers",
-            "amount": 50
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
         },
         {
-            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
-            "action": "addfundsfromplayers",
-            "amount": 50
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
         },
         {
-            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
-            "action": "addfundsfromplayers",
-            "amount": 50
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
         }
+      
     ],
     "communitychest": [
         {
-            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
-            "action": "addfundsfromplayers",
-            "amount": 50
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
         },
         {
-            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
-            "action": "addfundsfromplayers",
-            "amount": 50
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
         },
         {
-            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
-            "action": "addfundsfromplayers",
-            "amount": 50
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
         },
         {
-            "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
-            "action": "addfundsfromplayers",
-            "amount": 50
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
         }
     ]
   }

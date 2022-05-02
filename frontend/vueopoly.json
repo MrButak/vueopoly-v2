@@ -833,6 +833,15 @@
         "averageProbability": 8.897
       },
       {
+        "name": "Jail",
+        "id": "injail",
+        "position": 11.5,
+        "pieceposition": "injail",
+        "style": "injail",
+        "group": "special",
+        "averageProbability": 8.897
+      },
+      {
         "name": "Chance",
         "id": "chance",
         "style": "chance",

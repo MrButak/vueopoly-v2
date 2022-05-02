@@ -16,10 +16,11 @@ let dtrmPropActionH = (property) => {
                 case 'communitychest': {
                     return 'specialcard';
                 }
-                case 'tax':
-                case 'freeparking':
+                case 'tax': return 'tax';
+                case 'freeparking': return 'freeparking';
+                case 'injail': return 'injail';
                 case 'gotojail': {
-                    return property.style;
+                    return 'gotojail' //property.style;
                 }
             }
           //  (go already handled, jailjustvisiting no need to handle)

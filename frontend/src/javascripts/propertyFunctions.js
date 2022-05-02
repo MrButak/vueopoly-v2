@@ -38,6 +38,8 @@ let isAnyBuildingsInGroup = (group) => {
 };
 
 // only called after determined whole group is owned and none are mortgaged
+
+// TODO : handle utilities
 let canAddBuilding = (property, group) => {
 
     // can only have 5 buildings
