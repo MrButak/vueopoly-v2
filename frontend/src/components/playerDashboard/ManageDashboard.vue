@@ -235,7 +235,6 @@ function useSpecialCard() {
     // must end turn
     turnLogic.value.diceRolled = true
     turnLogic.value.canEndTurn = true
-
 };
 
 </script>

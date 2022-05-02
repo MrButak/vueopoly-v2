@@ -5,9 +5,9 @@
             <div class="player-stats-top-wrapper">
                 <button v-if="dashboardView === 'play'" @click="dashboardView = 'manage'">Manage</button>
                 <button v-if="dashboardView === 'manage'" @click="dashboardView = 'play'">Game</button>
-                    <text>{{ crntPlayer.name }}</text>
-                    <text>{{ crntPlayer.alias }}</text>
-                    <text>${{ crntPlayer.money }}</text>
+                    <text>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].name }}</text>
+                    <text>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].alias }}</text>
+                    <text>${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</text>
                 <button>Trade</button>
             </div>
             
@@ -29,14 +29,9 @@ import JailDashboard from './JailDashboard.vue';
 
 let dashboardView = ref('play');
 
-let playerReference = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
-
-let crntPlayer = computed(() => {
-    return playerReference;
-});
 
 let isPlayerInJail = computed(() => {
-    return playerReference.inJail ? true : false;
+    return gameLogic.value.players[gameLogic.value.whosTurnIndex].inJail ? true : false;
 });
 
 

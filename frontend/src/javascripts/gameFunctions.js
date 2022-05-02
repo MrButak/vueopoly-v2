@@ -38,7 +38,7 @@ let calculateTaxAmountH = (propertyId) => {
 };
 
 let nextPlayerTurn = () => {
-    // whosTurnIndex is an int representing the 0 index position in the gameLogic.players array
+    
     let totalPlayers = gameLogic.value.players.length;
     if(gameLogic.value.whosTurnIndex < totalPlayers - 1) {
         gameLogic.value.whosTurnIndex++;
