@@ -1,5 +1,10 @@
 <template>
-    <span v-show="showComponent"><GameBoard ref="gameBoard" /></span>
+    <PopupSpecialCard ref="popupSpecialCard" />
+    <!-- permanently display none (for funciton calls) -->
+    <span v-show="showComponent">
+        <GameBoard ref="gameBoard" />
+    </span>
+
     <div class="log-and-dice-wrapper">
         <div class="gamelog-wrapper-main">
             <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }" class="game-log-text">{{ log.log }}</p>
@@ -26,11 +31,9 @@
         </span>
     </div>
    
-
 </template>
 
 <script setup>
-
 
 import { ref, computed, onMounted, reactive } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
@@ -41,19 +44,27 @@ import * as specialCards from '../../javascripts/specialcards';
 import * as gameConstants from '../../javascripts/constants.js';
 
 import GameBoard from '../GameBoard.vue';
+import PopupSpecialCard from '../specialCards/PopupSpecialCard.vue';
 
-let showComponent = ref(false);
-
+let popupSpecialCard = ref(PopupSpecialCard);
 let gameBoard = ref(GameBoard);
+let showComponent = ref(false); // permanently false. used to call functions from other components
+
 onMounted(() => {
     startTurn();
 });
 
- 
+
 let gameLogs = computed(() => {
     return gameLogic.value.gameLogs
 });
 
+// TODO refactor code to use crntPlayer.value
+// component variable to access current player
+let playerReference = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
+let crntPlayer = computed(() => {
+    return playerReference;
+});
 
 function startTurn() {
 
@@ -205,11 +216,12 @@ function handleSpecialCard() {
     };
 
     let drawnCard = specialCards.drawSpecialCardH(turnLogic.value.propertyLandedOn.style); // chance or community chest
-    console.log({drawnCard});
     
-    // TODO: call a function to display a popup div to show special card
+    // function call from PopupSpecialCard.vue
+    popupSpecialCard.value.showPopup(turnLogic.value.propertyLandedOn.style, drawnCard);
     
-    
+    console.log(drawnCard)
+
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
     switch(drawnCard.action) {
@@ -221,14 +233,12 @@ function handleSpecialCard() {
                 turnLogic.value.canEndTurn = true;
                 break;
             };
-            // bug here
-            
             moveFunction.moveToPropertyH(drawnCard.tileid);
             dtrmPropAction();
             turnLogic.value.canEndTurn = true;
             break;
         case 'addfunds':
-            turnLogic.value.crntPlayer.money += drawnCard.amount;
+            crntPlayer.value.money += drawnCard.amount;
             turnLogic.value.canEndTurn = true;
             break;
         case 'addfundsfromplayers':
@@ -253,6 +263,7 @@ function handleSpecialCard() {
             gotoJail();
             break;
         default:
+            // TODO: advance to nearest utility
             console.log('unhandled case in PlayDashboard.vue handleSpecialCard()')
     };
 

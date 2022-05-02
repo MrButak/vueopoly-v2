@@ -2,7 +2,7 @@
 
 
 
-<div v-if="askToContinueGame" class="full-page-centered">
+<div v-if="askToContinueGame">
     <div>
         <div class="choose-players-wrapper">
             
@@ -30,7 +30,7 @@
     </div>
 </div>
 
-<div v-if="!showPlayerCountDiv" class="full-page-centered">
+<div v-if="!showPlayerCountDiv">
     <div class="choose-players-wrapper">
         <div v-for="count in playerCount">
             <input name="playerName" type="text" v-bind:placeholder='"Player " + count + " name"'>
@@ -48,12 +48,10 @@
 
 <script setup>
 
-import { ref, onMounted, defineComponent } from 'vue';
+import { ref, onMounted } from 'vue';
 import initNewGame from '../javascripts/initNewGame';
 import handleLs from '../javascripts/handleLs';
 import {lsInUse, gameLogic} from '../javascripts/stateStore';
-
-
 
 let showPlayerCountDiv = ref(true);
 let playerCount = ref(2);
@@ -71,7 +69,7 @@ function choosePlayerCount() {
 };  
 
 function submitUserProfile(event) {
-    // TODO 1. find a better way to get input values 2. validation.
+    // TODO (1. find a better way to get input values (2. validation.
     let playerObj = {};
     for(let i = 0; i < playerCount.value; i++) {
         playerObj[`${i + 1}`] = {};
@@ -90,17 +88,7 @@ function submitUserProfile(event) {
     display: flex;
     gap: 10px;
 }
-.full-page-centered {
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    background-color: grey;
-    margin: 0;
-}
+
 
 .choose-players-wrapper {
    display: flex;
@@ -110,7 +98,7 @@ function submitUserProfile(event) {
    width: 300px;
    background-color: wheat;
    padding: 10px;
-   margin: 0 0 50% 0;
+   
 
 }
 .choose-players-div {

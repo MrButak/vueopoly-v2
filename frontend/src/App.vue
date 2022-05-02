@@ -1,5 +1,4 @@
 <template>
-
 <span v-if="!gameLogic.startGame">
 <NewGame />
 </span>
@@ -8,18 +7,15 @@
 <GameBoard />
 <Dashboard />
 </span>
-
 </template>
 
 
 <script setup>
 
-import { ref } from 'vue';
 import GameBoard from './components/GameBoard.vue';
 import NewGame from './components/NewGame.vue';
 import Dashboard from './components/playerDashboard/DashBoard.vue';
 import { lsInUse, gameLogic } from './javascripts/stateStore';
-
 
 </script>
 
@@ -34,8 +30,9 @@ import { lsInUse, gameLogic } from './javascripts/stateStore';
     padding: 0px;
     
     
+    
 }
 #app {
-
+    
 }
 </style>

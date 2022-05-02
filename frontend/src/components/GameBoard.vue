@@ -1,5 +1,6 @@
 <template>
-<body>
+
+
 
 	<div class="responsive">
 
@@ -201,14 +202,17 @@
 
 	</div>
     <button @click="manualMove">move player forward</button>
-</body>
+    
+
 
 </template>
 
 
 <script setup>
-import { onMounted, watch, computed } from 'vue';
+import { onMounted, watch, computed, ref } from 'vue';
 import { lsInUse, gameLogic } from '../javascripts/stateStore';
+
+
 
 // place all player pieces
 onMounted(() => {
@@ -220,6 +224,8 @@ onMounted(() => {
 let crntPlayer = computed(() => {
     return gameLogic.value.players[gameLogic.value.whosTurnIndex];
 });
+
+
 
 function placePlayerPiece(playerId) {
     console.log(playerId)
@@ -268,11 +274,7 @@ defineExpose({placePlayerPiece});
 
 
 <style lang="scss" scoped>
-
-// @media (min-width: 480px) {
-
-
-// }    
+ 
 
 div {
 	box-sizing: border-box;
