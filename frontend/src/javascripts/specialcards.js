@@ -2,22 +2,25 @@ import { lsInUse, gameLogic } from './stateStore';
 import * as consts from './constants';
 import * as gameFunctions from './gameFunctions'
 
-let drawSpecialCardH = (type) => {
-
+let drawSpecialCardH = (type) => { // CURRENTLY DEBUGGING!!
+    
     let discardDeck = '';
     let deck = gameLogic.value.vueopoly[`${type}`]; // chance or community chest
+    
     if(type == 'chance') {discardDeck = 'usedChance';} else{discardDeck = 'usedCommunityChest';};
 
-    if(deck.length < 1) {return;} // handle empty deck
+    if(deck.length < 1) {console.log('empty deck. reshuffle!'); return;} // handle empty deck
 
     let cardIndex = Math.floor(Math.random() * deck.length);
 
     // place card in used deck array
     gameLogic.value[`${discardDeck}`].push(deck[cardIndex]);
+    
     // remove card from deck
     gameLogic.value.vueopoly[`${type}`].splice(cardIndex, 1);
     
-    return deck[cardIndex];
+    // returning the card that was pushed to the used deck array
+    return gameLogic.value[`${discardDeck}`][gameLogic.value[`${discardDeck}`].length - 1];
 };
 
 let streetRepairsCostH = (specialCard) => { // x amount for house, x amount for motel

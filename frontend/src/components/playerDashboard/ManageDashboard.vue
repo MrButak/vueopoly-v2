@@ -1,5 +1,5 @@
 <template>
-
+    <p>Properties</p>
     <span v-for="propArry in filteredProperties">
 
         <div v-for="prop in propArry" class="prop-name-wrapper">
@@ -21,6 +21,14 @@
             </span>
             
         </div>
+    </span>
+
+    <br />
+
+    <p>Special Cards</p>
+    <span v-if="computedShowSpecialCards" v-for="card in computedSpecialCards">
+        <input @click="offerSpecialCard($event, card)" type="radio" name="cards">
+        <span>{{ card.title }}</span>
     </span>
 
     <!-- mortages -->
@@ -56,19 +64,28 @@
             <button @click.prevent="clearOffer">No</button>
         </span>
     </span>
+
+    <!-- special cards -->
+    <span v-if="showSpecialCardOffer">
+        <p>Use special card message</p>
+        <span class="mortgage-yes-no-btn-wrapper">
+            <button @click.prevent="useSpecialCard">Yes</button>
+            <button @click.prevent="clearOffer">No</button>
+        </span>
+    </span>
    
     <button v-if="clickedProperty.canMortgage" @click="showMortgageOffer = true">Mortgage</button>
     <button v-if="clickedProperty.canUnmortgage" @click="showUnmortgageOffer = true">Unmortgage</button>
     <button v-if="clickedProperty.canBuild" @click="showBuildOffer = true">Buy Building</button>
     <button v-if="clickedProperty.canSellBuilding" @click="showSellBuildingOffer = true">Sell Building</button>
-  
+    <button v-if="canUseSpecialCard" @click="showSpecialCardOffer = true">Use Special Card</button>
 </template>
 
 <script setup>
 
 import { computed } from '@vue/reactivity';
 import { onMounted, reactive, ref } from 'vue';
-import { gameLogic } from '../../javascripts/stateStore';
+import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
 import * as gameFunctions from '../../javascripts/gameFunctions';
 
@@ -88,9 +105,13 @@ let showUnmortgageOffer = ref(false);
 let showBuildOffer = ref(false);
 let showSellBuildingOffer = ref(false);
 
+let clickedSpecialCard = reactive({});
+let canUseSpecialCard = ref(false);
+let showSpecialCardOffer = ref(false);
+
 let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
 
-// returns all of the current players properties ordered by group
+// returns all of the current player properties ordered by group
 let filteredProperties = computed(() => {
     let filteredPropArry = [];
     let propStyleArry = ['purple', 'lightgreen', 'violet', 'orange', 'red', 'yellow', 'darkgreen', 'darkblue', 'railroad', 'utilities'];
@@ -98,6 +119,23 @@ let filteredProperties = computed(() => {
         filteredPropArry.push(crntPlayer.properties.filter((prop => prop.style === item)));
     });
     return filteredPropArry;
+});
+
+// returns all of the current player special cards (get out of jail free)
+let computedSpecialCards = computed(() => {
+    let specialCardArry = [];
+
+    if(crntPlayer.specialCards.length > 0) {
+        for(let i = 0; i < crntPlayer.specialCards.length; i++) {
+            specialCardArry.push(crntPlayer.specialCards[i]);
+        };
+    };
+    
+    return specialCardArry;
+});
+
+let computedShowSpecialCards = computed(() => {
+    return crntPlayer.specialCards.length > 0 ? true : false;
 });
 
 
@@ -158,6 +196,42 @@ function clearOffer() {
    showUnmortgageOffer.value = false;
    showBuildOffer.value = false;
    showSellBuildingOffer.value = false;
+
+   canUseSpecialCard.value = false;
+   showSpecialCardOffer.value = false;
+};
+
+
+function offerSpecialCard(event, specialCard) {
+    
+    clickedSpecialCard.value = specialCard;
+
+    if(!crntPlayer.inJail) {
+        // TODO send message to dom ('can only use if in jail')
+        return;
+    }
+    else {canUseSpecialCard.value = true;};
+};
+
+function useSpecialCard() {
+
+    clearOffer();
+
+    // remove special card from players deck
+    let cardIndex = crntPlayer.specialCards.findIndex((card => card.title == clickedSpecialCard.value.title));
+    crntPlayer.specialCards.splice(cardIndex, 1);
+
+    // remove from jail
+    crntPlayer.turnsInJail = 0;
+    crntPlayer.inJail = false;
+    crntPlayer.position = 11; // jail just visiting
+
+    // TODO game logs ('out of jail!')
+
+    // must end turn
+    turnLogic.value.diceRolled = true
+    turnLogic.value.canEndTurn = true
+
 };
 
 </script>

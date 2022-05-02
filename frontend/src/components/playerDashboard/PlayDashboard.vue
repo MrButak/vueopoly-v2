@@ -200,11 +200,13 @@ function handleSpecialCard() {
     let keepGetOutOfJailFreeCard = (drawnCard, typeOfCard) => { // getoutofjail  chance/community chest
 
         specialCards.keepJailCardH(drawnCard, typeOfCard)
-        console.log(typeOfCard)
+        // TODO game logs
+        turnLogic.value.canEndTurn = true;
     };
 
     let drawnCard = specialCards.drawSpecialCardH(turnLogic.value.propertyLandedOn.style); // chance or community chest
     console.log({drawnCard});
+    
     // TODO: call a function to display a popup div to show special card
     
     
