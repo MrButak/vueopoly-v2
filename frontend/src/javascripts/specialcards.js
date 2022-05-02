@@ -3,10 +3,20 @@ import * as consts from './constants';
 import * as gameFunctions from './gameFunctions'
 
 let drawSpecialCardH = (type) => {
-    let deck = gameLogic.value.vueopoly[`${type}`];
+
+    let discardDeck = '';
+    let deck = gameLogic.value.vueopoly[`${type}`]; // chance or community chest
+    if(type == 'chance') {discardDeck = 'usedChance';} else{discardDeck = 'usedCommunityChest';};
+
     if(deck.length < 1) {return;} // handle empty deck
 
     let cardIndex = Math.floor(Math.random() * deck.length);
+
+    // place card in used deck array
+    gameLogic.value[`${discardDeck}`].push(deck[cardIndex]);
+    // remove card from deck
+    gameLogic.value.vueopoly[`${type}`].splice(cardIndex, 1);
+    
     return deck[cardIndex];
 };
 
@@ -38,8 +48,18 @@ let removeFundsToPlayersH = (amountPerPlayer) => {
     };
 };
 
-let keepJailCardH = (type) => {
+let keepJailCardH = (card, type) => {
+
+    let discardDeck = '';
+    if(type == 'chance') {discardDeck = 'usedChance';} else{discardDeck = 'usedCommunityChest';};
+
+    // add card to players special card array
     let crntPlayer = consts.crntPlayer();
+    crntPlayer.specialCards.push(card);
+    
+    // remove card from the discard deck
+    let usedCardIndex = gameLogic.value[`${discardDeck}`].findIndex((crd => crd.title == card.title));
+    gameLogic.value[`${discardDeck}`].splice(usedCardIndex, 1);
 };
 // addFundsFromPlayersH
 

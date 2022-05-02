@@ -199,15 +199,14 @@ function handleSpecialCard() {
 
     let keepGetOutOfJailFreeCard = (drawnCard, typeOfCard) => { // getoutofjail  chance/community chest
 
-        specialCards.keepJailCardH(typeOfCard)
+        specialCards.keepJailCardH(drawnCard, typeOfCard)
         console.log(typeOfCard)
     };
 
     let drawnCard = specialCards.drawSpecialCardH(turnLogic.value.propertyLandedOn.style); // chance or community chest
     console.log({drawnCard});
     // TODO: call a function to display a popup div to show special card
-    // TODO: remove card from deck, place in used card array
-    console.log(gameLogic.value)
+    
     
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
