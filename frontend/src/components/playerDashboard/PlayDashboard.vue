@@ -221,6 +221,8 @@ function handleSpecialCard() {
                 turnLogic.value.canEndTurn = true;
                 break;
             };
+            // bug here
+            
             moveFunction.moveToPropertyH(drawnCard.tileid);
             dtrmPropAction();
             turnLogic.value.canEndTurn = true;

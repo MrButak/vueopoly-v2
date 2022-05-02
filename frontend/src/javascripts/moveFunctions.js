@@ -42,6 +42,9 @@ let getCrntPropH = () => {
 let moveToPropertyH = (propertyId) => {
 
     let crntPlayer = consts.crntPlayer();
+
+    console.log(propertyId)
+    console.log('&&&^^^%%%$$$')
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id == propertyId));
     let propertyPosition = gameLogic.value.vueopoly.properties[propertyIndex].position;
 

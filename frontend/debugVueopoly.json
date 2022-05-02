@@ -1020,47 +1020,26 @@
     ],
     "chance": [
         {
-            "title": "Get Out of Jail Free",
-            "action": "jail",
-            "subaction": "getout"
+        "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
+        "action": "move",
+        "tileid": "illinoisave"
         },
         {
-            "title": "Get Out of Jail Free",
-            "action": "jail",
-            "subaction": "getout"
-        },
-        {
-            "title": "Get Out of Jail Free",
-            "action": "jail",
-            "subaction": "getout"
-        },
-        {
-            "title": "Get Out of Jail Free",
-            "action": "jail",
-            "subaction": "getout"
+        "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
+        "action": "move",
+        "tileid": "illinoisave"
         }
-      
     ],
     "communitychest": [
         {
-            "title": "Get Out of Jail Free",
-            "action": "jail",
-            "subaction": "getout"
+        "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
+        "action": "move",
+        "tileid": "illinoisave"
         },
         {
-            "title": "Get Out of Jail Free",
-            "action": "jail",
-            "subaction": "getout"
-        },
-        {
-            "title": "Get Out of Jail Free",
-            "action": "jail",
-            "subaction": "getout"
-        },
-        {
-            "title": "Get Out of Jail Free",
-            "action": "jail",
-            "subaction": "getout"
+        "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
+        "action": "move",
+        "tileid": "illinoisave"
         }
     ]
   }
