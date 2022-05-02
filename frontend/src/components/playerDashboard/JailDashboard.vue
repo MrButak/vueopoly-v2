@@ -16,11 +16,14 @@ import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import PlayDashboard from '../playerDashboard/PlayDashboard.vue';
 import GameBoard from '../GameBoard.vue';
 
+let playerReference = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
+let crntPlayer = computed(() => {
+    return playerReference;
+});
+
 let diceRoll = reactive([]);
 let diceRolled = ref(false);
 let showComponent = ref(false); // to call function from PlayDashboard.vue
-let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
-
 
 let playDashboard = ref(PlayDashboard);
 let gameBoard = ref(GameBoard);
@@ -28,10 +31,8 @@ let gameBoard = ref(GameBoard);
 
 
 onMounted(() => {
-    if(gameLogic.value.players[gameLogic.value.whosTurnIndex].turnsInJail == 4) {
-        gameLogic.value.players[gameLogic.value.whosTurnIndex].turnsInJail = 0;
-        gameLogic.value.players[gameLogic.value.whosTurnIndex].inJail = false;
-        gameLogic.value.players[gameLogic.value.whosTurnIndex].position -= .5; // in jail position is 11.5, just visiting is 11
+    if(crntPlayer.value.turnsInJail == 4) {
+        getOutOfJail();
     }
 });
 
@@ -54,9 +55,9 @@ function rolledDoubles() {
     
     let moveAmount = diceRoll.value[0] + diceRoll.value[1];
 
-    crntPlayer.position += (moveAmount - .5); // injail position is 11.5
-    crntPlayer.turnsInJail = 0;
-    crntPlayer.inJail = false;
+    crntPlayer.value.position += (moveAmount - .5); // injail position is 11.5
+    crntPlayer.value.turnsInJail = 0;
+    crntPlayer.value.inJail = false;
     playDashboard.value.dtrmPropAction();
 
     turnLogic.value.crntDiceRoll[0] = diceRoll.value[0];
@@ -67,10 +68,9 @@ function rolledDoubles() {
 
 // using a 'get out of jail free card, being in there 3 turns, or paying'
 function getOutOfJail() {
-    crntPlayer.position -= .5; // move to jail/just visiting
-    crntPlayer.turnsInJail = 0;
-    crntPlayer.inJail = false;
-    // TODO endTurn()
+    crntPlayer.value.position -= .5; // move to jail/just visiting
+    crntPlayer.value.turnsInJail = 0;
+    crntPlayer.value.inJail = false;
 };
 
 </script>

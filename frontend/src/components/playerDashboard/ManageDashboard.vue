@@ -109,14 +109,18 @@ let clickedSpecialCard = reactive({});
 let canUseSpecialCard = ref(false);
 let showSpecialCardOffer = ref(false);
 
-let crntPlayer = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
+// component variable to access current player
+let playerReference = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
+let crntPlayer = computed(() => {
+    return playerReference;
+});
 
 // returns all of the current player properties ordered by group
 let filteredProperties = computed(() => {
     let filteredPropArry = [];
     let propStyleArry = ['purple', 'lightgreen', 'violet', 'orange', 'red', 'yellow', 'darkgreen', 'darkblue', 'railroad', 'utilities'];
     propStyleArry.forEach((item) => {
-        filteredPropArry.push(crntPlayer.properties.filter((prop => prop.style === item)));
+        filteredPropArry.push(crntPlayer.value.properties.filter((prop => prop.style === item)));
     });
     return filteredPropArry;
 });
@@ -125,9 +129,9 @@ let filteredProperties = computed(() => {
 let computedSpecialCards = computed(() => {
     let specialCardArry = [];
 
-    if(crntPlayer.specialCards.length > 0) {
-        for(let i = 0; i < crntPlayer.specialCards.length; i++) {
-            specialCardArry.push(crntPlayer.specialCards[i]);
+    if(crntPlayer.value.specialCards.length > 0) {
+        for(let i = 0; i < crntPlayer.value.specialCards.length; i++) {
+            specialCardArry.push(crntPlayer.value.specialCards[i]);
         };
     };
     
@@ -135,7 +139,7 @@ let computedSpecialCards = computed(() => {
 });
 
 let computedShowSpecialCards = computed(() => {
-    return crntPlayer.specialCards.length > 0 ? true : false;
+    return crntPlayer.value.specialCards.length > 0 ? true : false;
 });
 
 
@@ -158,7 +162,7 @@ function setClickedPropertyObj(propertyId) {
 function mortgageProperty() {
 
     propertyFunctions.mortgagePropertyH(clickedProperty.id);
-    crntPlayer.money += clickedProperty.mortgagePrice;
+    crntPlayer.value.money += clickedProperty.mortgagePrice;
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
 };
@@ -167,7 +171,7 @@ function unmortgageProperty() {
     
     let unMortgagePrice = (clickedProperty.mortgagePrice * 2) + clickedProperty.mortgagePrice * .1;
     if(!gameFunctions.moneyCheckH(crntPlayer.money, unMortgagePrice)) {return;}; // TODO: show 'not enough money message'
-    crntPlayer.money -= unMortgagePrice;
+    crntPlayer.value.money -= unMortgagePrice;
     propertyFunctions.unMortgagePropertyH(clickedProperty.id);
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
@@ -175,8 +179,8 @@ function unmortgageProperty() {
 
 function buyBuilding() {
 
-    if(!gameFunctions.moneyCheckH(crntPlayer.money, clickedProperty.buildingCost)) {return;}; // TODO: show 'not enough money message'
-    crntPlayer.money -= clickedProperty.buildingCost;
+    if(!gameFunctions.moneyCheckH(crntPlayer.value.money, clickedProperty.buildingCost)) {return;}; // TODO: show 'not enough money message'
+    crntPlayer.value.money -= clickedProperty.buildingCost;
     propertyFunctions.buyBuildingH(clickedProperty.id);
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
@@ -185,7 +189,7 @@ function buyBuilding() {
 function sellBuilding() {
 
     propertyFunctions.sellBuildingH(clickedProperty.id);
-    crntPlayer.money += clickedProperty.buildingCost / 2;
+    crntPlayer.value.money += clickedProperty.buildingCost / 2;
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
 };
@@ -206,7 +210,7 @@ function offerSpecialCard(event, specialCard) {
     
     clickedSpecialCard.value = specialCard;
 
-    if(!crntPlayer.inJail) {
+    if(!crntPlayer.value.inJail) {
         // TODO send message to dom ('can only use if in jail')
         return;
     }
@@ -218,13 +222,13 @@ function useSpecialCard() {
     clearOffer();
 
     // remove special card from players deck
-    let cardIndex = crntPlayer.specialCards.findIndex((card => card.title == clickedSpecialCard.value.title));
-    crntPlayer.specialCards.splice(cardIndex, 1);
+    let cardIndex = crntPlayer.value.specialCards.findIndex((card => card.title == clickedSpecialCard.value.title));
+    crntPlayer.value.specialCards.splice(cardIndex, 1);
 
     // remove from jail
-    crntPlayer.turnsInJail = 0;
-    crntPlayer.inJail = false;
-    crntPlayer.position = 11; // jail just visiting
+    crntPlayer.value.turnsInJail = 0;
+    crntPlayer.value.inJail = false;
+    crntPlayer.value.position = 11; // jail just visiting
 
     // TODO game logs ('out of jail!')
 
