@@ -1019,48 +1019,48 @@
       {"id": "boardwalk"}
     ],
     "chance": [
-      {
-        "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
-        "action": "jail",
-        "subaction": "goto"
-      },
-      {
-        "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
-        "action": "jail",
-        "subaction": "goto"
-      },
-      {
-        "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
-        "action": "jail",
-        "subaction": "goto"
-      },
-      {
-        "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
-        "action": "jail",
-        "subaction": "goto"
-      }
+        {
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
+        },
+        {
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
+        },
+        {
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
+        },
+        {
+            "title": "Get Out of Jail Free",
+            "action": "jail",
+            "subaction": "getout"
+        }
       
     ],
     "communitychest": [
         {
-            "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
+            "title": "Get Out of Jail Free",
             "action": "jail",
-            "subaction": "goto"
-          },
-          {
-            "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
+            "subaction": "getout"
+        },
+        {
+            "title": "Get Out of Jail Free",
             "action": "jail",
-            "subaction": "goto"
-          },
-          {
-            "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
+            "subaction": "getout"
+        },
+        {
+            "title": "Get Out of Jail Free",
             "action": "jail",
-            "subaction": "goto"
-          },
-          {
-            "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
+            "subaction": "getout"
+        },
+        {
+            "title": "Get Out of Jail Free",
             "action": "jail",
-            "subaction": "goto"
-          }
+            "subaction": "getout"
+        }
     ]
   }

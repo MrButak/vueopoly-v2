@@ -38,6 +38,9 @@ let removeFundsToPlayersH = (amountPerPlayer) => {
     };
 };
 
+let keepJailCardH = (type) => {
+    let crntPlayer = consts.crntPlayer();
+};
 // addFundsFromPlayersH
 
-export { drawSpecialCardH, streetRepairsCostH, removeFundsToPlayersH}
+export { drawSpecialCardH, streetRepairsCostH, removeFundsToPlayersH, keepJailCardH }

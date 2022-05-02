@@ -102,13 +102,12 @@ function dtrmPropAction() {
         case 'tax': payTax(); break;
         case 'freeparking': console.log('free parking, cant end turn?'); freeParking(); break;
         case 'gotojail': gotoJail(); break;
-        case 'injail': 
-            
-            break;
+        case 'injail': break;
         default:
             // landed on go, jail just visiting
             console.log('unhandled case in PlayDashboard.vue dtrmPropAction()')
             turnLogic.value.canEndTurn = true;
+            break;
     };
 };
 
@@ -138,12 +137,14 @@ function payRent() {
 };
 
 function payTax() {
+    // TODO handle different taxes income/luxuery
     // 10% or 200
     let taxAmount = gameFunctions.calculateTaxAmountH();
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};
     gameFunctions.payMoneyH('bank', turnLogic.value.crntPlayer, taxAmount, 'tax');
     turnLogic.value.canEndTurn = true;
+    return;
 };
 
 function freeParking() {
@@ -152,6 +153,7 @@ function freeParking() {
     turnLogic.value.crntPlayer.money += gameLogic.value.freeParking;
     gameLogic.value.freeParking = gameConstants.freeParkingMoney();
     turnLogic.value.canEndTurn = true;
+    return;
 };
 
 function gotoJail() {
@@ -195,9 +197,17 @@ function handleSpecialCard() {
         turnLogic.value.canEndTurn = true;
     };
 
+    let keepGetOutOfJailFreeCard = (drawnCard, typeOfCard) => { // getoutofjail  chance/community chest
+
+        specialCards.keepJailCardH(typeOfCard)
+        console.log(typeOfCard)
+    };
+
     let drawnCard = specialCards.drawSpecialCardH(turnLogic.value.propertyLandedOn.style); // chance or community chest
     console.log({drawnCard});
     // TODO: call a function to display a popup div to show special card
+    // TODO: remove card from deck, place in used card array
+    console.log(gameLogic.value)
     
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
@@ -236,7 +246,7 @@ function handleSpecialCard() {
             break;
 
         case 'jail':
-            if(drawnCard.subaction == 'getout') {break}; // handle keep 'get out of jail free' card
+            if(drawnCard.subaction == 'getout') {keepGetOutOfJailFreeCard(drawnCard, turnLogic.value.propertyLandedOn.style); break}; // handle keep 'get out of jail free' card
             gotoJail();
             break;
         default:
