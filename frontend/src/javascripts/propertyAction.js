@@ -31,6 +31,7 @@ let isPropOwnedH = (property) => {
     return property.ownedby == -1 ? false : true;
 };
 
+
 let purchasePropertyH = (player, property) => {
 
     // getting a direct reference to player using the above (player) argument
@@ -42,6 +43,7 @@ let purchasePropertyH = (player, property) => {
     playerToPurchase.properties.push(property);
     return;
 };
+
 
 let getTotalRentCostH = (property, diceRoll) => {
     

@@ -22,10 +22,19 @@ let payMoneyH = (recipient, payer, amount, type) => { // (type = 'rent', 'tax', 
     };  
 };
 
-let calculateTaxAmountH = () => {
+let calculateTaxAmountH = (propertyId) => {
+
     let crntPlayer = consts.crntPlayer();
-    let tenPercentOfMoney = crntPlayer.money * .10;
-    return tenPercentOfMoney < 200 ? tenPercentOfMoney : 200;
+
+    if(propertyId == 'incometax') {
+        let incomeTax = consts.luxuryTax();
+        let tenPercentOfMoney = crntPlayer.money * .10;
+        return tenPercentOfMoney < incomeTax ? tenPercentOfMoney : incomeTax;
+    };
+
+    return consts.luxuryTax();
+
+    
 };
 
 let nextPlayerTurn = () => {

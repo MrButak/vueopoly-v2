@@ -32,7 +32,7 @@
 <script setup>
 
 
-import { ref, computed, onMounted, reactive, defineExpose } from 'vue';
+import { ref, computed, onMounted, reactive } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';
 import * as propertyAction from '../../javascripts/propertyAction';
@@ -99,8 +99,8 @@ function dtrmPropAction() {
         case 'canbuy': turnLogic.value.buyAvailable = true; turnLogic.value.canEndTurn = true; break; // displays 'buy btn' and buy property message on dom
         case 'willpay': payRent(); break;
         case 'specialcard': handleSpecialCard(); break;
-        case 'tax': payTax(); break;
-        case 'freeparking': console.log('free parking, cant end turn?'); freeParking(); break;
+        case 'tax': payTax(turnLogic.value.propertyLandedOn.id); break;
+        case 'freeparking': freeParking(); break;
         case 'gotojail': gotoJail(); break;
         case 'injail': break;
         default:
@@ -136,12 +136,12 @@ function payRent() {
     turnLogic.value.canEndTurn = true;
 };
 
-function payTax() {
-    // TODO handle different taxes income/luxuery
-    // 10% or 200
-    let taxAmount = gameFunctions.calculateTaxAmountH();
+function payTax(propertyId) {
+
+    let taxAmount = gameFunctions.calculateTaxAmountH(propertyId);
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};
+    
     gameFunctions.payMoneyH('bank', turnLogic.value.crntPlayer, taxAmount, 'tax');
     turnLogic.value.canEndTurn = true;
     return;
