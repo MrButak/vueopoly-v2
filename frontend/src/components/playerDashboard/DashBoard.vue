@@ -5,9 +5,9 @@
             <div class="player-stats-top-wrapper">
                 <button v-if="dashboardView === 'play'" @click="dashboardView = 'manage'">Manage</button>
                 <button v-if="dashboardView === 'manage'" @click="dashboardView = 'play'">Game</button>
-                    <text>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].name }}</text>
-                    <text>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].alias }}</text>
-                    <text>${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</text>
+                    <text>{{ turnLogic.value.crntPlayer.name }}</text>
+                    <text>{{ turnLogic.value.crntPlayer.alias }}</text>
+                    <text>${{ turnLogic.value.crntPlayer.money }}</text>
                 <button>Trade</button>
             </div>
             
@@ -22,7 +22,7 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue';
-import { gameLogic } from '../../javascripts/stateStore';
+import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import PlayDashboard from './PlayDashboard.vue';
 import ManageDashboard from './ManageDashboard.vue';
 import JailDashboard from './JailDashboard.vue';
@@ -31,7 +31,7 @@ let dashboardView = ref('play');
 
 
 let isPlayerInJail = computed(() => {
-    return gameLogic.value.players[gameLogic.value.whosTurnIndex].inJail ? true : false;
+    return turnLogic.value.crntPlayer.inJail ? true : false;
 });
 
 
