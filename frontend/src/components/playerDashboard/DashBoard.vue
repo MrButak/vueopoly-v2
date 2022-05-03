@@ -4,38 +4,35 @@
         
             <div class="player-stats-top-wrapper">
                 <button v-if="dashboardView === 'play'" @click="dashboardView = 'manage'">Manage</button>
-                <button v-if="dashboardView === 'manage'" @click="dashboardView = 'play'">Game</button>
-                    <text>{{ turnLogic.value.crntPlayer.name }}</text>
-                    <text>{{ turnLogic.value.crntPlayer.alias }}</text>
+                <button v-if="dashboardView === 'manage' || dashboardView === 'trade'" @click="dashboardView = 'play'">Game</button>
+                    <text>{{ turnLogic.value.crntPlayer.name }}-{{ turnLogic.value.crntPlayer.alias }}</text>
                     <text>${{ turnLogic.value.crntPlayer.money }}</text>
-                <button>Trade</button>
+                <button v-if="dashboardView !== 'trade'" @click="dashboardView = 'trade'">Trade</button>
+                <button v-if="dashboardView === 'trade'">Trade</button>
             </div>
             
                 <span v-if="dashboardView === 'play' && !isPlayerInJail"><PlayDashboard /></span>
                 <span v-if="dashboardView === 'manage'"><ManageDashboard /></span>
                 <span v-if="dashboardView === 'play' && isPlayerInJail"><JailDashboard /></span>
+                <span v-if="dashboardView === 'trade'"><TradeDashboard /></span>
         </div>
-        
     </div>
-
 </template>
 
 <script setup>
+
 import { ref, computed, reactive } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import PlayDashboard from './PlayDashboard.vue';
 import ManageDashboard from './ManageDashboard.vue';
 import JailDashboard from './JailDashboard.vue';
+import TradeDashboard from './TradeDashboard.vue';
 
 let dashboardView = ref('play');
-
 
 let isPlayerInJail = computed(() => {
     return turnLogic.value.crntPlayer.inJail ? true : false;
 });
-
-
-
 
 </script>
 

@@ -247,15 +247,15 @@ function placePlayerPiece(playerId) {
 };
 
 function manualMove() {
-    turnLogic.value.crntPlayer.position++
+    gameLogic.value.players[gameLogic.value.whosTurnIndex].position++
 }
 
 // when current players poition changes
 watch(
-    () => turnLogic.value.crntPlayer.position,
+    () => gameLogic.value.players[gameLogic.value.whosTurnIndex].position,
     (count, prevCount) => {
         // placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
-        placePlayerPiece(turnLogic.value.crntPlayer.name);
+        placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name);
     }
 );
 
