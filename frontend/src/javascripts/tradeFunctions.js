@@ -15,7 +15,7 @@ let getEligiblePropertiesH = (playerId) => {
         if(filteredPropArry.length > 0) {
             filteredPropArry.forEach((prop) => {
                 allFilteredPropArry.push(prop);
-            })
+            });
         };
     });
 

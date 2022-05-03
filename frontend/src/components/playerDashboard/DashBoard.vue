@@ -22,7 +22,7 @@
 
 <script setup>
 
-import { ref, computed, reactive, watch, onMounted } from 'vue';
+import { computed } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import PlayDashboard from './PlayDashboard.vue';
 import ManageDashboard from './ManageDashboard.vue';

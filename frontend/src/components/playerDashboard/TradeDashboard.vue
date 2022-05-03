@@ -1,148 +1,125 @@
 <template>
 
-    <div class="overlay">
-        <div class="container">
+<div class="overlay">
+    <div class="container">
+
+        <div class="card">
 
 
+            <span class="close-btn-wrapper">
+                <button @click="closeTradeView" class="close-btn">X</button>
+            </span>
 
+            <div class="main-wrapper">
 
-            <div class="card">
+                <div class="main-row-wrapper">
 
+                    <div class="main-column-wrapper">
 
-                <span class="close-btn-wrapper">
-                    <button @click="closeTradeView" class="close-btn">X</button>
-                </span>
-
-                <div class="main-wrapper">
-
-        <div class="main-row-wrapper">
-            <div class="main-column-wrapper">
-                {{ turnLogic.value.crntPlayer.name }}
-                <span class="input-wrapper">
-                    <text>$</text>
-                    <input type="text" size="10">
-                </span>
-            </div>
-        </div>
-
-
-        <div class="main-row-wrapper">
-            <div class="main-column-wrapper">
-
-
-                <select @change="getTradeeEligibleProps" v-model="selectedTradee">
-                    <option v-for="player in tradeeArry">{{ player.name }}</option>
-                </select>
-
-                <span class="input-wrapper">
-                    <text>$</text>
-                    <input type="text" size="10">
-                </span>
-
-
-                <span v-if="tradeeProperties.length > 0">
-                    <span class="property-wrapper" v-for="prop in tradeeProperties[0]">
-                        <span class="property-wrapper">
-
-                            <!-- determine if any houses are in the group -->
-                            <input @change="storeTradeeItems" type="checkbox" v-bind:value="prop.id"
-                                v-if="!propertyFunctions.isAnyBuildingsInGroupH(propertyFunctions.getPropGroupFromPropH(prop))">
-
-                            <span class="prop-color-box" v-bind:style="{ 'background-color': prop.color }"></span>
-                            {{ prop.name }}
+                        {{ turnLogic.value.crntPlayer.name }}
+                        <span class="input-wrapper">
+                            <text>$</text>
+                            <input type="text" size="10" v-model="traderMoneyOffer">
                         </span>
-                    </span>
-                </span>
-            </div>
-        </div>
+                        <p>${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</p>
+                        <span v-if="traderProperties.length > 0">
+                            <span class="property-wrapper" v-for="prop in traderProperties[0]">
+                                <span class="property-wrapper">
+
+                                    <!-- determine if any houses are in the group or property mortgaged -->
+                                    <input @change="storeTraderItems" type="checkbox" v-bind:value="prop.id"
+                                    v-if="!propertyFunctions.isAnyBuildingsInGroupH(propertyFunctions.getPropGroupFromPropH(prop)) || prop.mortgaged">
+
+                                    <span class="prop-color-box" v-bind:style="{ 'background-color': prop.color }"></span>
+                                    {{ prop.name }}
+                                </span>
+                            </span>
+                        </span>
+
+                    </div>
+
+                </div>
 
 
+                <div class="main-row-wrapper">
 
-    </div>
-                
-            </div>
-        </div>
-    </div>
+                    <div class="main-column-wrapper">
+                        <select @change="getTradeeEligibleProps" v-model="selectedTradee">
+                            <option v-for="player in tradeeArry">{{ player.name }}</option>
+                        </select>
 
+                        <span class="input-wrapper">
+                            <text>$</text>
+                            <input type="text" size="10" v-model="tradeeMoneyOffer">
+                        </span>
+                        <p v-if="selectedTradee">${{ gameLogic.value.players[gameLogic.value.players.findIndex((player => player.name == selectedTradee))].money }}</p>
 
-    <!-- <div class="player-dashboard-wrapper-main">
-        <div class="player-dashboard-wrapper">
-        
-            <div class="player-stats-top-wrapper">
-                
-                
-                    <text>{{ turnLogic.value.crntPlayer.name }}-{{ turnLogic.value.crntPlayer.alias }}</text>
-                    <text>${{ turnLogic.value.crntPlayer.money }}</text>
-            </div>
-            
-             
-        </div>
-    </div> -->
-
-
-
-
-    <!-- <div class="main-wrapper">
-
-        <div class="main-row-wrapper">
-            <div class="main-column-wrapper">
-                {{ turnLogic.value.crntPlayer.name }}
-                <span class="input-wrapper">
-                    <text>$</text>
-                    <input type="text" size="10">
-                </span>
-            </div>
-        </div>
-
-
-        <div class="main-row-wrapper">
-            <div class="main-column-wrapper">
-
-
-                <select @change="getTradeeEligibleProps" v-model="selectedTradee">
-                    <option v-for="player in tradeeArry">{{ player.name }}</option>
-                </select>
-
-                <span class="input-wrapper">
-                    <text>$</text>
-                    <input type="text" size="10">
-                </span>
-
-
-                <span v-if="tradeeProperties.length > 0">
-                    <span class="property-wrapper" v-for="prop in tradeeProperties[0]">
-                        <span class="property-wrapper">
-
+                        <span v-if="tradeeProperties.length > 0">
                             
-                            <input @change="storeTradeeItems" type="checkbox" v-bind:value="prop.id"
-                                v-if="!propertyFunctions.isAnyBuildingsInGroupH(propertyFunctions.getPropGroupFromPropH(prop))">
+                            <span class="property-wrapper" v-for="prop in tradeeProperties[0]">
+                                <span class="property-wrapper">
 
-                            <span class="prop-color-box" v-bind:style="{ 'background-color': prop.color }"></span>
-                            {{ prop.name }}
+                                    <!-- determine if any houses are in the group or property mortgaged -->
+                                    <input @change="storeTradeeItems" type="checkbox" v-bind:value="prop.id"
+                                    v-if="!propertyFunctions.isAnyBuildingsInGroupH(propertyFunctions.getPropGroupFromPropH(prop)) || prop.mortgaged">
+
+                                    <span class="prop-color-box" v-bind:style="{ 'background-color': prop.color }"></span>
+                                    {{ prop.name }}
+                                </span>
+                            </span>
                         </span>
-                    </span>
-                </span>
+                    </div>
 
-
-
+                </div>
+                
             </div>
-        </div>
 
-    </div> -->
+            <div class="offer-btn-wrapper">
+                <button @click="makeOffer">Offer</button>
+                <button @click="closeTradeView">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div v-if="offerTradeView" class="offer-trade-overlay">
+    <div class="container">
+        <div class="card">
+
+            <p>player {{  }}, player {{  }} has made you a trade offer</p>
+
+            <span class="close-btn-wrapper">
+                <button @click="offerTradeView = false" class="close-btn">X</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+
 </template>
 
 <script setup>
 
-import { ref, computed, reactive, watch } from 'vue';
+import { ref, computed, reactive, watch, onMounted } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as tradeFunctions from '../../javascripts/tradeFunctions';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
 
 
-let selectedTradee = ref(' ');
+let selectedTradee = ref();
+let traderMoneyOffer = ref();
+let tradeeMoneyOffer = ref();
 let tradeeProperties = reactive([]);
 let tradeeItems = reactive([]);
+let traderProperties = reactive([]);
+let traderItems = reactive([]);
 
+let offerTradeView = ref(false);
+
+// get current player's properties
+onMounted(() => {getTraderProperties(turnLogic.value.crntPlayer.name)});
 
 // get an array of all players, except for the current player
 let tradeeArry = computed(() => {
@@ -155,6 +132,16 @@ watch(
     () => { getTradeeProperties(selectedTradee.value); }
 );
 
+
+
+function getTraderProperties(playerId) {
+
+    // remove all items from array
+    traderProperties.splice(0, traderProperties.length);
+    // add all available properties to array
+    traderProperties.push(tradeFunctions.getEligiblePropertiesH(playerId));
+};
+
 function getTradeeProperties(playerId) {
 
     // remove all items from array
@@ -163,11 +150,26 @@ function getTradeeProperties(playerId) {
     tradeeProperties.push(tradeFunctions.getEligiblePropertiesH(playerId));
 };
 
+function storeTraderItems(event) {
+
+    if (event.target.checked) { traderItems.push(event.target.value); }
+    else { traderItems.splice(event.target.value, 1); };
+};
+
 function storeTradeeItems(event) {
 
-    if (event.target.checked) { tradeeArry.push(event.target.value); }
-    else { tradeeArry.splice(event.targe.value, 1); };
+    if (event.target.checked) { tradeeItems.push(event.target.value); }
+    else { tradeeItems.splice(event.target.value, 1); };
 };
+
+function makeOffer() {
+    if(!selectedTradee.value) {return;};
+    if(!tradeeMoneyOffer.value && tradeeItems.length < 1 || tradeeMoneyOffer.value < 1 && tradeeItems.length < 1) {return;}; // no empty trades
+    if(!traderMoneyOffer.value && traderItems.length < 1 || traderMoneyOffer.value < 1 && traderItems.length < 1) {return;}; // no empty trades
+    offerTradeView.value = true;
+};
+
+
 
 function closeTradeView() {
 
@@ -183,6 +185,16 @@ function closeTradeView() {
 .overlay {
     
     background-color: #80808066;
+    position: fixed;
+    width: 100vw;
+    height: 100vw;
+    z-index: 5;
+    top: 0vh;
+    left: 0vw
+}
+.offer-trade-overlay {
+    
+    
     position: fixed;
     width: 100vw;
     height: 100vw;
@@ -247,5 +259,10 @@ function closeTradeView() {
     width: 10px;
     height: 10px;
 
+}
+.offer-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
 }
 </style>
