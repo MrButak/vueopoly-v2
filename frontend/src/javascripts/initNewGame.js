@@ -441,7 +441,8 @@ function initNewGame(newPlayers) {
         freeParking: gameConstants.freeParkingMoney(),
         playerPiecePos: playerPositionObj,
         players: playersArr,
-        vueopoly: gameJson
+        vueopoly: gameJson,
+        view: 'play'
     };
 
     let turnLogicObj = reactive({

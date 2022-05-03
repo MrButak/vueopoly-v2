@@ -1,7 +1,6 @@
 <template>
 
 <div v-if="showSpecialCard" class="overlay">
-
     <div class="container">
         <div class="card">
             <span class="close-btn-wrapper">
@@ -10,12 +9,11 @@
             <h1 class="card-type">{{ specialCard.type }}</h1>
             <h2 class="card-desc">{{ specialCard.desc }}</h2>
             <!-- <p class="card-sub">this card may be kept until needed, or sold</p> -->
-        <div class="card-image">
-            <!-- <svg> use for get out of jail free -->
+            <div class="card-image">
+                <!-- <svg> use for get out of jail free -->
+            </div>
         </div>
     </div>
-</div>
-
 </div>
 
 </template>
@@ -64,6 +62,7 @@ defineExpose({showPopup});
     justify-content: center;
     align-items: center;
     margin-top: 20vh;
+    
 }
 
 .card {
