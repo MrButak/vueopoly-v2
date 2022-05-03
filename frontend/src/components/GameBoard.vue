@@ -1,5 +1,6 @@
 <template>
-<body>
+
+
 
 	<div class="responsive">
 
@@ -201,14 +202,12 @@
 
 	</div>
     <button @click="manualMove">move player forward</button>
-</body>
-
+    
 </template>
 
-
 <script setup>
-import { onMounted, watch, computed } from 'vue';
-import { lsInUse, gameLogic } from '../javascripts/stateStore';
+import { onMounted, watch, computed, ref } from 'vue';
+import { lsInUse, gameLogic, turnLogic } from '../javascripts/stateStore';
 
 // place all player pieces
 onMounted(() => {
@@ -217,12 +216,9 @@ onMounted(() => {
     })
 });
 
-let crntPlayer = computed(() => {
-    return gameLogic.value.players[gameLogic.value.whosTurnIndex];
-});
 
 function placePlayerPiece(playerId) {
-    console.log(playerId)
+    
     // if element already on the dom, remove it
     if(document.getElementById(playerId)) {document.getElementById(playerId).remove()};
     
@@ -251,15 +247,15 @@ function placePlayerPiece(playerId) {
 };
 
 function manualMove() {
-    gameLogic.value.players[gameLogic.value.whosTurnIndex].position++
+    turnLogic.value.crntPlayer.position++
 }
 
 // when current players poition changes
 watch(
-    () => gameLogic.value.players[gameLogic.value.whosTurnIndex].position,
+    () => turnLogic.value.crntPlayer.position,
     (count, prevCount) => {
         // placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
-        placePlayerPiece(crntPlayer.value.name);
+        placePlayerPiece(turnLogic.value.crntPlayer.name);
     }
 );
 
@@ -268,11 +264,7 @@ defineExpose({placePlayerPiece});
 
 
 <style lang="scss" scoped>
-
-// @media (min-width: 480px) {
-
-
-// }    
+ 
 
 div {
 	box-sizing: border-box;

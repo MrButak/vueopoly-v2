@@ -7,4 +7,4 @@ const logColor = () => {return 'red'}; // for when I make a log function
 let freeParkingMoney = () => {return 100}
 let incomeTax = () => {return 200};
 let luxuryTax = () => {return 100}
-export { crntPlayer, gameLogs, logColor, logSpecialCardColor, freeParkingMoney }
+export { crntPlayer, gameLogs, logColor, logSpecialCardColor, freeParkingMoney, incomeTax, luxuryTax }

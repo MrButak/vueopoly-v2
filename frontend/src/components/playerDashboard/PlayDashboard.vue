@@ -1,5 +1,10 @@
 <template>
-    <span v-show="showComponent"><GameBoard ref="gameBoard" /></span>
+    <PopupSpecialCard ref="popupSpecialCard" />
+    <!-- permanently display none (for funciton calls) -->
+    <span v-show="showComponent">
+        <GameBoard ref="gameBoard" />
+    </span>
+
     <div class="log-and-dice-wrapper">
         <div class="gamelog-wrapper-main">
             <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }" class="game-log-text">{{ log.log }}</p>
@@ -26,11 +31,9 @@
         </span>
     </div>
    
-
 </template>
 
 <script setup>
-
 
 import { ref, computed, onMounted, reactive } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
@@ -41,19 +44,24 @@ import * as specialCards from '../../javascripts/specialcards';
 import * as gameConstants from '../../javascripts/constants.js';
 
 import GameBoard from '../GameBoard.vue';
+import PopupSpecialCard from '../specialCards/PopupSpecialCard.vue';
 
-let showComponent = ref(false);
-
+let popupSpecialCard = ref(PopupSpecialCard);
 let gameBoard = ref(GameBoard);
+let showComponent = ref(false); // permanently false. used to call functions from other components
+
 onMounted(() => {
     startTurn();
 });
 
- 
+
 let gameLogs = computed(() => {
     return gameLogic.value.gameLogs
 });
 
+// TODO refactor code to use crntPlayer.value
+// component variable to access current player
+turnLogic.value.gameLogs
 
 function startTurn() {
 
@@ -85,7 +93,7 @@ function rollDice() {
     
     turnLogic.value.crntDiceRoll = moveFunction.rollDiceH();
     moveFunction.movePlayerH(turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1], turnLogic.value.crntPlayer.position);
-    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} rolled for ${turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1]}`, color: `${turnLogic.value.crntPlayer.color}`});
+    gameLogs.value.push({log: `${turnLogic.value.crntPlayer.name} rolled for ${turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1]}`, color: `${turnLogic.value.crntPlayer.color}`});
     turnLogic.value.diceRolled = true; // will remove the 'roll dice btn' from dom
 };
 
@@ -115,7 +123,9 @@ function dtrmPropAction() {
 
 function purchaseProperty() {
     // TODO also send a 'not enough money message to dom'
+
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, turnLogic.value.propertyLandedOn.price)) {return};
+    console.log('purchaseProperty(), debuggins')
     propertyAction.purchasePropertyH(turnLogic.value.crntPlayer, turnLogic.value.propertyLandedOn);
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} purchased ${turnLogic.value.propertyLandedOn.name} for $${turnLogic.value.propertyLandedOn.price}`, color: `${turnLogic.value.crntPlayer.color}`});
     turnLogic.value.buyAvailable = false;
@@ -158,11 +168,11 @@ function freeParking() {
 
 function gotoJail() {
     
-    gameLogic.value.players[gameLogic.value.whosTurnIndex].position = 11.5;
+    turnLogic.value.crntPlayer.position = 11.5;
     // manually call function to move player. watcher() is set but not firing
-    gameBoard.value.placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
+    gameBoard.value.placePlayerPiece(turnLogic.value.crntPlayer.name)
     dtrmPropAction();
-    gameLogic.value.players[gameLogic.value.whosTurnIndex].inJail = true;
+    turnLogic.value.crntPlayer.inJail = true;
     endTurn();
 };
 
@@ -205,11 +215,12 @@ function handleSpecialCard() {
     };
 
     let drawnCard = specialCards.drawSpecialCardH(turnLogic.value.propertyLandedOn.style); // chance or community chest
-    console.log({drawnCard});
     
-    // TODO: call a function to display a popup div to show special card
+    // function call from PopupSpecialCard.vue
+    popupSpecialCard.value.showPopup(turnLogic.value.propertyLandedOn.style, drawnCard);
     
-    
+    console.log(drawnCard)
+
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
     switch(drawnCard.action) {
@@ -221,8 +232,6 @@ function handleSpecialCard() {
                 turnLogic.value.canEndTurn = true;
                 break;
             };
-            // bug here
-            
             moveFunction.moveToPropertyH(drawnCard.tileid);
             dtrmPropAction();
             turnLogic.value.canEndTurn = true;
@@ -253,6 +262,7 @@ function handleSpecialCard() {
             gotoJail();
             break;
         default:
+            // TODO: advance to nearest utility
             console.log('unhandled case in PlayDashboard.vue handleSpecialCard()')
     };
 
