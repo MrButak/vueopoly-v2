@@ -16,11 +16,6 @@ import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import PlayDashboard from '../playerDashboard/PlayDashboard.vue';
 import GameBoard from '../GameBoard.vue';
 
-let playerReference = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
-let crntPlayer = computed(() => {
-    return playerReference;
-});
-
 let diceRoll = reactive([]);
 let diceRolled = ref(false);
 let showComponent = ref(false); // to call function from PlayDashboard.vue
@@ -31,9 +26,9 @@ let gameBoard = ref(GameBoard);
 
 
 onMounted(() => {
-    if(crntPlayer.value.turnsInJail == 4) {
+    if(turnLogic.value.crntPlayer.turnsInJail == 4) {
         getOutOfJail();
-    }
+    };
 });
 
 function roll() {
@@ -47,7 +42,7 @@ function roll() {
 function endTurn() {
 
     diceRolled.value = false;
-    crntPlayer.turnsInJail++;
+    turnLogic.value.crntPlayer.turnsInJail++;
     playDashboard.value.endTurn();
 };
 
@@ -55,9 +50,9 @@ function rolledDoubles() {
     
     let moveAmount = diceRoll.value[0] + diceRoll.value[1];
 
-    crntPlayer.value.position += (moveAmount - .5); // injail position is 11.5
-    crntPlayer.value.turnsInJail = 0;
-    crntPlayer.value.inJail = false;
+    turnLogic.value.crntPlayer.position += (moveAmount - .5); // injail position is 11.5
+    turnLogic.value.crntPlayer.turnsInJail = 0;
+    turnLogic.value.crntPlayer.inJail = false;
     playDashboard.value.dtrmPropAction();
 
     turnLogic.value.crntDiceRoll[0] = diceRoll.value[0];
@@ -68,9 +63,9 @@ function rolledDoubles() {
 
 // using a 'get out of jail free card, being in there 3 turns, or paying'
 function getOutOfJail() {
-    crntPlayer.value.position -= .5; // move to jail/just visiting
-    crntPlayer.value.turnsInJail = 0;
-    crntPlayer.value.inJail = false;
+    turnLogic.value.crntPlayer.position -= .5; // move to jail/just visiting
+    turnLogic.value.crntPlayer.turnsInJail = 0;
+    turnLogic.value.crntPlayer.inJail = false;
 };
 
 </script>
