@@ -34,7 +34,11 @@ let transferPropsTraderToTradeeH = (traderIndex, tradeeIndex, traderItems) => {
 }
 
 let transferPropsTradeeToTraderH = (traderIndex, tradeeIndex, tradeeItems) => {
+    tradeeItems.forEach((item) => {
 
+        gameLogic.value.players[traderIndex].properties.push(item);
+        gameLogic.value.players[tradeeIndex].properties.splice(item, 1);
+    });
 };
 
 export { getEligiblePropertiesH, transferPropsTraderToTradeeH, transferPropsTradeeToTraderH }
