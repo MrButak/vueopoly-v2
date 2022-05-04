@@ -22,7 +22,9 @@ let dtrmPropActionH = (property) => {
                 case 'gotojail': {
                     return 'gotojail' //property.style;
                 }
-            }
+            };
+        default:
+            console.log('unhandled case in propertyAction.js', property.group);
           //  (go already handled, jailjustvisiting no need to handle)
     };
 };
@@ -50,6 +52,7 @@ let getTotalRentCostH = (property, diceRoll) => {
     switch(property.group) {
 
         case 'railroad':
+        
             let rrOwned = 1;
             // check how many RRs are owned by same person
             let railroads = gameLogic.value.vueopoly.properties.filter((prop => prop.group == 'railroad'));
@@ -83,7 +86,7 @@ let getTotalRentCostH = (property, diceRoll) => {
             };
             return ((diceRoll[0] + diceRoll[1]) * 10);
         default:
-            console.log('unhandled case in propertyAction.js dtrmPropActionH()')
+            console.log('unhandled case in propertyAction.js getTotalRentCostH()')
     }
 };
 

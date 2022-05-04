@@ -7,7 +7,7 @@
                 <button v-if="gameLogic.value.view === 'play'" @click="gameLogic.value.view = 'manage'">Manage</button>
                 <button v-if="gameLogic.value.view === 'manage' || gameLogic.value.view === 'trade'" @click="gameLogic.value.view = 'play'">Game</button>
                     <text>{{ turnLogic.value.crntPlayer.name }}-{{ turnLogic.value.crntPlayer.alias }}</text>
-                    <text id="player-money">${{ turnLogic.value.crntPlayer.money }}</text>
+                    <text id="player-money">${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</text>
                 <button @click="gameLogic.value.view = 'trade'">Trade</button>
             </div>
             
@@ -34,10 +34,10 @@ let isPlayerInJail = computed(() => {
     return turnLogic.value.crntPlayer.inJail ? true : false;
 });
 
-watch(
-    () => gameLogic.value.players[gameLogic.value.whosTurnIndex].money,
-    () => {animateMoney();}
-);
+// watch(
+//     () => gameLogic.value.players[gameLogic.value.whosTurnIndex].money,
+//     () => {animateMoney();}
+// );
 
 
 </script>

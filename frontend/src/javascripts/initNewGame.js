@@ -1,4 +1,4 @@
-import gameJson from '../../vueopoly.json';
+import gameJson from '../../debugVueopoly.json';
 import {lsInUse, gameLogic, turnLogic} from '../javascripts/stateStore';
 import * as gameConstants from './constants';
 import { ref, reactive } from 'vue';
