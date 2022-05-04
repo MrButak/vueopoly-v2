@@ -1,4 +1,4 @@
-import gameJson from '../../vueopoly.json';
+import gameJson from '../../debugVueopoly.json';
 import {lsInUse, gameLogic, turnLogic} from '../javascripts/stateStore';
 import * as gameConstants from './constants';
 import { ref, reactive } from 'vue';
@@ -425,7 +425,7 @@ function initNewGame(newPlayers) {
     let playerCnt = 0;
     Object.keys(newPlayers).forEach((player) => {
         playersArr[playerCnt] = player;
-        playersArr[playerCnt] = new Player('player' + player, newPlayers[player].alias, newPlayers[player].color, 1, [], 3500, false, false, [], 0, {houses: 0, hotels: 0});
+        playersArr[playerCnt] = new Player('player' + player, newPlayers[player].alias, newPlayers[player].color, 1, [], 1500, false, false, [], 0, {houses: 0, hotels: 0});
         playerCnt++;
     });
 
@@ -441,7 +441,8 @@ function initNewGame(newPlayers) {
         freeParking: gameConstants.freeParkingMoney(),
         playerPiecePos: playerPositionObj,
         players: playersArr,
-        vueopoly: gameJson
+        vueopoly: gameJson,
+        view: 'play'
     };
 
     let turnLogicObj = reactive({

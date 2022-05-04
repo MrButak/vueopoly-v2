@@ -1,6 +1,6 @@
 <template>
     <PopupSpecialCard ref="popupSpecialCard" />
-    <!-- permanently display none (for funciton calls) -->
+    <!-- permanently display: none (for funciton calls) -->
     <span v-show="showComponent">
         <GameBoard ref="gameBoard" />
     </span>
@@ -219,10 +219,11 @@ function handleSpecialCard() {
     // function call from PopupSpecialCard.vue
     popupSpecialCard.value.showPopup(turnLogic.value.propertyLandedOn.style, drawnCard);
     
-    console.log(drawnCard)
+    console.log(drawnCard.groupid)
 
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
+
     switch(drawnCard.action) {
 
         case 'move':
@@ -257,12 +258,16 @@ function handleSpecialCard() {
             removefundsSpecial(propertyCharges);
             break;
 
+        case 'movenearest':
+            removefundsSpecial(specialCards.moveNearestSpecialH(drawnCard.groupid));
+            break;
+
         case 'jail':
             if(drawnCard.subaction == 'getout') {keepGetOutOfJailFreeCard(drawnCard, turnLogic.value.propertyLandedOn.style); break}; // handle keep 'get out of jail free' card
             gotoJail();
             break;
         default:
-            // TODO: advance to nearest utility
+            
             console.log('unhandled case in PlayDashboard.vue handleSpecialCard()')
     };
 

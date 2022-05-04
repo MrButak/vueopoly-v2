@@ -7,7 +7,7 @@ let getPropFromIdH = (propertyId) => {
     return gameLogic.value.vueopoly.properties[propertyIndex];
 };
 
-let getPropGroupFromProp = (property) => {
+let getPropGroupFromPropH = (property) => {
 
     let group = gameLogic.value.vueopoly.properties.filter((prop) => prop.style == property.style);
     return group;
@@ -29,7 +29,7 @@ let isAnyMortgagedInGroup = (group) => {
     return false;
 };
 
-let isAnyBuildingsInGroup = (group) => {
+let isAnyBuildingsInGroupH = (group) => {
 
     for(let i = 0; i < group.length; i++) {
         if(group[i].buildings > 0) {return true;};
@@ -71,7 +71,7 @@ let checkedPropObjH = (propertyId) => {
 
     let property = getPropFromIdH(propertyId);
     let owner = property.ownedby;
-    let group = getPropGroupFromProp(property);
+    let group = getPropGroupFromPropH(property);
 
     let propObj = {
         name: property.name,
@@ -103,7 +103,7 @@ let checkedPropObjH = (propertyId) => {
     if(property.mortgaged) {
         propObj.canUnmortgage = true;
     };
-    if(!isAnyBuildingsInGroup(group) && !property.mortgaged) {
+    if(!isAnyBuildingsInGroupH(group) && !property.mortgaged) {
         propObj.canMortgage = true;
     };
 
@@ -131,4 +131,4 @@ let sellBuildingH = (propertyId) => {
     property.buildings--;
 
 }
-export { checkedPropObjH, mortgagePropertyH, unMortgagePropertyH, buyBuildingH, sellBuildingH }
+export { checkedPropObjH, mortgagePropertyH, unMortgagePropertyH, buyBuildingH, sellBuildingH, getPropGroupFromPropH, isAnyBuildingsInGroupH, getPropFromIdH }

@@ -1,40 +1,43 @@
 <template>
+    
     <div class="player-dashboard-wrapper-main">
         <div class="player-dashboard-wrapper">
         
             <div class="player-stats-top-wrapper">
-                <button v-if="dashboardView === 'play'" @click="dashboardView = 'manage'">Manage</button>
-                <button v-if="dashboardView === 'manage'" @click="dashboardView = 'play'">Game</button>
-                    <text>{{ turnLogic.value.crntPlayer.name }}</text>
-                    <text>{{ turnLogic.value.crntPlayer.alias }}</text>
-                    <text>${{ turnLogic.value.crntPlayer.money }}</text>
-                <button>Trade</button>
+                <button v-if="gameLogic.value.view === 'play'" @click="gameLogic.value.view = 'manage'">Manage</button>
+                <button v-if="gameLogic.value.view === 'manage' || gameLogic.value.view === 'trade'" @click="gameLogic.value.view = 'play'">Game</button>
+                    <text>{{ turnLogic.value.crntPlayer.name }}-{{ turnLogic.value.crntPlayer.alias }}</text>
+                    <text id="player-money">${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</text>
+                <button @click="gameLogic.value.view = 'trade'">Trade</button>
             </div>
             
-                <span v-if="dashboardView === 'play' && !isPlayerInJail"><PlayDashboard /></span>
-                <span v-if="dashboardView === 'manage'"><ManageDashboard /></span>
-                <span v-if="dashboardView === 'play' && isPlayerInJail"><JailDashboard /></span>
+            <span v-if="gameLogic.value.view === 'play' && !isPlayerInJail"><PlayDashboard /></span>
+            <span v-if="gameLogic.value.view === 'manage'"><ManageDashboard /></span>
+            <span v-if="gameLogic.value.view === 'play' && isPlayerInJail"><JailDashboard /></span>
+            <span v-if="gameLogic.value.view === 'trade'"><TradeDashboard /></span>
+            
         </div>
-        
     </div>
-
 </template>
 
 <script setup>
-import { ref, computed, reactive } from 'vue';
+
+import { computed, watch } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import PlayDashboard from './PlayDashboard.vue';
 import ManageDashboard from './ManageDashboard.vue';
 import JailDashboard from './JailDashboard.vue';
-
-let dashboardView = ref('play');
+import TradeDashboard from './TradeDashboard.vue';
 
 
 let isPlayerInJail = computed(() => {
     return turnLogic.value.crntPlayer.inJail ? true : false;
 });
 
-
+// watch(
+//     () => gameLogic.value.players[gameLogic.value.whosTurnIndex].money,
+//     () => {animateMoney();}
+// );
 
 
 </script>

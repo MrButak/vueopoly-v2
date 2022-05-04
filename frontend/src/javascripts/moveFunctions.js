@@ -31,7 +31,7 @@ let passGoH = () => {
     gameLogs.push(gameLog);
 };
 
-let getCrntPropH = () => {
+let getCrntPropH = () => { // gets the property the current player is on
 
     let crntPlayer = consts.crntPlayer();
     let crntPropIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == crntPlayer.position)

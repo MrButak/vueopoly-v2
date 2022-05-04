@@ -23,10 +23,8 @@ let showComponent = ref(false); // to call function from PlayDashboard.vue
 let playDashboard = ref(PlayDashboard);
 let gameBoard = ref(GameBoard);
 
-
-
 onMounted(() => {
-    if(turnLogic.value.crntPlayer.turnsInJail == 4) {
+    if(turnLogic.value.crntPlayer.turnsInJail > 3) {
         getOutOfJail();
     };
 });
@@ -35,7 +33,7 @@ function roll() {
     let dRoll = moveFunctions.rollDiceH()
     diceRoll.value = dRoll;
     diceRolled.value = true;
-
+    turnLogic.value.crntPlayer.turnsInJail++;
     if(dRoll[0] === dRoll[1]) {rolledDoubles();};
 };
 
