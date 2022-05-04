@@ -76,7 +76,6 @@
 
                 </div>
                 
-                
             </div>
 
             <div v-if="!offerTradeView" class="offer-btn-wrapper">
@@ -93,9 +92,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 </template>
 
@@ -131,8 +127,6 @@ watch(
     () => selectedTradee.value,
     () => { getTradeeProperties(selectedTradee.value);}
 );
-
-
 
 function getTraderProperties(playerId) {
 
@@ -178,33 +172,25 @@ function acceptOffer() {
     let traderIndex = gameLogic.value.whosTurnIndex;
     let tradeeIndex = gameLogic.value.players.findIndex((player => player.name == selectedTradee.value));
 
-    // properties
     if(traderItems.length > 0) {
         // trader => tradee
-        traderItems.forEach((item) => {
-
-            gameLogic.value.players[tradeeIndex].properties.push(item);
-            gameLogic.value.players[traderIndex].properties.splice(item, 1);
-        });
+        tradeFunctions.transferPropsTraderToTradeeH(traderIndex, tradeeIndex, traderItems);
     };
+
     if(tradeeItems.length > 0) {
         // tradee => trader
-        tradeeItems.forEach((item) => {
-            
-            gameLogic.value.players[traderIndex].properties.push(item); // add properties
-            gameLogic.value.players[tradeeIndex].properties.splice(item, 1); // remove properties
-        });
+        tradeFunctions.transferPropsTradeeToTraderH(traderIndex, tradeeIndex, tradeeItems)
     };
     
     // money
     if(!tradeeMoneyOffer.value) {tradeeMoneyOffer.value = 0};
     if(!traderMoneyOffer.value) {traderMoneyOffer.value = 0};
 
-    gameLogic.value.players[traderIndex].money += tradeeMoneyOffer.value;
-    gameLogic.value.players[tradeeIndex].money += traderMoneyOffer.value;
+    gameLogic.value.players[traderIndex].money += parseInt(tradeeMoneyOffer.value);
+    gameLogic.value.players[tradeeIndex].money += parseInt(traderMoneyOffer.value);
 
-    gameLogic.value.players[traderIndex].money -= traderMoneyOffer.value;
-    gameLogic.value.players[tradeeIndex].money -= tradeeMoneyOffer.value;
+    gameLogic.value.players[traderIndex].money -= parseInt(traderMoneyOffer.value);
+    gameLogic.value.players[tradeeIndex].money -= parseInt(tradeeMoneyOffer.value);
 
     closeTradeView();
     // TODO: handle special cards
@@ -233,16 +219,7 @@ function closeTradeView() {
     top: 0vh;
     left: 0vw
 }
-.offer-trade-overlay {
-    
-    
-    position: fixed;
-    width: 100vw;
-    height: 100vw;
-    z-index: 5;
-    top: 0vh;
-    left: 0vw
-}
+
 
 .container {
   
@@ -267,7 +244,10 @@ function closeTradeView() {
 }
 
 .offer-text-wrapper {
+    display: flex;
+    justify-content: center;
     position: absolute;
+    width: 100%;
     top: 1vw;
 }
 
@@ -301,8 +281,8 @@ function closeTradeView() {
 }
 
 .prop-color-box {
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
 
 }
 .offer-btn-wrapper {

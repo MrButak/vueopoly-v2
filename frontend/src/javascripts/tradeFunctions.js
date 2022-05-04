@@ -21,9 +21,20 @@ let getEligiblePropertiesH = (playerId) => {
 
     player.specialCards.forEach((card) => {allFilteredPropArry.push(card)});
 
-    
-    
     return allFilteredPropArry;
 };
 
-export { getEligiblePropertiesH }
+let transferPropsTraderToTradeeH = (traderIndex, tradeeIndex, traderItems) => {
+
+    traderItems.forEach((item) => {
+
+        gameLogic.value.players[tradeeIndex].properties.push(item);
+        gameLogic.value.players[traderIndex].properties.splice(item, 1);
+    });
+}
+
+let transferPropsTradeeToTraderH = (traderIndex, tradeeIndex, tradeeItems) => {
+
+};
+
+export { getEligiblePropertiesH, transferPropsTraderToTradeeH, transferPropsTradeeToTraderH }
