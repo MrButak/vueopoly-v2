@@ -131,4 +131,4 @@ let sellBuildingH = (propertyId) => {
     property.buildings--;
 
 }
-export { checkedPropObjH, mortgagePropertyH, unMortgagePropertyH, buyBuildingH, sellBuildingH, getPropGroupFromPropH, isAnyBuildingsInGroupH }
+export { checkedPropObjH, mortgagePropertyH, unMortgagePropertyH, buyBuildingH, sellBuildingH, getPropGroupFromPropH, isAnyBuildingsInGroupH, getPropFromIdH }

@@ -4,7 +4,11 @@
     <div class="container">
 
         <div class="card">
-
+            
+            <!-- once trade if offered -->
+            <div v-if="offerTradeView" class="offer-text-wrapper">
+                <text>{{ gameLogic.value.players[gameLogic.value.players.findIndex((player => player.name == selectedTradee))].name }}, {{ gameLogic.value.players[gameLogic.value.whosTurnIndex].name }} has made you a trade offer. Accept or Reject.</text>
+            </div>
 
             <span class="close-btn-wrapper">
                 <button @click="closeTradeView" class="close-btn">X</button>
@@ -72,30 +76,25 @@
 
                 </div>
                 
+                
             </div>
 
-            <div class="offer-btn-wrapper">
+            <div v-if="!offerTradeView" class="offer-btn-wrapper">
                 <button @click="makeOffer">Offer</button>
                 <button @click="closeTradeView">Cancel</button>
             </div>
 
+            <!-- once trade is offered -->
+            <div v-if="offerTradeView" class="offer-btn-wrapper">
+                <button @click="acceptOffer">Accept Offer</button>
+                <button @click="closeTradeView">Decline Offer</button>
+            </div>
+
         </div>
     </div>
 </div>
 
 
-<div v-if="offerTradeView" class="offer-trade-overlay">
-    <div class="container">
-        <div class="card">
-
-            <p>player {{  }}, player {{  }} has made you a trade offer</p>
-
-            <span class="close-btn-wrapper">
-                <button @click="offerTradeView = false" class="close-btn">X</button>
-            </span>
-        </div>
-    </div>
-</div>
 
 
 </template>
@@ -106,6 +105,7 @@ import { ref, computed, reactive, watch, onMounted } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as tradeFunctions from '../../javascripts/tradeFunctions';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
+
 
 
 let selectedTradee = ref();
@@ -129,7 +129,7 @@ let tradeeArry = computed(() => {
 // when selected player changes
 watch(
     () => selectedTradee.value,
-    () => { getTradeeProperties(selectedTradee.value); }
+    () => { getTradeeProperties(selectedTradee.value);}
 );
 
 
@@ -151,25 +151,66 @@ function getTradeeProperties(playerId) {
 };
 
 function storeTraderItems(event) {
+    // store/remove property id's in an array
+    if (event.target.checked) { traderItems.push(propertyFunctions.getPropFromIdH(event.target.value)); }
+    else { traderItems.splice(propertyFunctions.getPropFromIdH(event.target.value), 1); };
 
-    if (event.target.checked) { traderItems.push(event.target.value); }
-    else { traderItems.splice(event.target.value, 1); };
+    console.log(traderItems)
 };
 
 function storeTradeeItems(event) {
-
-    if (event.target.checked) { tradeeItems.push(event.target.value); }
-    else { tradeeItems.splice(event.target.value, 1); };
+    // store/remove property id's in an array
+    if (event.target.checked) { tradeeItems.push(propertyFunctions.getPropFromIdH(event.target.value)); }
+    else { tradeeItems.splice(propertyFunctions.getPropFromIdH(event.target.value), 1); };
 };
 
 function makeOffer() {
     if(!selectedTradee.value) {return;};
     if(!tradeeMoneyOffer.value && tradeeItems.length < 1 || tradeeMoneyOffer.value < 1 && tradeeItems.length < 1) {return;}; // no empty trades
     if(!traderMoneyOffer.value && traderItems.length < 1 || traderMoneyOffer.value < 1 && traderItems.length < 1) {return;}; // no empty trades
+
+    // TODO: money check
     offerTradeView.value = true;
 };
 
+function acceptOffer() {
 
+    let traderIndex = gameLogic.value.whosTurnIndex;
+    let tradeeIndex = gameLogic.value.players.findIndex((player => player.name == selectedTradee.value));
+
+    // properties
+    if(traderItems.length > 0) {
+        // trader => tradee
+        traderItems.forEach((item) => {
+
+            gameLogic.value.players[tradeeIndex].properties.push(item);
+            gameLogic.value.players[traderIndex].properties.splice(item, 1);
+        });
+    };
+    if(tradeeItems.length > 0) {
+        // tradee => trader
+        tradeeItems.forEach((item) => {
+            
+            gameLogic.value.players[traderIndex].properties.push(item); // add properties
+            gameLogic.value.players[tradeeIndex].properties.splice(item, 1); // remove properties
+        });
+    };
+    
+    // money
+    if(!tradeeMoneyOffer.value) {tradeeMoneyOffer.value = 0};
+    if(!traderMoneyOffer.value) {traderMoneyOffer.value = 0};
+
+    gameLogic.value.players[traderIndex].money += tradeeMoneyOffer.value;
+    gameLogic.value.players[tradeeIndex].money += traderMoneyOffer.value;
+
+    gameLogic.value.players[traderIndex].money -= traderMoneyOffer.value;
+    gameLogic.value.players[tradeeIndex].money -= tradeeMoneyOffer.value;
+
+    closeTradeView();
+    // TODO: handle special cards
+    // TODO: Game Logs
+
+};
 
 function closeTradeView() {
 
@@ -225,12 +266,16 @@ function closeTradeView() {
     padding: 5px;
 }
 
-
+.offer-text-wrapper {
+    position: absolute;
+    top: 1vw;
+}
 
 .main-wrapper {
     display: flex;
     width: 100%;
     height: 100%;
+    padding: 10px 0 0 0;
 }
 
 .main-row-wrapper {
