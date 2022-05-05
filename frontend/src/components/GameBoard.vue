@@ -14,6 +14,7 @@
 				<div id="kentuckyave" class="square1">
 					<div class="header header-top red"></div>
 					<div class="firstLine firstLine-top rotation2">kentucky <br /> avenue</div>
+                    <div class="ownedbytopbar" id="kentuckyaveownedbar"></div>
 				</div>
 
 				<div id="chancetwo" class="square1">		
@@ -219,7 +220,20 @@ onMounted(() => {
             placeBuildingPieces(prop);
         };
     });
+    placeOwnedBar()
+    // gameLogic.value.vueopoly.properties.forEach((prop) => {
+    //     if(prop.ownedby && prop.ownedby != -1) {
+    //         placeOwnedBar(prop);
+    //     };
+    // });
 });
+
+function placeOwnedBar(property) {
+    let id = 'kentuckyave'
+    let finishedId = id + 'ownedbar';
+    console.log(finishedId)
+    document.getElementById(finishedId).style.backgroundColor = ('green')
+};
 
 function placeBuildingPieces(property) {
 
@@ -297,11 +311,9 @@ function addBuildingPiece(propertyId) {
 
 function removeBuildingPiece(propertyId) {
 
-    
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
     let property = gameLogic.value.vueopoly.properties[propertyIndex];
     let buildingCount = property.buildings;
-
 
     if(buildingCount < 4) {
         if(buildingCount < 1) {
@@ -315,6 +327,7 @@ function removeBuildingPiece(propertyId) {
         parent.childNodes[parent.childNodes.length - 1].remove();
         return;
     };
+
     // if hotel is on property when building is sold
     let parent = document.getElementById(propertyId).childNodes[0];
     parent.childNodes[0].remove();
@@ -377,7 +390,13 @@ defineExpose({
 
 <style lang="scss" scoped>
  
-
+.ownedbytopbar {
+    width: 100%;
+    height: 1vw;
+    /*background-color: red;*/
+    position: absolute;
+    inset: -1.5vw 0 0 0;
+}
 div {
 	box-sizing: border-box;
 	text-transform: uppercase;
