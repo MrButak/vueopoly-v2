@@ -125,11 +125,12 @@ function purchaseProperty() {
     // TODO also send a 'not enough money message to dom'
 
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, turnLogic.value.propertyLandedOn.price)) {return};
-    console.log('purchaseProperty(), debuggins')
     propertyAction.purchasePropertyH(turnLogic.value.crntPlayer, turnLogic.value.propertyLandedOn);
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} purchased ${turnLogic.value.propertyLandedOn.name} for $${turnLogic.value.propertyLandedOn.price}`, color: `${turnLogic.value.crntPlayer.color}`});
     turnLogic.value.buyAvailable = false;
     turnLogic.value.canEndTurn = true;
+
+    gameBoard.value.placeOwnedBar()// place owned bar on dom
     
 };
 

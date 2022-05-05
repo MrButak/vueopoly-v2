@@ -27,7 +27,6 @@
     </span>
 
     <br />
-    <button @click="testCall">test call</button>
     <p>Special Cards</p>
     <span v-if="computedShowSpecialCards" v-for="card in computedSpecialCards">
         <input @click="offerSpecialCard($event, card)" type="radio" name="cards">
@@ -92,6 +91,7 @@ import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
 import * as gameFunctions from '../../javascripts/gameFunctions';
 import GameBoard from '../GameBoard.vue';
+import GameBoardVue from '../GameBoard.vue';
 
 let gameBoard = ref(GameBoard);
 let showComponent = ref(false); // always false. used to call function in GameBoard.vue
@@ -149,13 +149,6 @@ let computedShowSpecialCards = computed(() => {
     return crntPlayer.value.specialCards.length > 0 ? true : false;
 });
 
-
-function testCall() {
-    let parent = document.getElementById('mediterraneanave').childNodes[0];
-    while (parent.firstChild) {parent.removeChild(parent.firstChild)}
-    
-}
-
 function setClickedPropertyObj(propertyId) {
     
     clearOffer();
@@ -176,6 +169,9 @@ function mortgageProperty() {
     propertyFunctions.mortgagePropertyH(clickedProperty.id);
     crntPlayer.value.money += clickedProperty.mortgagePrice;
     clearOffer();
+
+    gameBoard.value.placeOwnedBar() // place owned bar on dom
+
     setClickedPropertyObj(clickedProperty.id);
 };
 
@@ -185,6 +181,8 @@ function unmortgageProperty() {
     if(!gameFunctions.moneyCheckH(crntPlayer.money, unMortgagePrice)) {return;}; // TODO: show 'not enough money message'
     crntPlayer.value.money -= unMortgagePrice;
     propertyFunctions.unMortgagePropertyH(clickedProperty.id);
+
+    gameBoard.value.placeOwnedBar() // place owned bar on dom
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
 };

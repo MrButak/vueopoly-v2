@@ -34,5 +34,8 @@ let compStartGame = computed(() => {
     margin: 0px;
     padding: 0px;
 }
+#app {
+    background-color: #F1F1F1;
+}
 
 </style>

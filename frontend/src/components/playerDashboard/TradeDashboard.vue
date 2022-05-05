@@ -1,5 +1,7 @@
 <template>
-
+<span v-show="showComponent">
+    <GameBoard ref="gameBoard" />
+</span>
 <div class="overlay">
     <div class="container">
 
@@ -101,8 +103,10 @@ import { ref, computed, reactive, watch, onMounted } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as tradeFunctions from '../../javascripts/tradeFunctions';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
+import GameBoard from '../GameBoard.vue';
 
-
+let gameBoard = ref(GameBoard);
+let showComponent = ref(false); // always false
 
 let selectedTradee = ref();
 let traderMoneyOffer = ref();
@@ -191,6 +195,8 @@ function acceptOffer() {
 
     gameLogic.value.players[traderIndex].money -= parseInt(traderMoneyOffer.value);
     gameLogic.value.players[tradeeIndex].money -= parseInt(tradeeMoneyOffer.value);
+
+    gameBoard.value.placeOwnedBar(); // place owned bar on dom
 
     closeTradeView();
     // TODO: handle special cards
