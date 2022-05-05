@@ -3,15 +3,6 @@ import { ref, reactive } from 'vue';
 const lsInUse = ref(false);
 const gameLogic = reactive({});
 const turnLogic = reactive({});
+const startGame = ref(false);
 
-// function gameState() {
-
-//   // other functions, for example to mutate message ref
-  
-//     return {
-//         lsInUse,
-//         gameLogic
-//     };
-// };
-
-export {lsInUse, gameLogic, turnLogic}
+export { lsInUse, gameLogic, turnLogic, startGame }
