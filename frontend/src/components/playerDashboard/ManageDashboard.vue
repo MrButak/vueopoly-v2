@@ -151,7 +151,9 @@ let computedShowSpecialCards = computed(() => {
 
 
 function testCall() {
-    gameBoard.value.testy()
+    let parent = document.getElementById('mediterraneanave').childNodes[0];
+    while (parent.firstChild) {parent.removeChild(parent.firstChild)}
+    // document.getElementById('mediterraneanave').childNodes[0].childNodes.remove();
 }
 
 function setClickedPropertyObj(propertyId) {

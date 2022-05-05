@@ -206,6 +206,8 @@
 <script setup>
 import { onMounted, watch, computed, ref } from 'vue';
 import { lsInUse, gameLogic, turnLogic } from '../javascripts/stateStore';
+import * as consts from '../javascripts/constants';
+import * as domFunctions from '../javascripts/domFunctions';
 
 // place all player pieces
 onMounted(() => {
@@ -214,63 +216,45 @@ onMounted(() => {
     })
 });
 
-function testy() {
-    console.log('function caled from GameBoard.vue')
-};
 
 function placeBuildingPiece(propertyId) {
 
-    let buildingPieces = {
-        
-        houseDimensions: {
-            width: '1vw',
-            height: '1.1vw'
-        },
-        bottomRow: {
-            1: "22% 0 0 3%",
-            2: "22% 0 0 28%",
-            3: "22% 0 0 52%",
-            4: "22% 0 0 77%",
-            5: "0 0 0 0"
-        },
-        "leftRow": {
-            1: "0 0 0 0",
-            2: "0 0 0 0",
-            3: "0 0 0 0",
-            4: "0 0 0 0",
-            5: "0 0 0 0"
-        },
-        "topRow": {
-            1: "0 0 0 0",
-            2: "0 0 0 0",
-            3: "0 0 0 0",
-            4: "0 0 0 0",
-            5: "0 0 0 0"
-        },
-        "rightRow": {
-            1: "0 0 0 0",
-            2: "0 0 0 0",
-            3: "0 0 0 0",
-            4: "0 0 0 0",
-            5: "0 0 0 0"
-        },
-    }
 
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
     let property = gameLogic.value.vueopoly.properties[propertyIndex];
+
     let buildingCount = property.buildings;
+    let row = domFunctions.dtrmBuildingRowH(propertyId);
     
-
-
+    let buildingDimensions = domFunctions.dtrmBuildingDimensionsH(row, buildingCount);
+    console.log(buildingDimensions)
     let buildingPiece = document.createElement('span');
-    buildingPiece.style.width = buildingPieces.houseDimensions.width;
-    buildingPiece.style.height = buildingPieces.houseDimensions.height;
-    buildingPiece.style.inset = buildingPieces.bottomRow[buildingCount];
-    buildingPiece.style.position = 'absolute';
-    buildingPiece.style.backgroundColor = 'green';
 
-    document.getElementById(propertyId).firstChild.append(buildingPiece)
+    // houses
+    if(buildingCount < 5) {
+        
+        buildingPiece.style.width = buildingDimensions[0];
+        buildingPiece.style.height = buildingDimensions[1];
+        buildingPiece.style.backgroundColor = consts.houseColor();
+    }
+    // hotels
+    else {
+        // remove all houses
+        let parent = document.getElementById(propertyId).childNodes[0];
+        while(parent.firstChild) {parent.removeChild(parent.firstChild)};
+        
+        buildingPiece.style.width = buildingDimensions[0];
+        buildingPiece.style.height = buildingDimensions[1];
+        buildingPiece.style.backgroundColor = consts.hotelColor();
+    };
+
     
+    buildingPiece.style.inset = domFunctions.dtrmBuildingInsetH(row, buildingCount);
+    
+    buildingPiece.style.position = 'absolute';
+    
+    // add building piece to dom
+    document.getElementById(propertyId).firstChild.append(buildingPiece); 
     
 };
 
