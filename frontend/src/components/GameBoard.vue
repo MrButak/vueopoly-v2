@@ -1,7 +1,5 @@
 <template>
 
-
-
 	<div class="responsive">
 
 		<div class="mainSquare">
@@ -216,6 +214,65 @@ onMounted(() => {
     })
 });
 
+function testy() {
+    console.log('function caled from GameBoard.vue')
+};
+
+function placeBuildingPiece(propertyId) {
+
+    let buildingPieces = {
+        
+        houseDimensions: {
+            width: '1vw',
+            height: '1.1vw'
+        },
+        bottomRow: {
+            1: "22% 0 0 3%",
+            2: "22% 0 0 28%",
+            3: "22% 0 0 52%",
+            4: "22% 0 0 77%",
+            5: "0 0 0 0"
+        },
+        "leftRow": {
+            1: "0 0 0 0",
+            2: "0 0 0 0",
+            3: "0 0 0 0",
+            4: "0 0 0 0",
+            5: "0 0 0 0"
+        },
+        "topRow": {
+            1: "0 0 0 0",
+            2: "0 0 0 0",
+            3: "0 0 0 0",
+            4: "0 0 0 0",
+            5: "0 0 0 0"
+        },
+        "rightRow": {
+            1: "0 0 0 0",
+            2: "0 0 0 0",
+            3: "0 0 0 0",
+            4: "0 0 0 0",
+            5: "0 0 0 0"
+        },
+    }
+
+    let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
+    let property = gameLogic.value.vueopoly.properties[propertyIndex];
+    let buildingCount = property.buildings;
+    
+
+
+    let buildingPiece = document.createElement('span');
+    buildingPiece.style.width = buildingPieces.houseDimensions.width;
+    buildingPiece.style.height = buildingPieces.houseDimensions.height;
+    buildingPiece.style.inset = buildingPieces.bottomRow[buildingCount];
+    buildingPiece.style.position = 'absolute';
+    buildingPiece.style.backgroundColor = 'green';
+
+    document.getElementById(propertyId).firstChild.append(buildingPiece)
+    
+    
+};
 
 function placePlayerPiece(playerId) {
     
@@ -259,7 +316,10 @@ watch(
     }
 );
 
-defineExpose({placePlayerPiece});
+defineExpose({
+    placePlayerPiece,
+    placeBuildingPiece
+});
 </script>
 
 

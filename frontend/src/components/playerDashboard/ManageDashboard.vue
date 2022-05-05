@@ -1,4 +1,7 @@
 <template>
+<span v-show="showComponent">
+    <GameBoard ref="gameBoard" />
+</span>
     <p>Properties</p>
     <span v-for="propArry in filteredProperties">
 
@@ -24,7 +27,7 @@
     </span>
 
     <br />
-
+    <button @click="testCall">test call</button>
     <p>Special Cards</p>
     <span v-if="computedShowSpecialCards" v-for="card in computedSpecialCards">
         <input @click="offerSpecialCard($event, card)" type="radio" name="cards">
@@ -88,6 +91,10 @@ import { onMounted, reactive, ref } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
 import * as gameFunctions from '../../javascripts/gameFunctions';
+import GameBoard from '../GameBoard.vue';
+
+let gameBoard = ref(GameBoard);
+let showComponent = ref(false); // always false. used to call function in GameBoard.vue
 
 let clickedProperty = reactive({
     name: ref(''),
@@ -143,6 +150,9 @@ let computedShowSpecialCards = computed(() => {
 });
 
 
+function testCall() {
+    gameBoard.value.testy()
+}
 
 function setClickedPropertyObj(propertyId) {
     
@@ -183,6 +193,7 @@ function buyBuilding() {
     crntPlayer.value.money -= clickedProperty.buildingCost;
     propertyFunctions.buyBuildingH(clickedProperty.id);
     clearOffer();
+    gameBoard.value.placeBuildingPiece(clickedProperty.id); // place building piece on gameboard
     setClickedPropertyObj(clickedProperty.id);
 };
 
