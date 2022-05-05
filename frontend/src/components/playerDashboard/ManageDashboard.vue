@@ -153,7 +153,7 @@ let computedShowSpecialCards = computed(() => {
 function testCall() {
     let parent = document.getElementById('mediterraneanave').childNodes[0];
     while (parent.firstChild) {parent.removeChild(parent.firstChild)}
-    // document.getElementById('mediterraneanave').childNodes[0].childNodes.remove();
+    
 }
 
 function setClickedPropertyObj(propertyId) {
@@ -195,15 +195,17 @@ function buyBuilding() {
     crntPlayer.value.money -= clickedProperty.buildingCost;
     propertyFunctions.buyBuildingH(clickedProperty.id);
     clearOffer();
-    gameBoard.value.placeBuildingPiece(clickedProperty.id); // place building piece on gameboard
+    gameBoard.value.addBuildingPiece(clickedProperty.id); // place building piece on gameboard
     setClickedPropertyObj(clickedProperty.id);
 };
 
 function sellBuilding() {
 
+    gameBoard.value.removeBuildingPiece(clickedProperty.id); // remove building piece from gameboard
     propertyFunctions.sellBuildingH(clickedProperty.id);
     crntPlayer.value.money += clickedProperty.buildingCost / 2;
     clearOffer();
+    
     setClickedPropertyObj(clickedProperty.id);
 };
 
