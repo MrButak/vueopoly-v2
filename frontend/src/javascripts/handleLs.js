@@ -47,7 +47,7 @@ let setLs = () => {
     return;
 };
 
-// Function restores global state variables from local storage variables
+// Function restores global state variables from local
 let restoreLs = () => {
 
     // convert local storage string to object

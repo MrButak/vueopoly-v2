@@ -148,6 +148,7 @@ function payRent() {
 
 function payTax(propertyId) {
 
+    console.log('pay tax debug')
     let taxAmount = gameFunctions.calculateTaxAmountH(propertyId);
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};

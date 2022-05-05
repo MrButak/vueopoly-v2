@@ -3,7 +3,7 @@
 <NewGame />
 </span>
 
-<span v-if="gameLogic.startGame">
+<span v-if="startGame">
 <GameBoard />
 <Dashboard />
 </span>
@@ -15,14 +15,19 @@
 import GameBoard from './components/GameBoard.vue';
 import NewGame from './components/NewGame.vue';
 import Dashboard from './components/playerDashboard/DashBoard.vue';
-import { lsInUse, gameLogic } from './javascripts/stateStore';
+import { watch, computed } from 'vue';
+import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
+
+let compStartGame = computed(() => {
+    return startGame.value;
+});
+
 
 </script>
 
 
-
-
 <style>
+
 * {
     
     box-sizing: border-box;
