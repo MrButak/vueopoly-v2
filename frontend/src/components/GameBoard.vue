@@ -302,11 +302,9 @@ function removeBuildingPiece(propertyId) {
     let property = gameLogic.value.vueopoly.properties[propertyIndex];
     let buildingCount = property.buildings;
 
-    // if no buildings to remove
-    if(buildingCount < 1) {return};
 
-    if(buildingCount < 5) {
-        if(buildingCount < 2) {
+    if(buildingCount < 4) {
+        if(buildingCount < 1) {
 
             let parent = document.getElementById(propertyId).childNodes[0];
             parent.childNodes[0].remove();
@@ -315,10 +313,18 @@ function removeBuildingPiece(propertyId) {
         };
         let parent = document.getElementById(propertyId).childNodes[0];
         parent.childNodes[parent.childNodes.length - 1].remove();
-        return;  
+        return;
     };
-    
-}
+    // if hotel is on property when building is sold
+    let parent = document.getElementById(propertyId).childNodes[0];
+    parent.childNodes[0].remove();
+
+    property.buildings = 0;
+    for(let i = 1; i < 5; i++) {
+        property.buildings++;
+        addBuildingPiece(propertyId);
+    };  
+};
 function placePlayerPiece(playerId) {
     
     // if element already on the dom, remove it

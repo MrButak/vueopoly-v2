@@ -201,8 +201,8 @@ function buyBuilding() {
 
 function sellBuilding() {
 
-    gameBoard.value.removeBuildingPiece(clickedProperty.id); // remove building piece from gameboard
     propertyFunctions.sellBuildingH(clickedProperty.id);
+    gameBoard.value.removeBuildingPiece(clickedProperty.id); // remove building piece from gameboard
     crntPlayer.value.money += clickedProperty.buildingCost / 2;
     clearOffer();
     
