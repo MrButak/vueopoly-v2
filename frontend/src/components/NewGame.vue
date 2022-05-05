@@ -70,7 +70,6 @@ function submitUserProfile(event) {
     };
     initNewGame(playerObj);
     startGame.value = true;
-    console.log(startGame.value)
 };
  
 </script>
