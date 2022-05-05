@@ -153,7 +153,6 @@ function storeTraderItems(event) {
     if (event.target.checked) { traderItems.push(propertyFunctions.getPropFromIdH(event.target.value)); }
     else { traderItems.splice(propertyFunctions.getPropFromIdH(event.target.value), 1); };
 
-    console.log(traderItems)
 };
 
 function storeTradeeItems(event) {
@@ -175,7 +174,7 @@ function acceptOffer() {
 
     let traderIndex = gameLogic.value.whosTurnIndex;
     let tradeeIndex = gameLogic.value.players.findIndex((player => player.name == selectedTradee.value));
-
+    
     if(traderItems.length > 0) {
         // trader => tradee
         tradeFunctions.transferPropsTraderToTradeeH(traderIndex, tradeeIndex, traderItems);
@@ -190,11 +189,15 @@ function acceptOffer() {
     if(!tradeeMoneyOffer.value) {tradeeMoneyOffer.value = 0};
     if(!traderMoneyOffer.value) {traderMoneyOffer.value = 0};
 
+
     gameLogic.value.players[traderIndex].money += parseInt(tradeeMoneyOffer.value);
     gameLogic.value.players[tradeeIndex].money += parseInt(traderMoneyOffer.value);
 
     gameLogic.value.players[traderIndex].money -= parseInt(traderMoneyOffer.value);
     gameLogic.value.players[tradeeIndex].money -= parseInt(tradeeMoneyOffer.value);
+
+    console.log(gameLogic.value.players);
+    console.log('&&&&&&&&&&&&&&')
 
     gameBoard.value.placeOwnedBar(); // place owned bar on dom
 

@@ -28,6 +28,9 @@ let transferPropsTraderToTradeeH = (traderIndex, tradeeIndex, traderItems) => {
 
     traderItems.forEach((item) => {
 
+        // change ownership of property
+        item.ownedby = gameLogic.value.players[tradeeIndex].name;
+
         gameLogic.value.players[tradeeIndex].properties.push(item);
         gameLogic.value.players[traderIndex].properties.splice(item, 1);
     });
@@ -35,6 +38,9 @@ let transferPropsTraderToTradeeH = (traderIndex, tradeeIndex, traderItems) => {
 
 let transferPropsTradeeToTraderH = (traderIndex, tradeeIndex, tradeeItems) => {
     tradeeItems.forEach((item) => {
+
+        // change ownership of property
+        item.ownedby = gameLogic.value.players[traderIndex].name;
 
         gameLogic.value.players[traderIndex].properties.push(item);
         gameLogic.value.players[tradeeIndex].properties.splice(item, 1);

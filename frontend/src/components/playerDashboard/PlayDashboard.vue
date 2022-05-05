@@ -149,7 +149,6 @@ function payRent() {
 
 function payTax(propertyId) {
 
-    console.log('pay tax debug')
     let taxAmount = gameFunctions.calculateTaxAmountH(propertyId);
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};
@@ -220,8 +219,6 @@ function handleSpecialCard() {
     
     // function call from PopupSpecialCard.vue
     popupSpecialCard.value.showPopup(turnLogic.value.propertyLandedOn.style, drawnCard);
-    
-    console.log(drawnCard.groupid)
 
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
