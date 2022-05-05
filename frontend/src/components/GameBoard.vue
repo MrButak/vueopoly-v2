@@ -1,7 +1,5 @@
 <template>
 
-
-
 	<div class="responsive">
 
 		<div class="mainSquare">
@@ -208,15 +206,125 @@
 <script setup>
 import { onMounted, watch, computed, ref } from 'vue';
 import { lsInUse, gameLogic, turnLogic } from '../javascripts/stateStore';
+import * as consts from '../javascripts/constants';
+import * as domFunctions from '../javascripts/domFunctions';
 
-// place all player pieces
+// place all player pieces, buildings
 onMounted(() => {
     gameLogic.value.players.forEach((player) => {
         placePlayerPiece(player.name)
-    })
+    });
+    gameLogic.value.vueopoly.properties.forEach((prop) => {
+        if(prop.buildings && prop.buildings > 0) {
+            placeBuildingPieces(prop);
+        };
+    });
 });
 
+function placeBuildingPieces(property) {
 
+    let buildingCount = property.buildings;
+    let row = domFunctions.dtrmBuildingRowH(property.id);
+    let buildingDimensions = domFunctions.dtrmBuildingDimensionsH(row, buildingCount);
+
+    // houses
+    if(buildingCount < 5) {
+        for(let i = 1; i < buildingCount + 1; i++) {
+
+            let buildingPiece = document.createElement('span');
+            buildingPiece.style.width = buildingDimensions[0];
+            buildingPiece.style.height = buildingDimensions[1];
+            buildingPiece.style.backgroundColor = consts.houseColor();
+            buildingPiece.style.inset = domFunctions.dtrmBuildingInsetH(row, i);
+            buildingPiece.style.position = 'absolute';
+            let parent = document.getElementById(property.id);
+            parent.firstChild.append(buildingPiece);
+        };
+        return;
+    };
+    // hotels
+    let buildingPiece = document.createElement('span');
+    buildingPiece.style.width = buildingDimensions[0];
+    buildingPiece.style.height = buildingDimensions[1];
+    buildingPiece.style.backgroundColor = consts.hotelColor();
+    buildingPiece.style.inset = domFunctions.dtrmBuildingInsetH(row, buildingCount);
+    buildingPiece.style.position = 'absolute';
+    let parent = document.getElementById(property.id);
+    parent.firstChild.append(buildingPiece);
+
+};
+
+function addBuildingPiece(propertyId) {
+
+
+    let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
+    let property = gameLogic.value.vueopoly.properties[propertyIndex];
+
+    let buildingCount = property.buildings;
+    let row = domFunctions.dtrmBuildingRowH(propertyId);
+    
+    let buildingDimensions = domFunctions.dtrmBuildingDimensionsH(row, buildingCount);
+    
+    let buildingPiece = document.createElement('span');
+
+    // houses
+    if(buildingCount < 5) {
+        
+        buildingPiece.style.width = buildingDimensions[0];
+        buildingPiece.style.height = buildingDimensions[1];
+        buildingPiece.style.backgroundColor = consts.houseColor();
+    }
+    // hotels
+    else {
+        // remove all houses
+        let parent = document.getElementById(propertyId).childNodes[0];
+        while(parent.firstChild) {parent.removeChild(parent.firstChild)};
+        
+        buildingPiece.style.width = buildingDimensions[0];
+        buildingPiece.style.height = buildingDimensions[1];
+        buildingPiece.style.backgroundColor = consts.hotelColor();
+    };
+
+    
+    buildingPiece.style.inset = domFunctions.dtrmBuildingInsetH(row, buildingCount);
+    
+    buildingPiece.style.position = 'absolute';
+    
+    // add building piece to dom
+    document.getElementById(propertyId).firstChild.append(buildingPiece);
+    
+};
+
+function removeBuildingPiece(propertyId) {
+
+    
+    let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
+    let property = gameLogic.value.vueopoly.properties[propertyIndex];
+    let buildingCount = property.buildings;
+
+
+    if(buildingCount < 4) {
+        if(buildingCount < 1) {
+
+            let parent = document.getElementById(propertyId).childNodes[0];
+            parent.childNodes[0].remove();
+            
+            return;
+        };
+        let parent = document.getElementById(propertyId).childNodes[0];
+        parent.childNodes[parent.childNodes.length - 1].remove();
+        return;
+    };
+    // if hotel is on property when building is sold
+    let parent = document.getElementById(propertyId).childNodes[0];
+    parent.childNodes[0].remove();
+
+    property.buildings = 0;
+    for(let i = 1; i < 5; i++) {
+        property.buildings++;
+        addBuildingPiece(propertyId);
+    };  
+};
 function placePlayerPiece(playerId) {
     
     // if element already on the dom, remove it
@@ -259,7 +367,11 @@ watch(
     }
 );
 
-defineExpose({placePlayerPiece});
+defineExpose({
+    placePlayerPiece,
+    addBuildingPiece,
+    removeBuildingPiece
+});
 </script>
 
 

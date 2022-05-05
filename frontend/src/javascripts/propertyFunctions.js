@@ -87,7 +87,7 @@ let checkedPropObjH = (propertyId) => {
     // can add/remove building
     if(doesOwnAllInGroup(owner, group) && !isAnyMortgagedInGroup(group)) {
 
-        console.log(canAddBuilding(property, group))
+        
         if(canAddBuilding(property, group)) {
             propObj.canBuild = true;
         }
