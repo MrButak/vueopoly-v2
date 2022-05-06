@@ -54,6 +54,7 @@ let gameBoard = ref(GameBoard);
 let showComponent = ref(false); // permanently false. used to call functions from other components
 
 onMounted(() => {
+    
     startTurn();
 });
 
@@ -63,14 +64,31 @@ let gameLogs = computed(() => {
 });
 
 // when game log is added, function to scroll to bottom is called
+
+
 watch(
     () => gameLogic.value.gameLogs.length,
-    (count, prevCount) => {scrollGameLogs()}
+    (count, prevCount) => {
+
+        let logElement = document.getElementById('gamelog-wrapper-main');
+        logElement.scrollTop = logElement.scrollHeight;  
+    }
 );
 function scrollGameLogs() {
     let logElement = document.getElementById('gamelog-wrapper-main');
     logElement.scrollTop = logElement.scrollHeight;  
 };
+// watch(
+//     () => gameLogic.value.gameLogs.length,
+//     (count, prevCount) => {
+
+//         scrollGameLogs();
+//     }
+// );
+// function scrollGameLogs() {
+//     let logElement = document.getElementById('gamelog-wrapper-main');
+//     logElement.scrollTop = logElement.scrollHeight;  
+// };
 
 
 
@@ -78,6 +96,7 @@ function startTurn() {
 
     // if(turnLogic.value.crntPlayer.inJail) {console.log('player is in jail'); return}; // handle in jail
     gameFunctions.addGameLogsH('startTurn', null, null);
+    scrollGameLogs();
     
 };
 
@@ -106,6 +125,7 @@ function rollDice() {
     turnLogic.value.crntDiceRoll = moveFunction.rollDiceH();
     moveFunction.movePlayerH(turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1], turnLogic.value.crntPlayer.position);
     turnLogic.value.diceRolled = true; // will remove the 'roll dice btn' from dom
+    scrollGameLogs();
 };
 
 // called after rollDice() @click
@@ -113,7 +133,8 @@ function dtrmPropAction() {
 
     turnLogic.value.propertyLandedOn = moveFunction.getCrntPropH();
     
-    gameFunctions.addGameLogsH('diceRoll', null, null)
+    gameFunctions.addGameLogsH('diceRoll', null, null); // game log
+    
 
     switch(propertyAction.dtrmPropActionH(turnLogic.value.propertyLandedOn)) {
 
@@ -128,6 +149,7 @@ function dtrmPropAction() {
             // landed on go, jail just visiting
             console.log('unhandled case in PlayDashboard.vue dtrmPropAction()')
             turnLogic.value.canEndTurn = true;
+            scrollGameLogs();
             break;
     };
 };
@@ -194,7 +216,7 @@ function gotoJail() {
 
     // manually call function to move player. watcher() is set but not firing
     gameBoard.value.placePlayerPiece(turnLogic.value.crntPlayer.name);
-    
+
     dtrmPropAction();
     turnLogic.value.crntPlayer.inJail = true;
     endTurn();
