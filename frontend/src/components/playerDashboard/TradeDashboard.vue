@@ -132,23 +132,26 @@ watch(
     () => { getTradeeProperties(selectedTradee.value);}
 );
 
-function getTraderProperties(playerId) {
+function getTraderProperties(playerId) { // this array is displayed on dom
 
     // remove all items from array
     traderProperties.splice(0, traderProperties.length);
     // add all available properties to array
-    traderProperties.push(tradeFunctions.getEligiblePropertiesH(playerId));
+    traderProperties.push(tradeFunctions.getPropsToDisplayForTradeH(playerId));
 };
 
-function getTradeeProperties(playerId) {
+function getTradeeProperties(playerId) { // this array is displayed on dom
 
     // remove all items from array
     tradeeProperties.splice(0, tradeeProperties.length);
     // add all available properties to array
-    tradeeProperties.push(tradeFunctions.getEligiblePropertiesH(playerId));
+    tradeeProperties.push(tradeFunctions.getPropsToDisplayForTradeH(playerId));
 };
 
 function storeTraderItems(event) {
+
+    // TODO: handle  special card
+
     // store/remove property id's in an array
     if (event.target.checked) { traderItems.push(propertyFunctions.getPropFromIdH(event.target.value)); }
     else { traderItems.splice(propertyFunctions.getPropFromIdH(event.target.value), 1); };
@@ -156,6 +159,9 @@ function storeTraderItems(event) {
 };
 
 function storeTradeeItems(event) {
+
+    // TODO: handle  special card
+
     // store/remove property id's in an array
     if (event.target.checked) { tradeeItems.push(propertyFunctions.getPropFromIdH(event.target.value)); }
     else { tradeeItems.splice(propertyFunctions.getPropFromIdH(event.target.value), 1); };
@@ -175,6 +181,8 @@ function acceptOffer() {
     let traderIndex = gameLogic.value.whosTurnIndex;
     let tradeeIndex = gameLogic.value.players.findIndex((player => player.name == selectedTradee.value));
     
+
+    
     if(traderItems.length > 0) {
         // trader => tradee
         tradeFunctions.transferPropsTraderToTradeeH(traderIndex, tradeeIndex, traderItems);
@@ -185,20 +193,18 @@ function acceptOffer() {
         tradeFunctions.transferPropsTradeeToTraderH(traderIndex, tradeeIndex, tradeeItems)
     };
     
-    // money
-    if(!tradeeMoneyOffer.value) {tradeeMoneyOffer.value = 0};
-    if(!traderMoneyOffer.value) {traderMoneyOffer.value = 0};
+    // // money
+    // if(!tradeeMoneyOffer.value) {tradeeMoneyOffer.value = 0};
+    // if(!traderMoneyOffer.value) {traderMoneyOffer.value = 0};
 
 
-    gameLogic.value.players[traderIndex].money += parseInt(tradeeMoneyOffer.value);
-    gameLogic.value.players[tradeeIndex].money += parseInt(traderMoneyOffer.value);
+    // gameLogic.value.players[traderIndex].money += parseInt(tradeeMoneyOffer.value);
+    // gameLogic.value.players[tradeeIndex].money += parseInt(traderMoneyOffer.value);
 
-    gameLogic.value.players[traderIndex].money -= parseInt(traderMoneyOffer.value);
-    gameLogic.value.players[tradeeIndex].money -= parseInt(tradeeMoneyOffer.value);
+    // gameLogic.value.players[traderIndex].money -= parseInt(traderMoneyOffer.value);
+    // gameLogic.value.players[tradeeIndex].money -= parseInt(tradeeMoneyOffer.value);
 
-    console.log(gameLogic.value.players);
-    console.log('&&&&&&&&&&&&&&')
-
+    
     gameBoard.value.placeOwnedBar(); // place owned bar on dom
 
     closeTradeView();
