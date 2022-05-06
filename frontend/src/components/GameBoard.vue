@@ -47,7 +47,7 @@
 				<div id="ventnorave" class="square1 ">
 					<div class="header header-top yellow"></div>
 					<div class="firstLine firstLine-top rotation2">ventnor <br /> avenue</div>
-                    <div class="ownedtopbar" id="ventoraveownedbar"></div>
+                    <div class="ownedtopbar" id="ventnoraveownedbar"></div>
 				</div>
 
 				<div id="waterworks" class="square1 ">
