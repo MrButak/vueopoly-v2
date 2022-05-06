@@ -36,7 +36,7 @@ let isPropOwnedH = (property) => {
 
 let purchasePropertyH = (player, property) => {
 
-    // getting a direct reference to player using the above (player) argument
+    
     let playerToPurchaseIndex = gameLogic.value.players.findIndex((tplayer => tplayer.name == player.name));
     let playerToPurchase = gameLogic.value.players[playerToPurchaseIndex];
 

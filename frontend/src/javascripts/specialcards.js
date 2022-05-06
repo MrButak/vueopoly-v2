@@ -90,7 +90,8 @@ let moveNearestSpecialH = (groupId) => { // railroad, utility
     };
 
     let calculateTotalCost = (propertyGroup, propertyId) => {
-        
+
+        turnLogic.value.propertyLandedOn = moveFunctions.getCrntPropH(); // add crntproperty to state
         if(propertyGroup === 'railroad') { // railroad
             
             return propertyAction.getTotalRentCostH(propertyFunctions.getPropFromIdH(propertyId)) * 2;// function accepts a property object

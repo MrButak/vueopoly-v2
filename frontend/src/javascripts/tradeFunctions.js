@@ -26,15 +26,18 @@ let getPropsToDisplayForTradeH = (playerId) => {
 
 let transferPropsTraderToTradeeH = (traderIndex, tradeeIndex, traderItems) => {
 
-
     traderItems.forEach((item) => {
 
         // change ownership of property
-        console.log('trader => tradee')
         let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop == item));
         gameLogic.value.vueopoly.properties[propertyIndex].ownedby = gameLogic.value.players[tradeeIndex].name;
+
+        // add properties to tradee
         gameLogic.value.players[tradeeIndex].properties.push(gameLogic.value.vueopoly.properties[propertyIndex]);
-        gameLogic.value.players[traderIndex].properties.splice(gameLogic.value.vueopoly.properties[propertyIndex], 1);
+
+        // remove properties from trader
+        let traderPropIndex = gameLogic.value.players[traderIndex].properties.findIndex((prop => prop.id == item.id));
+        gameLogic.value.players[traderIndex].properties.splice(traderPropIndex, 1);
     });
 }
 
@@ -45,10 +48,13 @@ let transferPropsTradeeToTraderH = (traderIndex, tradeeIndex, tradeeItems) => {
         // change ownership of property
         let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop == item));
         gameLogic.value.vueopoly.properties[propertyIndex].ownedby = gameLogic.value.players[traderIndex].name;
-        console.log('tradee => trader')
 
+        // add properties to trader
         gameLogic.value.players[traderIndex].properties.push(gameLogic.value.vueopoly.properties[propertyIndex]);
-        gameLogic.value.players[tradeeIndex].properties.splice(gameLogic.value.vueopoly.properties[propertyIndex], 1);
+
+        // remove properties from tradee
+        let tradeePropIndex = gameLogic.value.players[tradeeIndex].properties.findIndex((prop) => prop.id == item.id);
+        gameLogic.value.players[tradeeIndex].properties.splice(tradeePropIndex, 1);
         
     });
 };
