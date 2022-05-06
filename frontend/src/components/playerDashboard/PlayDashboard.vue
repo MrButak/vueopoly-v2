@@ -70,25 +70,13 @@ watch(
     () => gameLogic.value.gameLogs.length,
     (count, prevCount) => {
 
-        let logElement = document.getElementById('gamelog-wrapper-main');
-        logElement.scrollTop = logElement.scrollHeight;  
+        scrollGameLogs();
     }
 );
 function scrollGameLogs() {
     let logElement = document.getElementById('gamelog-wrapper-main');
     logElement.scrollTop = logElement.scrollHeight;  
 };
-// watch(
-//     () => gameLogic.value.gameLogs.length,
-//     (count, prevCount) => {
-
-//         scrollGameLogs();
-//     }
-// );
-// function scrollGameLogs() {
-//     let logElement = document.getElementById('gamelog-wrapper-main');
-//     logElement.scrollTop = logElement.scrollHeight;  
-// };
 
 
 
