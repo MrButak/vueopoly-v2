@@ -48,4 +48,8 @@ let nextPlayerTurn = () => {
 
 };
 
+let addGameLogsH = () => {
+
+};
+
 export { moneyCheckH, payMoneyH, calculateTaxAmountH, nextPlayerTurn }

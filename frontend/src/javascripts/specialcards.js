@@ -81,7 +81,10 @@ let moveNearestSpecialH = (groupId) => { // railroad, utility
 
     let checkIfOwned = (propertyId) => {
 
+        turnLogic.value.propertyLandedOn = moveFunctions.getCrntPropH(); // add crntproperty to state
+        
         if(!propertyAction.isPropOwnedH(propertyFunctions.getPropFromIdH(propertyId))) {
+            // BUG somewhere around here. when move to nearest.
             turnLogic.value.buyAvailable = true;
             turnLogic.value.canEndTurn = true;
             return false;
@@ -91,7 +94,7 @@ let moveNearestSpecialH = (groupId) => { // railroad, utility
 
     let calculateTotalCost = (propertyGroup, propertyId) => {
 
-        turnLogic.value.propertyLandedOn = moveFunctions.getCrntPropH(); // add crntproperty to state
+        
         if(propertyGroup === 'railroad') { // railroad
             
             return propertyAction.getTotalRentCostH(propertyFunctions.getPropFromIdH(propertyId)) * 2;// function accepts a property object

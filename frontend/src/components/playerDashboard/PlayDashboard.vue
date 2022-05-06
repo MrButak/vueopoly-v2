@@ -35,6 +35,11 @@
 
 <script setup>
 
+// scroll to bottom
+// reference the div, then: (everytime log is added)
+// gameLogDiv.scrollTop = gameLogDiv.scrollHeight;
+
+
 import { ref, computed, onMounted, reactive } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';
@@ -306,7 +311,7 @@ function handleSpecialCard() {
     width: 100%;
 }
 .game-log-text {
-    font-size: 26px;
+    /*font-size: 26px;*/
 }
 .dice-wrapper-main {
     display: flex;
