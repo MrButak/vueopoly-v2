@@ -5,7 +5,7 @@
 
 <span v-if="startGame">
 <GameBoard />
-<Dashboard />
+<!-- <Dashboard /> -->
 </span>
 </template>
 

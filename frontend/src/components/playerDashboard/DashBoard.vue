@@ -4,11 +4,18 @@
         <div class="player-dashboard-wrapper">
         
             <div class="player-stats-top-wrapper">
-                <button v-if="gameLogic.value.view === 'play'" @click="gameLogic.value.view = 'manage'">Manage</button>
-                <button v-if="gameLogic.value.view === 'manage' || gameLogic.value.view === 'trade'" @click="gameLogic.value.view = 'play'">Game</button>
-                    <text>{{ turnLogic.value.crntPlayer.name }}-{{ turnLogic.value.crntPlayer.alias }}</text>
-                    <text id="player-money">${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</text>
-                <button @click="gameLogic.value.view = 'trade'">Trade</button>
+                <button class="stat-btn" v-if="gameLogic.value.view === 'play'" @click="gameLogic.value.view = 'manage'">Manage</button>
+                <button class="stat-btn" v-if="gameLogic.value.view === 'manage' || gameLogic.value.view === 'trade'" @click="gameLogic.value.view = 'play'">Game</button>
+
+                <div class="text-wrapper">
+                    <span class="text-row">
+                        <p>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].name }}</p>
+                        <p>${{ gameLogic.value.players[gameLogic.value.whosTurnIndex].money }}</p>
+                    </span>
+                    <p>{{ gameLogic.value.players[gameLogic.value.whosTurnIndex].alias }}</p>
+                </div>
+
+                <button class="stat-btn" @click="gameLogic.value.view = 'trade'">Trade</button>
             </div>
             
             <span v-if="gameLogic.value.view === 'play' && !isPlayerInJail"><PlayDashboard /></span>
@@ -42,30 +49,44 @@ let isPlayerInJail = computed(() => {
 
 </script>
 
-<style>
+<style scoped>
+* {
+    text-transform: lowercase;
+}
 .player-dashboard-wrapper-main {
 
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 56vw;
-    top: 18.4vw;
-    margin: 3rem 0 3rem 3rem;
+    
 }
 .player-dashboard-wrapper {
     
-    width: 38.4vw;
-    border: 1px solid black;
+    width: 38.65vw;
+    
     background-color: white;
     padding: 10px;
-    height: 24vw;
+    height: 38.7vw;
 }
 .player-stats-top-wrapper {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 4vw;
-    padding: 0 0 10px 0;
+    padding: 10px;
+}
+.text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%
+}
+.text-row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    
+}
+
+.stat-btn {
+    width: 3.5rem;
+    padding: .1rem;
 }
 </style>
