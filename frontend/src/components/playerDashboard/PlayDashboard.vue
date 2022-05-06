@@ -77,7 +77,8 @@ function scrollGameLogs() {
 function startTurn() {
 
     // if(turnLogic.value.crntPlayer.inJail) {console.log('player is in jail'); return}; // handle in jail
-    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name}'s turn.`, color: `${gameConstants.logColor()}`});
+    gameFunctions.addGameLogsH('startTurn', null, null);
+    
 };
 
 function endTurn() {
@@ -104,7 +105,6 @@ function rollDice() {
     
     turnLogic.value.crntDiceRoll = moveFunction.rollDiceH();
     moveFunction.movePlayerH(turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1], turnLogic.value.crntPlayer.position);
-    gameLogs.value.push({log: `${turnLogic.value.crntPlayer.name} rolled for ${turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1]}`, color: `${turnLogic.value.crntPlayer.color}`});
     turnLogic.value.diceRolled = true; // will remove the 'roll dice btn' from dom
 };
 
@@ -113,6 +113,8 @@ function dtrmPropAction() {
 
     turnLogic.value.propertyLandedOn = moveFunction.getCrntPropH();
     
+    gameFunctions.addGameLogsH('diceRoll', null, null)
+
     switch(propertyAction.dtrmPropActionH(turnLogic.value.propertyLandedOn)) {
 
         case 'canbuy': turnLogic.value.buyAvailable = true; turnLogic.value.canEndTurn = true; break; // displays 'buy btn' and buy property message on dom
@@ -137,7 +139,9 @@ function purchaseProperty() {
 
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, turnLogic.value.propertyLandedOn.price)) {return};
     propertyAction.purchasePropertyH(turnLogic.value.crntPlayer, turnLogic.value.propertyLandedOn);
-    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} purchased ${turnLogic.value.propertyLandedOn.name} for $${turnLogic.value.propertyLandedOn.price}`, color: `${turnLogic.value.crntPlayer.color}`});
+
+    gameFunctions.addGameLogsH('purchaseProperty', null, null);
+    
     turnLogic.value.buyAvailable = false;
     turnLogic.value.canEndTurn = true;
 
@@ -153,7 +157,9 @@ function payRent() {
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, totalRentAmount)) {return};
     // // (to, from, amount, type)
     gameFunctions.payMoneyH(turnLogic.value.propertyLandedOn.ownedby, turnLogic.value.crntPlayer.name, totalRentAmount, 'rent');
-    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} payed ${turnLogic.value.propertyLandedOn.ownedby} $${totalRentAmount} in rent at ${turnLogic.value.propertyLandedOn.name}`, color: `${turnLogic.value.crntPlayer.color}`});
+
+    gameFunctions.addGameLogsH('payRent', totalRentAmount, null);
+    
     // TODO dom message. for utilities, make custom message for dice roll *
     turnLogic.value.canEndTurn = true;
 };
@@ -165,24 +171,30 @@ function payTax(propertyId) {
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};
     
     gameFunctions.payMoneyH('bank', turnLogic.value.crntPlayer, taxAmount, 'tax');
+
+    gameFunctions.addGameLogsH('payTax', taxAmount, null);
     turnLogic.value.canEndTurn = true;
     return;
 };
 
 function freeParking() {
     
-    gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} landed on Free Parking and received $${gameLogic.value.freeParking}`, color: `${turnLogic.value.crntPlayer.color}`});
+    
     turnLogic.value.crntPlayer.money += gameLogic.value.freeParking;
     gameLogic.value.freeParking = gameConstants.freeParkingMoney();
     turnLogic.value.canEndTurn = true;
+
+    gameFunctions.addGameLogsH('freeParking', gameLogic.value.freeParking, null);
     return;
 };
 
 function gotoJail() {
     
     turnLogic.value.crntPlayer.position = 11.5;
+
     // manually call function to move player. watcher() is set but not firing
-    gameBoard.value.placePlayerPiece(turnLogic.value.crntPlayer.name)
+    gameBoard.value.placePlayerPiece(turnLogic.value.crntPlayer.name);
+    
     dtrmPropAction();
     turnLogic.value.crntPlayer.inJail = true;
     endTurn();
@@ -230,9 +242,9 @@ function handleSpecialCard() {
     
     // function call from PopupSpecialCard.vue
     popupSpecialCard.value.showPopup(turnLogic.value.propertyLandedOn.style, drawnCard);
-
-    gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
-    gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});
+    
+    gameFunctions.addGameLogsH('specialCard', null, drawnCard.title);
+    
 
     switch(drawnCard.action) {
 
