@@ -33,8 +33,6 @@ let calculateTaxAmountH = (propertyId) => {
     };
 
     return consts.luxuryTax();
-
-    
 };
 
 let nextPlayerTurn = () => {

@@ -6,7 +6,7 @@
     </span>
 
     <div class="log-and-dice-wrapper">
-        <div class="gamelog-wrapper-main">
+        <div id="gamelog-wrapper-main">
             <p v-for="log in gameLogs" v-bind:style="{ 'color': log.color }" class="game-log-text">{{ log.log }}</p>
             
         </div>
@@ -35,12 +35,10 @@
 
 <script setup>
 
-// scroll to bottom
-// reference the div, then: (everytime log is added)
-// gameLogDiv.scrollTop = gameLogDiv.scrollHeight;
 
 
-import { ref, computed, onMounted, reactive } from 'vue';
+
+import { ref, computed, onMounted, reactive, watch } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';
 import * as propertyAction from '../../javascripts/propertyAction';
@@ -64,9 +62,17 @@ let gameLogs = computed(() => {
     return gameLogic.value.gameLogs
 });
 
-// TODO refactor code to use crntPlayer.value
-// component variable to access current player
-turnLogic.value.gameLogs
+// when game log is added, function to scroll to bottom is called
+watch(
+    () => gameLogic.value.gameLogs.length,
+    (count, prevCount) => {scrollGameLogs()}
+);
+function scrollGameLogs() {
+    let logElement = document.getElementById('gamelog-wrapper-main');
+    logElement.scrollTop = logElement.scrollHeight;  
+};
+
+
 
 function startTurn() {
 
@@ -301,7 +307,7 @@ function handleSpecialCard() {
 
 }
 
-.gamelog-wrapper-main {
+#gamelog-wrapper-main {
     display: flex;
     flex-direction: column;
     height: 15vw;
