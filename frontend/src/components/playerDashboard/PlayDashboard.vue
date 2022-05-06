@@ -125,11 +125,12 @@ function purchaseProperty() {
     // TODO also send a 'not enough money message to dom'
 
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, turnLogic.value.propertyLandedOn.price)) {return};
-    console.log('purchaseProperty(), debuggins')
     propertyAction.purchasePropertyH(turnLogic.value.crntPlayer, turnLogic.value.propertyLandedOn);
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.crntPlayer.name} purchased ${turnLogic.value.propertyLandedOn.name} for $${turnLogic.value.propertyLandedOn.price}`, color: `${turnLogic.value.crntPlayer.color}`});
     turnLogic.value.buyAvailable = false;
     turnLogic.value.canEndTurn = true;
+
+    gameBoard.value.placeOwnedBar()// place owned bar on dom
     
 };
 
@@ -148,7 +149,6 @@ function payRent() {
 
 function payTax(propertyId) {
 
-    console.log('pay tax debug')
     let taxAmount = gameFunctions.calculateTaxAmountH(propertyId);
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};
@@ -219,8 +219,6 @@ function handleSpecialCard() {
     
     // function call from PopupSpecialCard.vue
     popupSpecialCard.value.showPopup(turnLogic.value.propertyLandedOn.style, drawnCard);
-    
-    console.log(drawnCard.groupid)
 
     gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.style} card!`, color: `${gameConstants.logColor()}`});
     gameLogic.value.gameLogs.push({log: `${drawnCard.title}`, color: `${gameConstants.logColor()}`});

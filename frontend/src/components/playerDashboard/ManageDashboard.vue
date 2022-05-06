@@ -27,7 +27,6 @@
     </span>
 
     <br />
-    <button @click="testCall">test call</button>
     <p>Special Cards</p>
     <span v-if="computedShowSpecialCards" v-for="card in computedSpecialCards">
         <input @click="offerSpecialCard($event, card)" type="radio" name="cards">
@@ -61,7 +60,7 @@
     </span>
 
     <span v-if="showSellBuildingOffer">
-        <p>Sel building message</p>
+        <p>Sell building message</p>
         <span class="mortgage-yes-no-btn-wrapper">
             <button @click.prevent="sellBuilding">Yes</button>
             <button @click.prevent="clearOffer">No</button>
@@ -92,6 +91,7 @@ import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
 import * as gameFunctions from '../../javascripts/gameFunctions';
 import GameBoard from '../GameBoard.vue';
+import GameBoardVue from '../GameBoard.vue';
 
 let gameBoard = ref(GameBoard);
 let showComponent = ref(false); // always false. used to call function in GameBoard.vue
@@ -117,17 +117,15 @@ let canUseSpecialCard = ref(false);
 let showSpecialCardOffer = ref(false);
 
 // component variable to access current player
-let playerReference = reactive(gameLogic.value.players[gameLogic.value.whosTurnIndex]);
-let crntPlayer = computed(() => {
-    return playerReference;
-});
+
+let crntPlayer = gameLogic.value.players[gameLogic.value.whosTurnIndex];
 
 // returns all of the current player properties ordered by group
 let filteredProperties = computed(() => {
     let filteredPropArry = [];
     let propStyleArry = ['purple', 'lightgreen', 'violet', 'orange', 'red', 'yellow', 'darkgreen', 'darkblue', 'railroad', 'utilities'];
     propStyleArry.forEach((item) => {
-        filteredPropArry.push(crntPlayer.value.properties.filter((prop => prop.style === item)));
+        filteredPropArry.push(crntPlayer.properties.filter((prop => prop.style === item)));
     });
     return filteredPropArry;
 });
@@ -136,9 +134,9 @@ let filteredProperties = computed(() => {
 let computedSpecialCards = computed(() => {
     let specialCardArry = [];
 
-    if(crntPlayer.value.specialCards.length > 0) {
-        for(let i = 0; i < crntPlayer.value.specialCards.length; i++) {
-            specialCardArry.push(crntPlayer.value.specialCards[i]);
+    if(crntPlayer.specialCards.length > 0) {
+        for(let i = 0; i < crntPlayer.specialCards.length; i++) {
+            specialCardArry.push(crntPlayer.specialCards[i]);
         };
     };
     
@@ -146,15 +144,8 @@ let computedSpecialCards = computed(() => {
 });
 
 let computedShowSpecialCards = computed(() => {
-    return crntPlayer.value.specialCards.length > 0 ? true : false;
+    return crntPlayer.specialCards.length > 0 ? true : false;
 });
-
-
-function testCall() {
-    let parent = document.getElementById('mediterraneanave').childNodes[0];
-    while (parent.firstChild) {parent.removeChild(parent.firstChild)}
-    
-}
 
 function setClickedPropertyObj(propertyId) {
     
@@ -174,25 +165,33 @@ function setClickedPropertyObj(propertyId) {
 function mortgageProperty() {
 
     propertyFunctions.mortgagePropertyH(clickedProperty.id);
-    crntPlayer.value.money += clickedProperty.mortgagePrice;
+    crntPlayer.money += clickedProperty.mortgagePrice;
     clearOffer();
+
+    gameBoard.value.placeOwnedBar() // place owned bar on dom
+
     setClickedPropertyObj(clickedProperty.id);
 };
 
 function unmortgageProperty() {
+    // BUG here!
     
     let unMortgagePrice = (clickedProperty.mortgagePrice * 2) + clickedProperty.mortgagePrice * .1;
+    console.log(Math.round(unMortgagePrice))
+    console.log(crntPlayer.money)
     if(!gameFunctions.moneyCheckH(crntPlayer.money, unMortgagePrice)) {return;}; // TODO: show 'not enough money message'
-    crntPlayer.value.money -= unMortgagePrice;
+    crntPlayer.money -= unMortgagePrice;
     propertyFunctions.unMortgagePropertyH(clickedProperty.id);
+    
+    gameBoard.value.placeOwnedBar() // place owned bar on dom
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
 };
 
 function buyBuilding() {
 
-    if(!gameFunctions.moneyCheckH(crntPlayer.value.money, clickedProperty.buildingCost)) {return;}; // TODO: show 'not enough money message'
-    crntPlayer.value.money -= clickedProperty.buildingCost;
+    if(!gameFunctions.moneyCheckH(crntPlayer.money, clickedProperty.buildingCost)) {return;}; // TODO: show 'not enough money message'
+    crntPlayer.money -= clickedProperty.buildingCost;
     propertyFunctions.buyBuildingH(clickedProperty.id);
     clearOffer();
     gameBoard.value.addBuildingPiece(clickedProperty.id); // place building piece on gameboard
@@ -203,7 +202,7 @@ function sellBuilding() {
 
     propertyFunctions.sellBuildingH(clickedProperty.id);
     gameBoard.value.removeBuildingPiece(clickedProperty.id); // remove building piece from gameboard
-    crntPlayer.value.money += clickedProperty.buildingCost / 2;
+    crntPlayer.money += clickedProperty.buildingCost / 2;
     clearOffer();
     
     setClickedPropertyObj(clickedProperty.id);
@@ -225,7 +224,7 @@ function offerSpecialCard(event, specialCard) {
     
     clickedSpecialCard.value = specialCard;
 
-    if(!crntPlayer.value.inJail) {
+    if(!crntPlayer.inJail) {
         // TODO send message to dom ('can only use if in jail')
         return;
     }
@@ -237,13 +236,13 @@ function useSpecialCard() {
     clearOffer();
 
     // remove special card from players deck
-    let cardIndex = crntPlayer.value.specialCards.findIndex((card => card.title == clickedSpecialCard.value.title));
-    crntPlayer.value.specialCards.splice(cardIndex, 1);
+    let cardIndex = crntPlayer.specialCards.findIndex((card => card.title == clickedSpecialCard.value.title));
+    crntPlayer.specialCards.splice(cardIndex, 1);
 
     // remove from jail
-    crntPlayer.value.turnsInJail = 0;
-    crntPlayer.value.inJail = false;
-    crntPlayer.value.position = 11; // jail just visiting
+    crntPlayer.turnsInJail = 0;
+    crntPlayer.inJail = false;
+    crntPlayer.position = 11; // jail just visiting
 
     // TODO game logs ('out of jail!')
 

@@ -12,7 +12,7 @@ let drawSpecialCardH = (type) => {
     
     if(type == 'chance') {discardDeck = 'usedChance';} else{discardDeck = 'usedCommunityChest';};
 
-    if(deck.length < 1) {console.log('empty deck. reshuffle!'); return;} // handle empty deck
+    if(deck.length < 1) {console.log('empty deck. reshuffle!'); return;} // TODO handle empty deck
 
     let cardIndex = Math.floor(Math.random() * deck.length);
 
@@ -133,7 +133,6 @@ let moveNearestSpecialH = (groupId) => { // railroad, utility
             switch(true) {
 
                 case crntPlayer.position < 13 || crntPlayer.position > 29:
-                    console.log('should be here')
                     moveFunctions.moveToPropertyH('electriccompany');
                     if(!checkIfOwned('electriccompany')) {return 0;};
                     return calculateTotalCost('utilities', 'electriccompany');

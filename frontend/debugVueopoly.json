@@ -18,9 +18,9 @@
         "style": "purple",
         "color": "purple",
         "group": "land",
-        "ownedby": -1,
+        "ownedby": "player1",
         "buildings": 0,
-        "mortgaged": false,
+        "mortgaged": true,
         "probability": 2.1314,
         "rel": {
           "Square": "Mediterranean Avenue",
@@ -84,7 +84,7 @@
         "group": "land",
         "ownedby": -1,
         "buildings": 0,
-        "mortgaged": false,
+        "mortgaged": true,
         "rel": {
           "Square": "Oriental Avenue",
           "Probability % (Jail Short)": 2.2621,
@@ -175,9 +175,9 @@
         "style": "violet",
         "color": "violet",
         "group": "land",
-        "ownedby": -1,
+        "ownedby": "player2",
         "buildings": 0,
-        "mortgaged": false,
+        "mortgaged": true,
         "rel": {
           "Square": "St. Charles Place",
           "Probability % (Jail Short)": 2.7017,
@@ -206,9 +206,9 @@
         "style": "violet",
         "color": "violet",
         "group": "land",
-        "ownedby": -1,
+        "ownedby": "player2",
         "buildings": 0,
-        "mortgaged": false,
+        "mortgaged": true,
         "rel": {
           "Square": "States Avenue",
           "Probability % (Jail Short)": 2.3721,
@@ -547,7 +547,7 @@
         "style": "darkgreen",
         "color": "darkgreen",
         "group": "land",
-        "ownedby": -1,
+        "ownedby": "player1",
         "buildings": 5,
         "mortgaged": false,
         "rel": {

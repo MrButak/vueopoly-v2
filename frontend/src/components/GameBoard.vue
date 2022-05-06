@@ -14,6 +14,7 @@
 				<div id="kentuckyave" class="square1">
 					<div class="header header-top red"></div>
 					<div class="firstLine firstLine-top rotation2">kentucky <br /> avenue</div>
+                    <div class="ownedtopbar" id="kentuckyaveownedbar"></div>
 				</div>
 
 				<div id="chancetwo" class="square1">		
@@ -23,34 +24,41 @@
 				<div id="indianaave" class="square1 ">
 					<div class="header header-top red"></div>
 					<div class="firstLine firstLine-top rotation2">indiana <br /> avenue</div>
+                    <div class="ownedtopbar" id="indianaaveownedbar"></div>
 				</div>
 
 				<div id="illinoisave" class="square1 ">
 					<div class="header header-top red"></div>
 					<div class="firstLine firstLine-top rotation2">illinios <br /> avenue</div>
+                    <div class="ownedtopbar" id="illinoisaveownedbar"></div>
 				</div>
 
 				<div id="borailroad" class="square1 ">
 					<div class="firstLine firstLine-top no-color rotation2">b. & o. <br /> railroad</div>
+                    <div class="ownedtopbar" id="borailroadownedbar"></div>
 				</div>
 
 				<div id="atlanticave" class="square1 ">
 					<div class="header header-top yellow"></div>
 					<div class="firstLine firstLine-top rotation2">atlantic <br /> avenue</div>
+                    <div class="ownedtopbar" id="atlanticaveownedbar"></div>
 				</div>
 
 				<div id="ventnorave" class="square1 ">
 					<div class="header header-top yellow"></div>
 					<div class="firstLine firstLine-top rotation2">ventnor <br /> avenue</div>
+                    <div class="ownedtopbar" id="ventoraveownedbar"></div>
 				</div>
 
 				<div id="waterworks" class="square1 ">
 					<div class="firstLine firstLine-top no-color rotation2">water <br /> works</div>
+                    <div class="ownedtopbar" id="waterworksownedbar"></div>
 				</div>
 
 				<div id="marvingardens" class="square1 ">
 					<div class="header header-top yellow"></div>
 					<div class="firstLine firstLine-top rotation2">marvin <br /> gardens</div>
+                    <div class="ownedtopbar" id="marvingardensownedbar"></div>
 				</div>
 
 				<div id="gotojail" class="square2 "><span class="corner corner2">go to<br />jail</span></div>
@@ -62,11 +70,13 @@
 					<div id="newyorkave" class="squareSide ">
 						<div class="headerSide header-left orange"></div>
 						<div class="firstLine firstLine-left rotation1">new york <br /> avenue</div>
+                        <div class="ownedleftbar" id="newyorkaveownedbar"></div>
 					</div>
 
 					<div id="tennesseeave" class="squareSide ">
 						<div class="headerSide header-left orange"></div>
 						<div class="firstLine firstLine-left rotation1">tennessee <br /> avenue</div>
+                        <div class="ownedleftbar" id="tennesseeaveownedbar"></div>
 					</div>
 					<div id="communitychesttwo" class="squareSide ">						
 						<div class="firstLine firstLine-left no-color rotation1">community<br /> chest</div>
@@ -75,25 +85,31 @@
 					<div id="stjamesplace" class="squareSide ">
 						<div class="headerSide header-left orange"></div>
 						<div class="firstLine firstLine-left rotation1">st.james <br />place</div>
+                        <div class="ownedleftbar" id="stjamesplaceownedbar"></div>
 					</div>
 
 					<div id="pennsylvaniarailroad" class="squareSide ">						
 						<div class="firstLine firstLine-left no-color rotation1">pennsylvania<br> railroad</div>
+                        <div class="ownedleftbar" id="pennsylvaniarailroadownedbar"></div>
 					</div>
 					<div id="virginiaave" class="squareSide ">
 						<div class="headerSide header-left purple"></div>
 						<div class="firstLine firstLine-left rotation1">virginia<br /> avenue</div>
+                        <div class="ownedleftbar" id="virginiaaveownedbar"></div>
 					</div>
 					<div id="statesave" class="squareSide ">
 						<div class="headerSide header-left purple"></div>
 						<div class="firstLine firstLine-left rotation1">states<br /> avenue</div>
+                        <div class="ownedleftbar" id="statesaveownedbar"></div>
 					</div>
 					<div id="electriccompany" class="squareSide ">						
 						<div class="firstLine firstLine-left no-color rotation1">electric<br />company</div>
+                        <div class="ownedleftbar" id="electriccompanyownedbar"></div>
 					</div>
 					<div id="stcharlesplace" class="squareSide ">
 						<div class="headerSide header-left purple"></div>
 						<div class="firstLine firstLine-left rotation1">st. charles<br />place</div>
+                        <div class="ownedleftbar" id="stcharlesplaceownedbar"></div>
 					</div>
 				</div>
 
@@ -113,10 +129,12 @@
 					<div id="pacificave" class="squareSide ">
 						<div class="headerSide header-right green"></div>
 						<div class="firstLine firstLine-right rotation3">pacific<br /> avenue</div>
+                        <div class="ownedrightbar" id="pacificaveownedbar"></div>
 					</div>
 					<div id="northcarolinaave" class="squareSide ">
 						<div class="headerSide header-right green"></div>
 						<div class="firstLine firstLine-right rotation3">north<br />carolina<br />avenue</div>
+                        <div class="ownedrightbar" id="northcarolinaaveownedbar"></div>
 					</div>
 					<div id="communitychestthree" class="squareSide ">						
 						<div class="firstLine firstLine-right no-color rotation3">community<br />chest</div>
@@ -124,9 +142,11 @@
 					<div id="pennsylvaniaave" class="squareSide ">
 						<div class="headerSide header-right green"></div>
 						<div class="firstLine firstLine-right rotation3">pennsylvania<br /> avenue</div>
+                        <div class="ownedrightbar" id="pennsylvaniaaveownedbar"></div>
 					</div>
 					<div id="shortlinerailroad" class="squareSide ">						
 						<div class="firstLine firstLine-right no-color rotation3">short<br /> line</div>
+                        <div class="ownedrightbar" id="shortlinerailroadownedbar"></div>
 					</div>
                     
                     <div id="chancethree" class="squareSide ">
@@ -136,6 +156,7 @@
 					<div id="parkplace" class="squareSide ">						
 						<div class="headerSide header-right blue"></div>
 						<div class="firstLine firstLine-right rotation3">park<br /> place</div>
+                        <div class="ownedrightbar" id="parkplaceownedbar"></div>
 					</div>
 					<div id="luxerytax" class="squareSide">						
 						<div class="firstLine firstLine-right no-color rotation3">luxury<br /> tax</div>
@@ -143,6 +164,7 @@
 					<div id="boardwalk" class="squareSide ">
 						<div class="headerSide header-right blue"></div>
 						<div class="firstLine firstLine-right rotation3">boardwalk<br /> avenue</div>
+                        <div class="ownedrightbar" id="boardwalkownedbar"></div>
 					</div>
 				</div>
 			</div>
@@ -162,10 +184,12 @@
 				<div id="connecticutave" class="square1 ">
 					<div class="header header-bottom lightblue"></div>
 					<div class="firstLine firstLine-bottom">connecticut avenue</div>
+                    <div class="ownedbottombar" id="connecticutaveownedbar"></div>
 				</div>
 				<div id="vermontave" class="square1 ">
 					<div class="header header-bottom lightblue"></div>
 					<div class="firstLine firstLine-bottom">vermont<br /> avenue</div>
+                    <div class="ownedbottombar" id="vermontaveownedbar"></div>
 				</div>
 				<div id="chance" class="square1 ">
 					<div class="firstLine firstLine-bottom no-color">chance</div>
@@ -173,9 +197,11 @@
 				<div id="orientalave" class="square1 ">
 					<div class="header header-bottom lightblue"></div>
 					<div class="firstLine firstLine-bottom">oriental<br /> avenue</div>
+                    <div class="ownedbottombar" id="orientalaveownedbar"></div>
 				</div>
 				<div id="readingrailroad" class="square1 ">					
 					<div data-id="readingrailroad" class="firstLine firstLine-bottom no-color">reading<br /> railroad</div>
+                    <div class="ownedbottombar" id="readingrailroadownedbar"></div>
 				</div>
 				<div id="incometax" class="square1 ">
 					<div class="firstLine firstLine-bottom no-color">income<br /> tax</div>
@@ -183,6 +209,7 @@
 				<div id="balticave" class="square1">
 					<div class="header header-bottom brown"></div>
 					<div class="firstLine firstLine-bottom">baltic<br /> avenue</div>
+                    <div class="ownedbottombar" id="balticaveownedbar"></div>
 				</div>
 				<div id="communitychest" class="square1 ">
 					<div class="firstLine firstLine-bottom no-color">community<br /> chest</div>
@@ -190,6 +217,7 @@
 				<div id="mediterraneanave" class="square1 ">
 					<div class="header header-bottom brown"></div>
 					<div class="firstLine firstLine-bottom">mediter-<br /> ranean <br /> avenue</div>
+                    <div class="ownedbottombar" id="mediterraneanaveownedbar"></div>
 				</div>
 				<div id="go" class="square2 ">
 					<span class="corner corner3">collect<br />$200 salary<br />as you pass</span>
@@ -219,7 +247,39 @@ onMounted(() => {
             placeBuildingPieces(prop);
         };
     });
+    
+    placeOwnedBar();
 });
+
+function placeOwnedBar() {
+    
+
+    gameLogic.value.vueopoly.properties.forEach((prop) => {
+
+        if(prop.ownedby && prop.ownedby != -1) {
+
+            let playerIndex = gameLogic.value.players.findIndex((player) => player.name == prop.ownedby);
+            let playerColor = gameLogic.value.players[playerIndex].color;
+            let ownedBar = document.getElementById(prop.id + 'ownedbar');
+
+            if(prop.mortgaged) {
+                
+                ownedBar.style.backgroundColor = 'transparent';
+                ownedBar.style.borderColor = playerColor;
+            }
+            else {
+                ownedBar.style.backgroundColor = playerColor;
+                ownedBar.style.borderColor = 'transparent';
+            }; 
+        };
+
+    });
+
+    
+
+    
+    
+};
 
 function placeBuildingPieces(property) {
 
@@ -297,11 +357,9 @@ function addBuildingPiece(propertyId) {
 
 function removeBuildingPiece(propertyId) {
 
-    
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
     let property = gameLogic.value.vueopoly.properties[propertyIndex];
     let buildingCount = property.buildings;
-
 
     if(buildingCount < 4) {
         if(buildingCount < 1) {
@@ -315,6 +373,7 @@ function removeBuildingPiece(propertyId) {
         parent.childNodes[parent.childNodes.length - 1].remove();
         return;
     };
+
     // if hotel is on property when building is sold
     let parent = document.getElementById(propertyId).childNodes[0];
     parent.childNodes[0].remove();
@@ -370,14 +429,42 @@ watch(
 defineExpose({
     placePlayerPiece,
     addBuildingPiece,
-    removeBuildingPiece
+    removeBuildingPiece,
+    placeOwnedBar
 });
 </script>
 
 
 <style lang="scss" scoped>
  
-
+.ownedtopbar {
+    width: 100%;
+    height: 1vw;
+    position: absolute;
+    inset: -1.5vw 0 0 0;
+    border: 3px solid transparent;
+}
+.ownedleftbar {
+    width: 1vw;
+    height: 100%;
+    position: absolute;
+    inset: 0 0 0 -1.65vw;
+    border: 3px solid transparent;
+}
+.ownedrightbar {
+    width: 1vw;
+    height: 100%;
+    position: absolute;
+    inset: 0 0 0 9.3vw;
+    border: 3px solid transparent;
+}
+.ownedbottombar {
+    width: 100%;
+    height: 1vw;
+    position: absolute;
+    inset: 9.3vw 0 0 0;
+    border: 3px solid transparent;
+}
 div {
 	box-sizing: border-box;
 	text-transform: uppercase;

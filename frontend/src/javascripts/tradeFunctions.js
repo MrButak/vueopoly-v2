@@ -1,7 +1,7 @@
 import { gameLogic } from './stateStore';
 
 // returns an array of a player's properties (ordered by group) and special cards
-let getEligiblePropertiesH = (playerId) => {
+let getPropsToDisplayForTradeH = (playerId) => {
 
     let playerIndex = gameLogic.value.players.findIndex((player => player.name === playerId));
     let player = gameLogic.value.players[playerIndex];
@@ -26,19 +26,31 @@ let getEligiblePropertiesH = (playerId) => {
 
 let transferPropsTraderToTradeeH = (traderIndex, tradeeIndex, traderItems) => {
 
+
     traderItems.forEach((item) => {
 
-        gameLogic.value.players[tradeeIndex].properties.push(item);
-        gameLogic.value.players[traderIndex].properties.splice(item, 1);
+        // change ownership of property
+        console.log('trader => tradee')
+        let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop == item));
+        gameLogic.value.vueopoly.properties[propertyIndex].ownedby = gameLogic.value.players[tradeeIndex].name;
+        gameLogic.value.players[tradeeIndex].properties.push(gameLogic.value.vueopoly.properties[propertyIndex]);
+        gameLogic.value.players[traderIndex].properties.splice(gameLogic.value.vueopoly.properties[propertyIndex], 1);
     });
 }
 
 let transferPropsTradeeToTraderH = (traderIndex, tradeeIndex, tradeeItems) => {
+    
     tradeeItems.forEach((item) => {
 
-        gameLogic.value.players[traderIndex].properties.push(item);
-        gameLogic.value.players[tradeeIndex].properties.splice(item, 1);
+        // change ownership of property
+        let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop == item));
+        gameLogic.value.vueopoly.properties[propertyIndex].ownedby = gameLogic.value.players[traderIndex].name;
+        console.log('tradee => trader')
+
+        gameLogic.value.players[traderIndex].properties.push(gameLogic.value.vueopoly.properties[propertyIndex]);
+        gameLogic.value.players[tradeeIndex].properties.splice(gameLogic.value.vueopoly.properties[propertyIndex], 1);
+        
     });
 };
 
-export { getEligiblePropertiesH, transferPropsTraderToTradeeH, transferPropsTradeeToTraderH }
+export { getPropsToDisplayForTradeH , transferPropsTraderToTradeeH, transferPropsTradeeToTraderH }
