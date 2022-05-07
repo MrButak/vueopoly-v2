@@ -358,5 +358,7 @@ function handleSpecialCard() {
 }
 .roll-dice-btn {
     padding: 2px 10px;
+    background: linear-gradient(#f57420, #f99120);
+    width: 100%;
 }
 </style>
