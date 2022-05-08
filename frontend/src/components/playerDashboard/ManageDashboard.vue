@@ -177,6 +177,12 @@ function buyBuilding() {
     if(!gameFunctions.moneyCheckH(crntPlayer.money, clickedProperty.buildingCost)) {return;}; // TODO: show 'not enough money message'
     crntPlayer.money -= clickedProperty.buildingCost;
     propertyFunctions.buyBuildingH(clickedProperty.id);
+
+    // set state. I have a watch() on this in GameBoard.vue. It calls a function which add/removes buildings from the dom
+    turnLogic.value.buildProperty['prop'] =  gameLogic.value.vueopoly.properties[gameLogic.value.vueopoly.properties.findIndex((prop => prop.id == clickedProperty.id))];
+    turnLogic.value.buildProperty['addBuilding'] = true;
+    turnLogic.value.buildProperty.watchCount++;
+
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
 };
@@ -185,6 +191,13 @@ function sellBuilding() {
 
     propertyFunctions.sellBuildingH(clickedProperty.id);
     crntPlayer.money += clickedProperty.buildingCost / 2;
+
+    // set state. I have a watch() on this in GameBoard.vue. It calls a function which add/removes buildings from the dom
+    turnLogic.value.buildProperty['prop'] =  gameLogic.value.vueopoly.properties[gameLogic.value.vueopoly.properties.findIndex((prop => prop.id == clickedProperty.id))];
+    turnLogic.value.buildProperty['addBuilding'] = false;
+    turnLogic.value.buildProperty.watchCount--;
+    
+    
     clearOffer();
     
     setClickedPropertyObj(clickedProperty.id);

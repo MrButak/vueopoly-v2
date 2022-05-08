@@ -43,11 +43,6 @@ import PopupSpecialCard from '../specialCards/PopupSpecialCard.vue';
 
 let popupSpecialCard = ref(PopupSpecialCard);
 
-onMounted(() => {
-    
-    startTurn();
-});
-
 
 let gameLogs = computed(() => {
     return gameLogic.value.gameLogs
@@ -130,8 +125,8 @@ function dtrmPropAction() {
 function purchaseProperty() {
     // TODO also send a 'not enough money message to dom'
 
-    if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, turnLogic.value.propertyLandedOn.price)) {return};
-    propertyAction.purchasePropertyH(turnLogic.value.crntPlayer, turnLogic.value.propertyLandedOn);
+    if(!gameFunctions.moneyCheckH(gameLogic.value.players[gameLogic.value.whosTurnIndex].money, turnLogic.value.propertyLandedOn.price)) {return};
+    propertyAction.purchasePropertyH(gameLogic.value.players[gameLogic.value.whosTurnIndex], turnLogic.value.propertyLandedOn);
 
     gameFunctions.addGameLogsH('purchaseProperty', null, null);
     
@@ -140,13 +135,14 @@ function purchaseProperty() {
 };
 
 function payRent() {
-
-    if(turnLogic.value.propertyLandedOn.ownedby == turnLogic.value.crntPlayer.name) {turnLogic.value.canEndTurn = true; return};
+    
+    if(turnLogic.value.propertyLandedOn.ownedby == gameLogic.value.players[gameLogic.value.whosTurnIndex].name) {turnLogic.value.canEndTurn = true; return};
     let totalRentAmount = propertyAction.getTotalRentCostH(turnLogic.value.propertyLandedOn, turnLogic.value.crntDiceRoll);
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
     if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, totalRentAmount)) {return};
-    // // (to, from, amount, type)
-    gameFunctions.payMoneyH(turnLogic.value.propertyLandedOn.ownedby, turnLogic.value.crntPlayer.name, totalRentAmount, 'rent');
+
+    // (to, from, amount, type)
+    gameFunctions.payMoneyH(turnLogic.value.propertyLandedOn.ownedby, gameLogic.value.players[gameLogic.value.whosTurnIndex].name, totalRentAmount, 'rent');
 
     gameFunctions.addGameLogsH('payRent', totalRentAmount, null);
     
@@ -158,9 +154,9 @@ function payTax(propertyId) {
 
     let taxAmount = gameFunctions.calculateTaxAmountH(propertyId);
     // TODO send a 'not enough money message, you need to mortgage or trade to dom'. also disable end turn button
-    if(!gameFunctions.moneyCheckH(turnLogic.value.crntPlayer.money, taxAmount)) {return};
+    if(!gameFunctions.moneyCheckH(gameLogic.value.players[gameLogic.value.whosTurnIndex].money, taxAmount)) {return};
     
-    gameFunctions.payMoneyH('bank', turnLogic.value.crntPlayer, taxAmount, 'tax');
+    gameFunctions.payMoneyH('bank', gameLogic.value.players[gameLogic.value.whosTurnIndex], taxAmount, 'tax');
 
     gameFunctions.addGameLogsH('payTax', taxAmount, null);
     turnLogic.value.canEndTurn = true;
@@ -304,7 +300,6 @@ function handleSpecialCard() {
     justify-content: space-between;
 
 }
-
 #gamelog-wrapper-main {
     display: flex;
     flex-direction: column;

@@ -63,7 +63,7 @@ let isPlayerInJail = computed(() => {
     background-color: white;
     border-radius: 4%;
     flex-direction: column;
-    height: 27vw;
+    /* height: 27vw; */
     overflow: hidden;
     padding: 1.3rem;
     border: 0.1rem solid black;

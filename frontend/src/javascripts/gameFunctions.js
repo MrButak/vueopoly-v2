@@ -49,7 +49,6 @@ let nextPlayerTurn = () => {
 let addGameLogsH = (logCase, moneyAmount, specialCardTitle) => {
 
     let crntPlayer = consts.crntPlayer();
-    let gameLogs = consts.gameLogs();
 
     switch(logCase) {
 
@@ -63,7 +62,8 @@ let addGameLogsH = (logCase, moneyAmount, specialCardTitle) => {
             gameLogic.value.gameLogs.push({log: `${crntPlayer.name} purchased ${turnLogic.value.propertyLandedOn.name} for $${turnLogic.value.propertyLandedOn.price}.`, color: `${crntPlayer.color}`});
             break;
         case 'payRent':
-            gameLogic.value.gameLogs.push({log: `${crntPlayer.name} payed $${turnLogic.value.propertyLandedOn.ownedby} $${moneyAmount} in rent at ${turnLogic.value.propertyLandedOn.name}.`, color: `${crntPlayer.color}`});
+            console.log('should be here')
+            gameLogic.value.gameLogs.push({log: `${crntPlayer.name} payed ${turnLogic.value.propertyLandedOn.ownedby} $${moneyAmount} in rent at ${turnLogic.value.propertyLandedOn.name}.`, color: `${crntPlayer.color}`});
             break;
         case 'payTax':
             gameLogic.value.gameLogs.push({log: `${crntPlayer.name} payed $${moneyAmount} in tax.`, color: `${crntPlayer.color}`});

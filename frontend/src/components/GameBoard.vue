@@ -244,7 +244,6 @@ onMounted(() => {
         };
     });
     placeOwnedBar();
-    console.log(gameLogic.value.vueopoly.properties)
 });
 
 function placeOwnedBar() {
@@ -271,15 +270,12 @@ function placeOwnedBar() {
 };
 
 function placeBuildingPieces(property) {
-
     let buildingCount = property.buildings;
     let row = domFunctions.dtrmBuildingRowH(property.id);
     let buildingDimensions = domFunctions.dtrmBuildingDimensionsH(row, buildingCount);
-
     // houses
     if(buildingCount < 5) {
         for(let i = 1; i < buildingCount + 1; i++) {
-
             let buildingPiece = document.createElement('span');
             buildingPiece.style.width = buildingDimensions[0];
             buildingPiece.style.height = buildingDimensions[1];
@@ -300,19 +296,14 @@ function placeBuildingPieces(property) {
     buildingPiece.style.position = 'absolute';
     let parent = document.getElementById(property.id);
     parent.firstChild.append(buildingPiece);
-
 };
-
 function addBuildingPiece(propertyId) {
-
-
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
     let property = gameLogic.value.vueopoly.properties[propertyIndex];
     let buildingCount = property.buildings;
     let row = domFunctions.dtrmBuildingRowH(propertyId);
     let buildingDimensions = domFunctions.dtrmBuildingDimensionsH(row, buildingCount);
     let buildingPiece = document.createElement('span');
-
     // houses
     if(buildingCount < 5) {
         
@@ -330,7 +321,6 @@ function addBuildingPiece(propertyId) {
         buildingPiece.style.height = buildingDimensions[1];
         buildingPiece.style.backgroundColor = consts.hotelColor();
     };
-
     buildingPiece.style.inset = domFunctions.dtrmBuildingInsetH(row, buildingCount);
     buildingPiece.style.position = 'absolute';
     
@@ -338,16 +328,12 @@ function addBuildingPiece(propertyId) {
     document.getElementById(propertyId).firstChild.append(buildingPiece);
     
 };
-
 function removeBuildingPiece(propertyId) {
-
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
     let property = gameLogic.value.vueopoly.properties[propertyIndex];
     let buildingCount = property.buildings;
-
     if(buildingCount < 4) {
         if(buildingCount < 1) {
-
             let parent = document.getElementById(propertyId).childNodes[0];
             parent.childNodes[0].remove();
             return;
@@ -356,7 +342,6 @@ function removeBuildingPiece(propertyId) {
         parent.childNodes[parent.childNodes.length - 1].remove();
         return;
     };
-
     // if hotel is on property when building is sold
     let parent = document.getElementById(propertyId).childNodes[0];
     // remove all then place 4 houses
@@ -367,6 +352,7 @@ function removeBuildingPiece(propertyId) {
         addBuildingPiece(propertyId);
     };  
 };
+
 function placePlayerPiece(playerId) {
     
     // if element already on the dom, remove it
@@ -424,12 +410,20 @@ watch(
     () => {placeOwnedBar()}
 );
 
-defineExpose({
-    placePlayerPiece,
-    addBuildingPiece,
-    removeBuildingPiece,
-    placeOwnedBar
-});
+// when a building is purchased or sold
+watch(
+    () => turnLogic.value.buildProperty.watchCount,
+    () => {
+
+        if(turnLogic.value.buildProperty.addBuilding) {
+            addBuildingPiece(turnLogic.value.buildProperty.prop.id);
+        }
+        else {
+            removeBuildingPiece(turnLogic.value.buildProperty.prop.id);
+        };
+    }
+);
+
 </script>
 
 
@@ -437,7 +431,7 @@ defineExpose({
 
 .debug-btn {
     position: absolute;
-    inset: 48vw 0 0 25vw;
+    inset: 58vw 0 0 25vw;
 }
 .ownedtopbar {
     width: 100%;
