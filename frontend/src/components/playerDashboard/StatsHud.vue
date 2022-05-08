@@ -1,13 +1,12 @@
 <template>
 
 <div class="player-stats-wrapper-main">
-    
+
     <div class="logoBox">
-    <span class="logoName">vueopoly</span>
-</div>
+        <span class="logoName">vueopoly</span>
+    </div>
 
     <div v-for="player in gameLogic.value.players" class="player-stat-wrapper">
-        
         <span v-bind:id="player.name + 'hud'" class="player-wrapper">
             <span class="player-color-wrapper" v-bind:style="{ 'background-color': player.color }"></span>
             <h3>{{ player.name }}-{{ player.alias }} ${{ player.money }}</h3>
@@ -18,10 +17,8 @@
 
 </template>
 
-
 <script setup>
-import { onMounted, reactive, ref, computed, watch } from 'vue';
-import { crntPlayer } from '../../javascripts/constants';
+import { onMounted, watch } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 
 onMounted(() => {
@@ -29,6 +26,7 @@ onMounted(() => {
     insertCrntPlayerArrow();
 });
 
+// when turn ends, place the '-->' arrow
 watch (
     () => gameLogic.value.whosTurnIndex,
     () => {insertCrntPlayerArrow()}
@@ -45,16 +43,11 @@ function insertCrntPlayerArrow() {
     arrow.id = 'arrowWrapper';
 
     document.getElementById(gameLogic.value.players[gameLogic.value.whosTurnIndex].name + 'hud').prepend(arrow);
-    
-}
-
-
+};
 
 </script>
 
-
 <style scoped>
-
 
 .logoBox {
 	
@@ -108,7 +101,6 @@ function insertCrntPlayerArrow() {
     margin: 0.3vw auto;
     position: relative;
 }
-
 .player-stats-wrapper-main {
 
     position: absolute;
@@ -129,9 +121,6 @@ function insertCrntPlayerArrow() {
     width: 2.5vw;
     height: 2.5vw;
     border-radius: 50%;
-    /* position: absolute; */
-    /* margin: 0.5rem 0 0 -2.5rem; */
-
 }
 .player-wrapper {
     display:flex;

@@ -31,9 +31,6 @@
 
 <script setup>
 
-
-
-
 import { ref, computed, onMounted, reactive, watch } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as moveFunction from '../../javascripts/moveFunctions';

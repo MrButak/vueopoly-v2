@@ -1,16 +1,14 @@
 <template>
 
-<div v-if="!startGame && askToContinueGame">
-    <div>
-        <div class="choose-players-wrapper">
-            
-            <text>Saved game found.</text>
-            <div class="continue-game-btn-wrapper">
-                <button @click="startGame = true; askToContinueGame = false" type="submit">Continue</button>
-                <button @click="askToContinueGame = false" type="submit">New game</button>
-            </div>
-            
+<div v-if="!startGame && askToContinueGame" class="full-page-centered">
+    <div class="choose-players-wrapper">
+        
+        <text>Saved game found.</text>
+        <div class="continue-game-btn-wrapper">
+            <button @click="startGame = true; askToContinueGame = false" type="submit">Continue</button>
+            <button @click="askToContinueGame = false" type="submit">New game</button>
         </div>
+        
     </div>
 </div>
 
@@ -76,6 +74,9 @@ function submitUserProfile(event) {
 
 
 <style scoped>
+.full-page-centered {
+    position: absolute;
+}
 .continue-game-btn-wrapper {
     display: flex;
     gap: 10px;

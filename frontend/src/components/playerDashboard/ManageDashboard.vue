@@ -1,7 +1,5 @@
 <template>
-<!-- <span v-show="showComponent">
-    <GameBoard ref="gameBoard" />
-</span> -->
+
     <p>Properties</p>
     <span v-for="propArry in filteredProperties">
 
@@ -86,15 +84,11 @@
 <script setup>
 
 import { computed } from '@vue/reactivity';
-import { onMounted, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
 import * as gameFunctions from '../../javascripts/gameFunctions';
 import GameBoard from '../GameBoard.vue';
-
-
-let gameBoard = ref(GameBoard);
-let showComponent = ref(false); // always false. used to call function in GameBoard.vue
 
 let clickedProperty = reactive({
     name: ref(''),
@@ -132,14 +126,13 @@ let filteredProperties = computed(() => {
 
 // returns all of the current player special cards (get out of jail free)
 let computedSpecialCards = computed(() => {
-    let specialCardArry = [];
 
+    let specialCardArry = [];
     if(crntPlayer.specialCards.length > 0) {
         for(let i = 0; i < crntPlayer.specialCards.length; i++) {
             specialCardArry.push(crntPlayer.specialCards[i]);
         };
     };
-    
     return specialCardArry;
 });
 
@@ -151,7 +144,6 @@ function setClickedPropertyObj(propertyId) {
     
     clearOffer();
     let propObj = propertyFunctions.checkedPropObjH(propertyId);
-    
     clickedProperty.name = propObj.name;
     clickedProperty.id = propObj.id;
     clickedProperty.buildingCost = propObj.buildingCost;
@@ -167,23 +159,15 @@ function mortgageProperty() {
     propertyFunctions.mortgagePropertyH(clickedProperty.id);
     crntPlayer.money += clickedProperty.mortgagePrice;
     clearOffer();
-    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
-    //gameBoard.value.placeOwnedBar() // place owned bar on dom
-
     setClickedPropertyObj(clickedProperty.id);
 };
 
 function unmortgageProperty() {
-    // BUG here!
     
     let unMortgagePrice = (clickedProperty.mortgagePrice * 2) + clickedProperty.mortgagePrice * .1;
-    console.log(Math.round(unMortgagePrice))
-    console.log(crntPlayer.money)
     if(!gameFunctions.moneyCheckH(crntPlayer.money, unMortgagePrice)) {return;}; // TODO: show 'not enough money message'
     crntPlayer.money -= unMortgagePrice;
     propertyFunctions.unMortgagePropertyH(clickedProperty.id);
-    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
-    //gameBoard.value.placeOwnedBar() // place owned bar on dom
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
 };
@@ -194,16 +178,12 @@ function buyBuilding() {
     crntPlayer.money -= clickedProperty.buildingCost;
     propertyFunctions.buyBuildingH(clickedProperty.id);
     clearOffer();
-    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
-    //gameBoard.value.addBuildingPiece(clickedProperty.id); // place building piece on gameboard
     setClickedPropertyObj(clickedProperty.id);
 };
 
 function sellBuilding() {
 
     propertyFunctions.sellBuildingH(clickedProperty.id);
-    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
-    //gameBoard.value.removeBuildingPiece(clickedProperty.id); // remove building piece from gameboard
     crntPlayer.money += clickedProperty.buildingCost / 2;
     clearOffer();
     
@@ -216,7 +196,6 @@ function clearOffer() {
    showUnmortgageOffer.value = false;
    showBuildOffer.value = false;
    showSellBuildingOffer.value = false;
-
    canUseSpecialCard.value = false;
    showSpecialCardOffer.value = false;
 };

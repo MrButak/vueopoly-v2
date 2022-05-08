@@ -5,7 +5,6 @@
 
 <span v-if="startGame">
 <GameBoard />
-<!-- <Dashboard /> -->
 </span>
 </template>
 
@@ -14,14 +13,8 @@
 
 import GameBoard from './components/GameBoard.vue';
 import NewGame from './components/NewGame.vue';
-import Dashboard from './components/playerDashboard/DashBoard.vue';
 import { watch, computed } from 'vue';
 import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
-
-let compStartGame = computed(() => {
-    return startGame.value;
-});
-
 
 </script>
 
@@ -29,7 +22,6 @@ let compStartGame = computed(() => {
 <style>
 
 * {
-    
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;

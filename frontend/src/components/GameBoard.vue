@@ -215,12 +215,10 @@
 					<span class="corner corner3">collect<br />$200 salary<br />as you pass</span>
 				</div>
 			</div>
-
 		</div>
         
 	</div>
     <StatsHud />
-    
     <button @click="manualMove">move player forward</button>
     
 </template>
@@ -267,7 +265,6 @@ function placeOwnedBar() {
                 ownedBar.style.borderColor = 'transparent';
             }; 
         };
-
     });
 };
 
@@ -309,12 +306,9 @@ function addBuildingPiece(propertyId) {
 
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
     let property = gameLogic.value.vueopoly.properties[propertyIndex];
-
     let buildingCount = property.buildings;
     let row = domFunctions.dtrmBuildingRowH(propertyId);
-    
     let buildingDimensions = domFunctions.dtrmBuildingDimensionsH(row, buildingCount);
-    
     let buildingPiece = document.createElement('span');
 
     // houses
@@ -335,9 +329,7 @@ function addBuildingPiece(propertyId) {
         buildingPiece.style.backgroundColor = consts.hotelColor();
     };
 
-    
     buildingPiece.style.inset = domFunctions.dtrmBuildingInsetH(row, buildingCount);
-    
     buildingPiece.style.position = 'absolute';
     
     // add building piece to dom
@@ -356,7 +348,6 @@ function removeBuildingPiece(propertyId) {
 
             let parent = document.getElementById(propertyId).childNodes[0];
             parent.childNodes[0].remove();
-            
             return;
         };
         let parent = document.getElementById(propertyId).childNodes[0];
@@ -366,8 +357,8 @@ function removeBuildingPiece(propertyId) {
 
     // if hotel is on property when building is sold
     let parent = document.getElementById(propertyId).childNodes[0];
+    // remove all then place 4 houses
     parent.childNodes[0].remove();
-
     property.buildings = 0;
     for(let i = 1; i < 5; i++) {
         property.buildings++;
@@ -479,7 +470,8 @@ div {
     background: #cde6d0;
     width: 56vw;
     height: 56vw;
-    margin: 3rem 0 3rem 3rem;
+    inset: 3rem 0 3rem 3rem;
+    position: absolute;
 }
 .mainSquare {
 	height: 100%;

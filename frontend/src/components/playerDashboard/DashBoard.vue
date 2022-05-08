@@ -3,8 +3,6 @@
     <div class="player-dashboard-wrapper-main">
         <div class="player-dashboard-wrapper">
 
-            
-
             <div class="player-stats-top-wrapper">
 
                 <button class="stat-btn" v-if="gameLogic.value.view === 'play'" @click="gameLogic.value.view = 'manage'">Manage</button>
