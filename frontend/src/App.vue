@@ -39,14 +39,23 @@ import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
     margin: 0px;
     padding: 0px;
 }
-#app {
+html {
     background-color: #F1F1F1;
+}
+#app {
+    
+    
 }
 .mobile-portrait-view, .container, .card, .card-title, .card-desc, .card-sub, .card-image, svg {
     display: none;
 } 
 /* hide app on mobile in portrait */
 @media only screen and (max-width: 700px) {
+
+    #app {
+        
+        background-color: none;
+    }
     .mobie-portrait-view {
         display: flex;
         position: absolute;
@@ -57,14 +66,11 @@ import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
         justify-content: center;
         overflow: hidden;
 
-
-
         .container {
             
             display: flex;
             justify-content: center;
             align-items: center;
-            
         }
 
         .card {
@@ -98,8 +104,8 @@ import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
         }
 
         .card-sub {
-        font-size: 0.9rem;
-        display: block;
+            font-size: 0.9rem;
+            display: block;
         }
 
         .card-image {
@@ -114,7 +120,6 @@ import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
             animation: slide-in 500ms linear forwards;
             display: block;
             width: 80%;
-            
         }
 
         @keyframes slide-in {

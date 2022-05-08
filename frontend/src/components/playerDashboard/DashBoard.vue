@@ -51,31 +51,15 @@ let isPlayerInJail = computed(() => {
     text-transform: lowercase;
 }
 .player-dashboard-wrapper-main {
-
-    /* position: absolute;
-    margin: 5vw 0 0 2vw; */
-    
     position: absolute;
     width: 65%;
-    
 }
-    
 .player-dashboard-wrapper {
     
-    /* display: flex;
-    width: 34.65vw;
-    background-color: white;
-    border-radius: 4%;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 1.3rem;
-    border: 0.1rem solid black; */
-
     display: flex;
-    background-color: white;
-    border-radius: 4%;
+    background-color: #F1F1F1;
+    border-radius: 2%;
     flex-direction: column;
-    /* height: 33vw; */
     padding: 0 1.3rem;
     border: 0.1rem solid black;
     

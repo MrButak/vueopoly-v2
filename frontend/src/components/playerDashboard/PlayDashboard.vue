@@ -302,8 +302,8 @@ function handleSpecialCard() {
 
 }
 #gamelog-wrapper-main {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     height: 15vw;
     background-color: black;
     border: 1px solid black;
