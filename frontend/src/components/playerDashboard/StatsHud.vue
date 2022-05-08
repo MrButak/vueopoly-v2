@@ -36,13 +36,18 @@ function insertCrntPlayerArrow() {
 
     if(document.getElementById('arrowWrapper')) {document.getElementById('arrowWrapper').remove();};
 
-    let arrow = document.createElement('span');
-    arrow.style.fontSize = '3vw';
-    
-    arrow.textContent = '-->';
-    arrow.id = 'arrowWrapper';
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    var path1 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 
-    document.getElementById(gameLogic.value.players[gameLogic.value.whosTurnIndex].name + 'hud').prepend(arrow);
+    svg.setAttribute("aria-hidden","true");
+    svg.setAttribute('viewbox', '0 0 44.952 44.952');
+    svg.setAttribute('width', '6vw');
+    svg.setAttribute('height', '5vw');
+    svg.setAttribute('id', 'arrowWrapper');
+    path1.setAttribute('d', 'M44.952,22.108c0-1.25-0.478-2.424-1.362-3.308L30.627,5.831c-0.977-0.977-2.561-0.977-3.536,0 c-0.978,0.977-0.976,2.568,0,3.546l10.574,10.57H2.484C1.102,19.948,0,21.081,0,22.464c0,0.003,0,0.025,0,0.028 c0,1.382,1.102,2.523,2.484,2.523h35.182L27.094,35.579c-0.978,0.978-0.978,2.564,0,3.541c0.977,0.979,2.561,0.978,3.538-0.001 l12.958-12.97c0.885-0.882,1.362-2.059,1.362-3.309C44.952,22.717,44.952,22.231,44.952,22.108z');
+    svg.appendChild(path1);
+
+    document.getElementById(gameLogic.value.players[gameLogic.value.whosTurnIndex].name + 'hud').prepend(svg);
 };
 
 </script>

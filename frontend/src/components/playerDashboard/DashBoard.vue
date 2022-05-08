@@ -1,5 +1,4 @@
 <template>
-    
     <div class="player-dashboard-wrapper-main">
         <div class="player-dashboard-wrapper">
 
@@ -75,10 +74,8 @@ let isPlayerInJail = computed(() => {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    
-    overflow: hidden;
     align-items: center;
-    padding: 0 0 1.7rem 0;
+    padding: 0 0 .7rem 0;
 }
 .text-wrapper {
     display: flex;

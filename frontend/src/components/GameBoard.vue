@@ -1,5 +1,6 @@
 <template>
 
+
 	<div class="responsive">
 
 		<div class="mainSquare">
@@ -219,7 +220,8 @@
         
 	</div>
     <StatsHud />
-    <button @click="manualMove">move player forward</button>
+    <span class="debug-btn"><button @click="manualMove">move player forward</button></span>
+    
     
 </template>
 
@@ -432,7 +434,11 @@ defineExpose({
 
 
 <style lang="scss" scoped>
- 
+
+.debug-btn {
+    position: absolute;
+    inset: 48vw 0 0 25vw;
+}
 .ownedtopbar {
     width: 100%;
     height: 1vw;
