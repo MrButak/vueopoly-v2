@@ -72,7 +72,7 @@ let isPlayerInJail = computed(() => {
     overflow: hidden;
     padding: 1.3rem;
     border: 0.1rem solid black;
-    justify-content: space-between;
+    
 }
 
 .player-stats-top-wrapper {
@@ -82,6 +82,7 @@ let isPlayerInJail = computed(() => {
     
     overflow: hidden;
     align-items: center;
+    padding: 0 0 1.7rem 0;
 }
 .text-wrapper {
     display: flex;
