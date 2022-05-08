@@ -220,7 +220,7 @@
         
 	</div>
     <StatsHud />
-    <span class="debug-btn"><button @click="manualMove">move player forward</button></span>
+    <!-- <span class="debug-btn"><button @click="manualMove">move player forward</button></span> -->
     
     
 </template>

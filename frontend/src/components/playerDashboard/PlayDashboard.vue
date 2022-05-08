@@ -93,8 +93,9 @@ defineExpose({
 
 function rollDice() {
     
+    
     turnLogic.value.crntDiceRoll = moveFunction.rollDiceH();
-    moveFunction.movePlayerH(turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1], turnLogic.value.crntPlayer.position);
+    moveFunction.movePlayerH(turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1], gameLogic.value.players[gameLogic.value.whosTurnIndex].position);
     turnLogic.value.diceRolled = true; // will remove the 'roll dice btn' from dom
 };
 
@@ -102,7 +103,7 @@ function rollDice() {
 function dtrmPropAction() {
 
     turnLogic.value.propertyLandedOn = moveFunction.getCrntPropH();
-    
+    console.log(turnLogic.value.propertyLandedOn)
     gameFunctions.addGameLogsH('diceRoll', null, null); // game log
     
     switch(propertyAction.dtrmPropActionH(turnLogic.value.propertyLandedOn)) {

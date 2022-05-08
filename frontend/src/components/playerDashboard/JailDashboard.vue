@@ -3,7 +3,7 @@
 
 <p>You are in jail</p>
 <p>Roll Doubles or use card to get out...</p>
-<p v-if="diceRolled">{{ diceRoll.value[0] }} , {{ diceRoll.value[1] }}</p>
+<p v-if="diceRolled">{{ diceRoll[0] }} , {{ diceRoll[1] }}</p>
 <button v-if="!diceRolled" @click="roll()">roll for doubles</button>
 <button v-if="diceRolled" @click="endTurn">End Turn</button>
 </template>
