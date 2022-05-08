@@ -243,13 +243,12 @@ onMounted(() => {
             placeBuildingPieces(prop);
         };
     });
-    
     placeOwnedBar();
+    console.log(gameLogic.value.vueopoly.properties)
 });
 
 function placeOwnedBar() {
     
-
     gameLogic.value.vueopoly.properties.forEach((prop) => {
 
         if(prop.ownedby && prop.ownedby != -1) {
@@ -270,11 +269,6 @@ function placeOwnedBar() {
         };
 
     });
-
-    
-
-    
-    
 };
 
 function placeBuildingPieces(property) {
@@ -385,15 +379,10 @@ function placePlayerPiece(playerId) {
     // if element already on the dom, remove it
     if(document.getElementById(playerId)) {document.getElementById(playerId).remove()};
     
-
     let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId));
-
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
-    
     let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
-
     let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
-
     let positionObj = gameLogic.value.playerPiecePos[`${gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
 
     // add css properties and id (getting info from an object in initNewGame.js)
@@ -411,15 +400,35 @@ function placePlayerPiece(playerId) {
 
 function manualMove() {
     gameLogic.value.players[gameLogic.value.whosTurnIndex].position++
-}
+};
 
 // when current players poition changes
 watch(
     () => gameLogic.value.players[gameLogic.value.whosTurnIndex].position,
     (count, prevCount) => {
-        // placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
         placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name);
     }
+);
+
+// called when property changes ownership, and places 'owned bar' on the dom
+watch(
+    () => [gameLogic.value.vueopoly.properties[0].ownedby,
+    gameLogic.value.vueopoly.properties[1].ownedby, gameLogic.value.vueopoly.properties[2].ownedby,
+    gameLogic.value.vueopoly.properties[3].ownedby, gameLogic.value.vueopoly.properties[4].ownedby,
+    gameLogic.value.vueopoly.properties[5].ownedby, gameLogic.value.vueopoly.properties[6].ownedby,
+    gameLogic.value.vueopoly.properties[7].ownedby, gameLogic.value.vueopoly.properties[8].ownedby,
+    gameLogic.value.vueopoly.properties[9].ownedby, gameLogic.value.vueopoly.properties[10].ownedby,
+    gameLogic.value.vueopoly.properties[11].ownedby, gameLogic.value.vueopoly.properties[12].ownedby,
+    gameLogic.value.vueopoly.properties[13].ownedby, gameLogic.value.vueopoly.properties[14].ownedby,
+    gameLogic.value.vueopoly.properties[15].ownedby, gameLogic.value.vueopoly.properties[16].ownedby,
+    gameLogic.value.vueopoly.properties[17].ownedby, gameLogic.value.vueopoly.properties[18].ownedby,
+    gameLogic.value.vueopoly.properties[19].ownedby, gameLogic.value.vueopoly.properties[20].ownedby,
+    gameLogic.value.vueopoly.properties[21].ownedby, gameLogic.value.vueopoly.properties[22].ownedby,
+    gameLogic.value.vueopoly.properties[23].ownedby, gameLogic.value.vueopoly.properties[24].ownedby,
+    gameLogic.value.vueopoly.properties[25].ownedby, gameLogic.value.vueopoly.properties[26].ownedby,
+    gameLogic.value.vueopoly.properties[27].ownedby,
+    ],
+    () => {placeOwnedBar()}
 );
 
 defineExpose({
@@ -466,11 +475,6 @@ div {
 	text-transform: uppercase;
 }
 .responsive {
-    /*background: #cde6d0;
-    width: 80vw;
-    height: 80vw;
-    margin: 10px auto;*/
-    /*transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);*/
     
     background: #cde6d0;
     width: 56vw;

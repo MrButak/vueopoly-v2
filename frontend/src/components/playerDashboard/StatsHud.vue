@@ -1,8 +1,4 @@
 <template>
- 
-<!-- <div class="logoBox">
-    <span class="logoName">vueopoly</span>
-</div> -->
 
 <div class="player-stats-wrapper-main">
     
@@ -19,8 +15,6 @@
     </div>
 
 </div>
-    
-
 
 </template>
 
@@ -41,25 +35,16 @@ watch (
 );
 
 function insertCrntPlayerArrow() {
-    try {
-        document.getElementById('arrowWrapper').remove();
-    }
-    catch(err) {
-        console.log(err);
-    };
+
+    if(document.getElementById('arrowWrapper')) {document.getElementById('arrowWrapper').remove();};
 
     let arrow = document.createElement('span');
-    //arrow.style.position = 'absolute';
     arrow.style.fontSize = '3vw';
-    //arrow.style.width = '5vw';
-    //arrow.style.height = '1vw';
-    //arrow.style.inset = '-1vw 0 0 -2vw';
+    
     arrow.textContent = '-->';
     arrow.id = 'arrowWrapper';
 
     document.getElementById(gameLogic.value.players[gameLogic.value.whosTurnIndex].name + 'hud').prepend(arrow);
-    console.log(document.getElementById(gameLogic.value.players[gameLogic.value.whosTurnIndex].name + 'hud'))
-    // display: flex;
     
 }
 

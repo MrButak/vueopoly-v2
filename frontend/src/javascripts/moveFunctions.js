@@ -25,9 +25,9 @@ let passGoH = () => {
     
     let crntPlayer = consts.crntPlayer();
     let gameLogs = consts.gameLogs();
+    // TODO add this log by calling the function
     let gameLog = {log: `${crntPlayer.name} passed Go! Collect $200`, color: consts.logColor()};
     crntPlayer.money += 200;
-    // TODO create a seperate function to handle logs
     gameLogs.push(gameLog);
 };
 

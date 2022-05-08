@@ -54,27 +54,27 @@ let addGameLogsH = (logCase, moneyAmount, specialCardTitle) => {
     switch(logCase) {
 
         case 'startTurn':
-            gameLogs.push({log: `${crntPlayer.name}'s turn.`, color: `${crntPlayer.color}`});
+            gameLogic.value.gameLogs.push({log: `${crntPlayer.name}'s turn.`, color: `${crntPlayer.color}`});
             break;
         case 'diceRoll':
-            gameLogs.push({log: `${crntPlayer.name} rolled for ${turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1]} and landed on ${turnLogic.value.propertyLandedOn.name}.`, color: `${crntPlayer.color}`});
+            gameLogic.value.gameLogs.push({log: `${crntPlayer.name} rolled for ${turnLogic.value.crntDiceRoll[0] + turnLogic.value.crntDiceRoll[1]} and landed on ${turnLogic.value.propertyLandedOn.name}.`, color: `${crntPlayer.color}`});
             break;
         case 'purchaseProperty':
-            gameLogs.push({log: `${crntPlayer.name} purchased ${turnLogic.value.propertyLandedOn.name} for $${turnLogic.value.propertyLandedOn.price}.`, color: `${crntPlayer.color}`});
+            gameLogic.value.gameLogs.push({log: `${crntPlayer.name} purchased ${turnLogic.value.propertyLandedOn.name} for $${turnLogic.value.propertyLandedOn.price}.`, color: `${crntPlayer.color}`});
             break;
         case 'payRent':
-            gameLogs.push({log: `${crntPlayer.name} payed $${turnLogic.value.propertyLandedOn.ownedby} $${moneyAmount} in rent at ${turnLogic.value.propertyLandedOn.name}.`, color: `${crntPlayer.color}`});
+            gameLogic.value.gameLogs.push({log: `${crntPlayer.name} payed $${turnLogic.value.propertyLandedOn.ownedby} $${moneyAmount} in rent at ${turnLogic.value.propertyLandedOn.name}.`, color: `${crntPlayer.color}`});
             break;
         case 'payTax':
-            gameLogs.push({log: `${crntPlayer.name} payed $${moneyAmount} in tax.`, color: `${crntPlayer.color}`});
+            gameLogic.value.gameLogs.push({log: `${crntPlayer.name} payed $${moneyAmount} in tax.`, color: `${crntPlayer.color}`});
             break;
         case 'freeParking':
-            gameLogs.push({log: `${crntPlayer.name} received $${moneyAmount} from Free Parking`, color: `${crntPlayer.color}`});
+            gameLogic.value.gameLogs.push({log: `${crntPlayer.name} received $${moneyAmount} from Free Parking`, color: `${crntPlayer.color}`});
             break;
         case 'specialCard':
-            gameLogs.push({log: `${turnLogic.value.propertyLandedOn.name}: ${specialCardTitle}`, color: `${consts.logSpecialCardColor()}`});
+            gameLogic.value.gameLogs.push({log: `${turnLogic.value.propertyLandedOn.name}: ${specialCardTitle}`, color: `${consts.logSpecialCardColor()}`});
             break;
-    }
+    };
     
 };
 
