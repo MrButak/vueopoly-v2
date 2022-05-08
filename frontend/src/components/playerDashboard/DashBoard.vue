@@ -3,8 +3,6 @@
     <div class="player-dashboard-wrapper-main">
         <div class="player-dashboard-wrapper">
 
-            
-
             <div class="player-stats-top-wrapper">
 
                 <button class="stat-btn" v-if="gameLogic.value.view === 'play'" @click="gameLogic.value.view = 'manage'">Manage</button>
@@ -38,7 +36,7 @@ import TradeDashboard from './TradeDashboard.vue';
 
 
 let isPlayerInJail = computed(() => {
-    return turnLogic.value.crntPlayer.inJail ? true : false;
+    return gameLogic.value.players[gameLogic.value.whosTurnIndex].inJail ? true : false;
 });
 
 // watch(
@@ -56,8 +54,6 @@ let isPlayerInJail = computed(() => {
 .player-dashboard-wrapper-main {
 
     position: absolute;
-    width: 100%;
-    height: 100%;
     margin: 5vw 0 0 2vw;
 }
     

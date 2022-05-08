@@ -215,20 +215,10 @@
 					<span class="corner corner3">collect<br />$200 salary<br />as you pass</span>
 				</div>
 			</div>
-
 		</div>
-<div class="square9">
-					<div class="card-box card-blue">
-						<div class="card-blue-inside"></div>
-					</div>
-					<div class="logoBox">
-						<span class="logoName">vueopoly</span>
-					</div>
-					<div class="card-box card-orange">
-						<div class="card-orange-inside"></div>						
-					</div>
-				</div>
+        
 	</div>
+    <StatsHud />
     <button @click="manualMove">move player forward</button>
     
 </template>
@@ -239,6 +229,7 @@ import { lsInUse, gameLogic, turnLogic } from '../javascripts/stateStore';
 import * as consts from '../javascripts/constants';
 import * as domFunctions from '../javascripts/domFunctions';
 import DashBoard from '../components/playerDashboard/DashBoard.vue';
+import StatsHud from '../components/playerDashboard/StatsHud.vue';
 
 // place all player pieces, buildings
 onMounted(() => {
@@ -250,13 +241,12 @@ onMounted(() => {
             placeBuildingPieces(prop);
         };
     });
-    
     placeOwnedBar();
+    console.log(gameLogic.value.vueopoly.properties)
 });
 
 function placeOwnedBar() {
     
-
     gameLogic.value.vueopoly.properties.forEach((prop) => {
 
         if(prop.ownedby && prop.ownedby != -1) {
@@ -275,13 +265,7 @@ function placeOwnedBar() {
                 ownedBar.style.borderColor = 'transparent';
             }; 
         };
-
     });
-
-    
-
-    
-    
 };
 
 function placeBuildingPieces(property) {
@@ -322,12 +306,9 @@ function addBuildingPiece(propertyId) {
 
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop => prop.id === propertyId));
     let property = gameLogic.value.vueopoly.properties[propertyIndex];
-
     let buildingCount = property.buildings;
     let row = domFunctions.dtrmBuildingRowH(propertyId);
-    
     let buildingDimensions = domFunctions.dtrmBuildingDimensionsH(row, buildingCount);
-    
     let buildingPiece = document.createElement('span');
 
     // houses
@@ -348,9 +329,7 @@ function addBuildingPiece(propertyId) {
         buildingPiece.style.backgroundColor = consts.hotelColor();
     };
 
-    
     buildingPiece.style.inset = domFunctions.dtrmBuildingInsetH(row, buildingCount);
-    
     buildingPiece.style.position = 'absolute';
     
     // add building piece to dom
@@ -369,7 +348,6 @@ function removeBuildingPiece(propertyId) {
 
             let parent = document.getElementById(propertyId).childNodes[0];
             parent.childNodes[0].remove();
-            
             return;
         };
         let parent = document.getElementById(propertyId).childNodes[0];
@@ -379,8 +357,8 @@ function removeBuildingPiece(propertyId) {
 
     // if hotel is on property when building is sold
     let parent = document.getElementById(propertyId).childNodes[0];
+    // remove all then place 4 houses
     parent.childNodes[0].remove();
-
     property.buildings = 0;
     for(let i = 1; i < 5; i++) {
         property.buildings++;
@@ -392,15 +370,10 @@ function placePlayerPiece(playerId) {
     // if element already on the dom, remove it
     if(document.getElementById(playerId)) {document.getElementById(playerId).remove()};
     
-
     let playerIndex = gameLogic.value.players.findIndex((player => player.name == playerId));
-
     let propertyIndex = gameLogic.value.vueopoly.properties.findIndex((prop) => prop.position == gameLogic.value.players[playerIndex].position);
-    
     let propertyId = gameLogic.value.vueopoly.properties[propertyIndex].id;
-
     let piecePosition = gameLogic.value.vueopoly.properties[propertyIndex].pieceposition;
-
     let positionObj = gameLogic.value.playerPiecePos[`${gameLogic.value.players[playerIndex].name}`].position[`${piecePosition}`];
 
     // add css properties and id (getting info from an object in initNewGame.js)
@@ -418,15 +391,35 @@ function placePlayerPiece(playerId) {
 
 function manualMove() {
     gameLogic.value.players[gameLogic.value.whosTurnIndex].position++
-}
+};
 
 // when current players poition changes
 watch(
     () => gameLogic.value.players[gameLogic.value.whosTurnIndex].position,
     (count, prevCount) => {
-        // placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)
         placePlayerPiece(gameLogic.value.players[gameLogic.value.whosTurnIndex].name);
     }
+);
+
+// called when property changes ownership, and places 'owned bar' on the dom
+watch(
+    () => [gameLogic.value.vueopoly.properties[0].ownedby,
+    gameLogic.value.vueopoly.properties[1].ownedby, gameLogic.value.vueopoly.properties[2].ownedby,
+    gameLogic.value.vueopoly.properties[3].ownedby, gameLogic.value.vueopoly.properties[4].ownedby,
+    gameLogic.value.vueopoly.properties[5].ownedby, gameLogic.value.vueopoly.properties[6].ownedby,
+    gameLogic.value.vueopoly.properties[7].ownedby, gameLogic.value.vueopoly.properties[8].ownedby,
+    gameLogic.value.vueopoly.properties[9].ownedby, gameLogic.value.vueopoly.properties[10].ownedby,
+    gameLogic.value.vueopoly.properties[11].ownedby, gameLogic.value.vueopoly.properties[12].ownedby,
+    gameLogic.value.vueopoly.properties[13].ownedby, gameLogic.value.vueopoly.properties[14].ownedby,
+    gameLogic.value.vueopoly.properties[15].ownedby, gameLogic.value.vueopoly.properties[16].ownedby,
+    gameLogic.value.vueopoly.properties[17].ownedby, gameLogic.value.vueopoly.properties[18].ownedby,
+    gameLogic.value.vueopoly.properties[19].ownedby, gameLogic.value.vueopoly.properties[20].ownedby,
+    gameLogic.value.vueopoly.properties[21].ownedby, gameLogic.value.vueopoly.properties[22].ownedby,
+    gameLogic.value.vueopoly.properties[23].ownedby, gameLogic.value.vueopoly.properties[24].ownedby,
+    gameLogic.value.vueopoly.properties[25].ownedby, gameLogic.value.vueopoly.properties[26].ownedby,
+    gameLogic.value.vueopoly.properties[27].ownedby,
+    ],
+    () => {placeOwnedBar()}
 );
 
 defineExpose({
@@ -473,16 +466,12 @@ div {
 	text-transform: uppercase;
 }
 .responsive {
-    /*background: #cde6d0;
-    width: 80vw;
-    height: 80vw;
-    margin: 10px auto;*/
-    /*transform: rotateX(50deg) rotateZ(30deg) translate(-10rem, -20rem);*/
     
     background: #cde6d0;
     width: 56vw;
     height: 56vw;
-    margin: 3rem 0 3rem 3rem;
+    inset: 3rem 0 3rem 3rem;
+    position: absolute;
 }
 .mainSquare {
 	height: 100%;
@@ -635,67 +624,7 @@ div {
 .rotation3 {
   transform: rotate(-90deg);
 }
-.logoBox {
-	/*width: 46%;
-	background: #ed1b24;
-	position: absolute;
-	transform: rotateZ(-45deg) translateX(-27%) translateY(237%);
-	border: 3px solid black;
-	text-align: center;
-	box-shadow: inset 0px 2px 12px 0px white;*/
 
-    width: 40%;
-    background: #ed1b24;
-    position: absolute;
-    transform: rotateZ(-45deg) translateX(-27%) translateY(116%);
-    border: 3px solid black;
-    text-align: center;
-    box-shadow: inset 0px 2px 12px 0px white;
-}
-.logoName {
-	font-size: 7.1vw;
-	color: white;
-	font-family: futura;
-	text-shadow: -4px 3px 0px black;
-	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
-	-webkit-text-stroke-width: 2px;
-	-webkit-text-stroke-color: #cfc2c3;
-}
-.card-box {
-	/*position: absolute;
-	width: 15%;
-	height: 9vw;*/
-
-    position: absolute;
-    width: 10%;
-    height: 7vw;
-}
-
-.card-blue {
-	background: linear-gradient(#4ccaf4, #a3dff9);
-	transform: rotateZ(-45deg) translateX(-13%) translateY(66%);
-}
-.card-blue-inside {
-    background: linear-gradient(#a3dff9, #4ccaf4);
-    width: 94%;
-    height: 94%;
-    margin: 0.3vw auto;
-    position: relative;
-}
-.card-orange {
-	/*background: linear-gradient(#f99120, #f57420);
-	transform: rotateZ(-45deg) translateX(-13%) translateY(610%);*/
-
-    background: linear-gradient(#f99120, #f57420);
-    transform: rotateZ(-45deg) translateX(-13%) translateY(521%);
-}
-.card-orange-inside {
-    background: linear-gradient(#f57420, #f99120);
-    width: 94%;
-    height: 94%;
-    margin: 0.3vw auto;
-    position: relative;
-}
 .corner {
 	/*position: absolute;
 	text-align: center;
