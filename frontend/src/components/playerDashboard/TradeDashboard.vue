@@ -1,7 +1,7 @@
 <template>
-<span v-show="showComponent">
+<!-- <span v-show="showComponent">
     <GameBoard ref="gameBoard" />
-</span>
+</span> -->
 <div class="overlay">
     <div class="container">
 
@@ -204,8 +204,8 @@ function acceptOffer() {
     // gameLogic.value.players[traderIndex].money -= parseInt(traderMoneyOffer.value);
     // gameLogic.value.players[tradeeIndex].money -= parseInt(tradeeMoneyOffer.value);
 
-    
-    gameBoard.value.placeOwnedBar(); // place owned bar on dom
+    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
+    //gameBoard.value.placeOwnedBar(); // place owned bar on dom
 
     closeTradeView();
     // TODO: handle special cards

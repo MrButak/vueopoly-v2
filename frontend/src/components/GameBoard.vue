@@ -114,15 +114,7 @@
 				</div>
 
 				<div class="square9">
-					<div class="card-box card-blue">
-						<div class="card-blue-inside"></div>
-					</div>
-					<div class="logoBox">
-						<span class="logoName">vueopoly</span>
-					</div>
-					<div class="card-box card-orange">
-						<div class="card-orange-inside"></div>						
-					</div>
+					<DashBoard />
 				</div>
 
 				<div class="pos-right square2">
@@ -225,7 +217,17 @@
 			</div>
 
 		</div>
-
+<div class="square9">
+					<div class="card-box card-blue">
+						<div class="card-blue-inside"></div>
+					</div>
+					<div class="logoBox">
+						<span class="logoName">vueopoly</span>
+					</div>
+					<div class="card-box card-orange">
+						<div class="card-orange-inside"></div>						
+					</div>
+				</div>
 	</div>
     <button @click="manualMove">move player forward</button>
     
@@ -236,6 +238,7 @@ import { onMounted, watch, computed, ref } from 'vue';
 import { lsInUse, gameLogic, turnLogic } from '../javascripts/stateStore';
 import * as consts from '../javascripts/constants';
 import * as domFunctions from '../javascripts/domFunctions';
+import DashBoard from '../components/playerDashboard/DashBoard.vue';
 
 // place all player pieces, buildings
 onMounted(() => {

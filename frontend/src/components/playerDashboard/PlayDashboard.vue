@@ -1,9 +1,9 @@
 <template>
     <PopupSpecialCard ref="popupSpecialCard" />
     <!-- permanently display: none (for funciton calls) -->
-    <span v-show="showComponent">
+    <!-- <span v-if="showComponent">
         <GameBoard ref="gameBoard" />
-    </span>
+    </span> -->
 
     <div class="log-and-dice-wrapper">
         <div id="gamelog-wrapper-main">
@@ -155,7 +155,9 @@ function purchaseProperty() {
     turnLogic.value.buyAvailable = false;
     turnLogic.value.canEndTurn = true;
 
-    gameBoard.value.placeOwnedBar()// place owned bar on dom
+
+    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
+    //gameBoard.value.placeOwnedBar()// place owned bar on dom
     
 };
 
@@ -203,7 +205,8 @@ function gotoJail() {
     turnLogic.value.crntPlayer.position = 11.5;
 
     // manually call function to move player. watcher() is set but not firing
-    gameBoard.value.placePlayerPiece(turnLogic.value.crntPlayer.name);
+    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
+    //gameBoard.value.placePlayerPiece(turnLogic.value.crntPlayer.name);
 
     dtrmPropAction();
     turnLogic.value.crntPlayer.inJail = true;
@@ -355,5 +358,7 @@ function handleSpecialCard() {
 }
 .roll-dice-btn {
     padding: 2px 10px;
+    background: linear-gradient(#f57420, #f99120);
+    width: 100%;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-<span v-show="showComponent">
+<!-- <span v-show="showComponent">
     <GameBoard ref="gameBoard" />
-</span>
+</span> -->
     <p>Properties</p>
     <span v-for="propArry in filteredProperties">
 
@@ -91,7 +91,7 @@ import { gameLogic, turnLogic } from '../../javascripts/stateStore';
 import * as propertyFunctions from '../../javascripts/propertyFunctions';
 import * as gameFunctions from '../../javascripts/gameFunctions';
 import GameBoard from '../GameBoard.vue';
-import GameBoardVue from '../GameBoard.vue';
+
 
 let gameBoard = ref(GameBoard);
 let showComponent = ref(false); // always false. used to call function in GameBoard.vue
@@ -167,8 +167,8 @@ function mortgageProperty() {
     propertyFunctions.mortgagePropertyH(clickedProperty.id);
     crntPlayer.money += clickedProperty.mortgagePrice;
     clearOffer();
-
-    gameBoard.value.placeOwnedBar() // place owned bar on dom
+    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
+    //gameBoard.value.placeOwnedBar() // place owned bar on dom
 
     setClickedPropertyObj(clickedProperty.id);
 };
@@ -182,8 +182,8 @@ function unmortgageProperty() {
     if(!gameFunctions.moneyCheckH(crntPlayer.money, unMortgagePrice)) {return;}; // TODO: show 'not enough money message'
     crntPlayer.money -= unMortgagePrice;
     propertyFunctions.unMortgagePropertyH(clickedProperty.id);
-    
-    gameBoard.value.placeOwnedBar() // place owned bar on dom
+    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
+    //gameBoard.value.placeOwnedBar() // place owned bar on dom
     clearOffer();
     setClickedPropertyObj(clickedProperty.id);
 };
@@ -194,14 +194,16 @@ function buyBuilding() {
     crntPlayer.money -= clickedProperty.buildingCost;
     propertyFunctions.buyBuildingH(clickedProperty.id);
     clearOffer();
-    gameBoard.value.addBuildingPiece(clickedProperty.id); // place building piece on gameboard
+    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
+    //gameBoard.value.addBuildingPiece(clickedProperty.id); // place building piece on gameboard
     setClickedPropertyObj(clickedProperty.id);
 };
 
 function sellBuilding() {
 
     propertyFunctions.sellBuildingH(clickedProperty.id);
-    gameBoard.value.removeBuildingPiece(clickedProperty.id); // remove building piece from gameboard
+    // TODO: find another way to call this function in GameBoard.vue - without putting it above in the dom
+    //gameBoard.value.removeBuildingPiece(clickedProperty.id); // remove building piece from gameboard
     crntPlayer.money += clickedProperty.buildingCost / 2;
     clearOffer();
     
