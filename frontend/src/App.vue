@@ -55,11 +55,12 @@ import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
         background-color: #c2dec5;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
 
 
 
         .container {
-            height: 100%;
+            
             display: flex;
             justify-content: center;
             align-items: center;
@@ -68,7 +69,7 @@ import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
 
         .card {
             
-            width: 100%;
+            width: 93%;
             background: #F57F17;
             padding: 25px;
             background: radial-gradient(rgb(255, 171, 145), #F57F17);
@@ -103,7 +104,7 @@ import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
 
         .card-image {
             position: absolute;
-            inset: -44% 0 0 48vw;
+            inset: -44% 0 0 37vw;
             display: block;
             
         }
@@ -112,6 +113,8 @@ import { lsInUse, gameLogic, startGame } from './javascripts/stateStore';
             opacity: 0;
             animation: slide-in 500ms linear forwards;
             display: block;
+            width: 80%;
+            
         }
 
         @keyframes slide-in {
