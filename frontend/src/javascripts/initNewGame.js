@@ -453,6 +453,9 @@ function initNewGame(newPlayers) {
         diceRolled: ref(false),
         canEndTurn: ref(false),
         buyAvailable: ref(false),
+        buildProperty: reactive({
+            watchCount: 1,
+        })
     });
 
 

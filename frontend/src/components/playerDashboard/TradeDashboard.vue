@@ -22,7 +22,7 @@
 
                     <div class="main-column-wrapper">
 
-                        {{ turnLogic.value.crntPlayer.name }}
+                        {{ gameLogic.value.players[gameLogic.value.whosTurnIndex].name }}
                         <span class="input-wrapper">
                             <text>$</text>
                             <input type="text" size="10" v-model="traderMoneyOffer">
@@ -119,11 +119,11 @@ let traderItems = reactive([]);
 let offerTradeView = ref(false);
 
 // get current player's properties
-onMounted(() => {getTraderProperties(turnLogic.value.crntPlayer.name)});
+onMounted(() => {getTraderProperties(gameLogic.value.players[gameLogic.value.whosTurnIndex].name)});
 
 // get an array of all players, except for the current player
 let tradeeArry = computed(() => {
-    return gameLogic.value.players.filter((player => player.name != turnLogic.value.crntPlayer.name));
+    return gameLogic.value.players.filter((player => player.name != gameLogic.value.players[gameLogic.value.whosTurnIndex].name));
 });
 
 // when selected player changes

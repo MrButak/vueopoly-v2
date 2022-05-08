@@ -1,5 +1,4 @@
 <template>
-    
     <div class="player-dashboard-wrapper-main">
         <div class="player-dashboard-wrapper">
 
@@ -53,20 +52,31 @@ let isPlayerInJail = computed(() => {
 }
 .player-dashboard-wrapper-main {
 
+    /* position: absolute;
+    margin: 5vw 0 0 2vw; */
+    
     position: absolute;
-    margin: 5vw 0 0 2vw;
+    width: 65%;
+    
 }
     
 .player-dashboard-wrapper {
     
-    display: flex;
+    /* display: flex;
     width: 34.65vw;
     background-color: white;
     border-radius: 4%;
     flex-direction: column;
-    height: 27vw;
     overflow: hidden;
     padding: 1.3rem;
+    border: 0.1rem solid black; */
+
+    display: flex;
+    background-color: white;
+    border-radius: 4%;
+    flex-direction: column;
+    /* height: 33vw; */
+    padding: 0 1.3rem;
     border: 0.1rem solid black;
     
 }
@@ -75,21 +85,20 @@ let isPlayerInJail = computed(() => {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    
-    overflow: hidden;
     align-items: center;
-    padding: 0 0 1.7rem 0;
+    padding: 0 0 .7rem 0;
 }
 .text-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%
+    width: 100%;
 }
 .text-column {
     display: flex;
     flex-direction: column;
     align-items: center;
+    line-height: 0rem;
 }
 .stat-btn {
     width: 4.5rem;
