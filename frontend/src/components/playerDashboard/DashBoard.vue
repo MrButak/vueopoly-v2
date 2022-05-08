@@ -56,8 +56,8 @@ let isPlayerInJail = computed(() => {
 .player-dashboard-wrapper-main {
 
     position: absolute;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     margin: 5vw 0 0 2vw;
 }
     

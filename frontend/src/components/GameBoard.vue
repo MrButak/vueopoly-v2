@@ -217,18 +217,10 @@
 			</div>
 
 		</div>
-<div class="square9">
-					<div class="card-box card-blue">
-						<div class="card-blue-inside"></div>
-					</div>
-					<div class="logoBox">
-						<span class="logoName">vueopoly</span>
-					</div>
-					<div class="card-box card-orange">
-						<div class="card-orange-inside"></div>						
-					</div>
-				</div>
+        
 	</div>
+    <StatsHud />
+    
     <button @click="manualMove">move player forward</button>
     
 </template>
@@ -239,6 +231,7 @@ import { lsInUse, gameLogic, turnLogic } from '../javascripts/stateStore';
 import * as consts from '../javascripts/constants';
 import * as domFunctions from '../javascripts/domFunctions';
 import DashBoard from '../components/playerDashboard/DashBoard.vue';
+import StatsHud from '../components/playerDashboard/StatsHud.vue';
 
 // place all player pieces, buildings
 onMounted(() => {
@@ -635,67 +628,7 @@ div {
 .rotation3 {
   transform: rotate(-90deg);
 }
-.logoBox {
-	/*width: 46%;
-	background: #ed1b24;
-	position: absolute;
-	transform: rotateZ(-45deg) translateX(-27%) translateY(237%);
-	border: 3px solid black;
-	text-align: center;
-	box-shadow: inset 0px 2px 12px 0px white;*/
 
-    width: 40%;
-    background: #ed1b24;
-    position: absolute;
-    transform: rotateZ(-45deg) translateX(-27%) translateY(116%);
-    border: 3px solid black;
-    text-align: center;
-    box-shadow: inset 0px 2px 12px 0px white;
-}
-.logoName {
-	font-size: 7.1vw;
-	color: white;
-	font-family: futura;
-	text-shadow: -4px 3px 0px black;
-	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
-	-webkit-text-stroke-width: 2px;
-	-webkit-text-stroke-color: #cfc2c3;
-}
-.card-box {
-	/*position: absolute;
-	width: 15%;
-	height: 9vw;*/
-
-    position: absolute;
-    width: 10%;
-    height: 7vw;
-}
-
-.card-blue {
-	background: linear-gradient(#4ccaf4, #a3dff9);
-	transform: rotateZ(-45deg) translateX(-13%) translateY(66%);
-}
-.card-blue-inside {
-    background: linear-gradient(#a3dff9, #4ccaf4);
-    width: 94%;
-    height: 94%;
-    margin: 0.3vw auto;
-    position: relative;
-}
-.card-orange {
-	/*background: linear-gradient(#f99120, #f57420);
-	transform: rotateZ(-45deg) translateX(-13%) translateY(610%);*/
-
-    background: linear-gradient(#f99120, #f57420);
-    transform: rotateZ(-45deg) translateX(-13%) translateY(521%);
-}
-.card-orange-inside {
-    background: linear-gradient(#f57420, #f99120);
-    width: 94%;
-    height: 94%;
-    margin: 0.3vw auto;
-    position: relative;
-}
 .corner {
 	/*position: absolute;
 	text-align: center;
